@@ -29,12 +29,18 @@ const ShopIndex = ({ products }: ShopIndexProps) => {
 
   return (
     <>
-      <Seo title="Produtos - Power House Brasil" description="Vitrine de produtos para ciclismo urbano." />
+      <Seo
+        title="Produtos - Power House Brasil"
+        description="Vitrine de produtos para ciclismo urbano."
+      />
       <div className="max-w-6xl mx-auto px-4 py-8">
         <h1 className="text-3xl font-bold mb-8 text-blue-900">Produtos</h1>
         {selectedCategory && (
           <div className="mb-6">
-            <ButtonPrimary onClick={() => setSelectedCategory(null)} className="text-base px-6 py-3 rounded-xl">
+            <ButtonPrimary
+              onClick={() => setSelectedCategory(null)}
+              className="text-base px-6 py-3 rounded-xl"
+            >
               Ver todos os produtos
             </ButtonPrimary>
           </div>
@@ -79,4 +85,4 @@ export const getStaticProps: GetStaticProps = async () => {
   };
 };
 
-export default ShopIndex; 
+export default ShopIndex;

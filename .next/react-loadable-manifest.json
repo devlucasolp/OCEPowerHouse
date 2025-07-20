@@ -1,124 +1,50 @@
 {
   "..\\node_modules\\@sanity\\client\\dist\\index.browser.js -> ./_chunks-es/stegaEncodeSourceMap.js": {
-    "id": 74195,
+    "id": "..\\node_modules\\@sanity\\client\\dist\\index.browser.js -> ./_chunks-es/stegaEncodeSourceMap.js",
     "files": [
-      "static/chunks/8570.f9e74f9050ae8e39.js",
-      "static/chunks/4195.96c567e2d8c9f89e.js"
+      "static/chunks/_app-pages-browser_node_modules_sanity_client_dist__chunks-es_stegaEncodeSourceMap_js.js"
     ]
   },
   "..\\node_modules\\@sanity\\client\\dist\\index.browser.js -> @sanity/eventsource": {
-    "id": 24406,
+    "id": "..\\node_modules\\@sanity\\client\\dist\\index.browser.js -> @sanity/eventsource",
     "files": [
-      "static/chunks/5723.947285d78e3373a4.js",
-      "static/chunks/4406.699afd687e314b38.js"
+      "static/chunks/_app-pages-browser_node_modules_sanity_eventsource_browser_js.js"
     ]
   },
   "..\\node_modules\\@sanity\\ui\\dist\\_chunks-es\\_visual-editing.mjs -> ./refractor.mjs": {
-    "id": 31826,
+    "id": "..\\node_modules\\@sanity\\ui\\dist\\_chunks-es\\_visual-editing.mjs -> ./refractor.mjs",
     "files": [
-      "static/chunks/1826.5ee547bbbf69cd92.js"
-    ]
-  },
-  "..\\node_modules\\@sanity\\vision\\lib\\_chunks-es\\index.mjs -> ./SanityVision.mjs": {
-    "id": 34254,
-    "files": [
-      "static/chunks/363642f4.44a03f6ed48fcded.js",
-      "static/chunks/9573.809c0fd70a1cfe26.js"
-    ]
-  },
-  "..\\node_modules\\@sanity\\vision\\lib\\_chunks-es\\index.mjs -> ./resources.mjs": {
-    "id": 55180,
-    "files": [
-      "static/chunks/5180.9f83631fd3717a1e.js"
-    ]
-  },
-  "..\\node_modules\\next-sanity\\dist\\studio\\client-component.js -> ../_chunks-es/NextStudio.js": {
-    "id": 82176,
-    "files": [
-      "static/chunks/2176.c3f2be566f51e7a4.js"
-    ]
-  },
-  "..\\node_modules\\next\\dist\\client\\index.js -> ../pages/_app": {
-    "id": 90472,
-    "files": [
-      "static/chunks/472.2c08b965bd9148e2.js"
-    ]
-  },
-  "..\\node_modules\\next\\dist\\client\\index.js -> ../pages/_error": {
-    "id": 99341,
-    "files": [
-      "static/chunks/9341.699dd3459a0f79c5.js"
-    ]
-  },
-  "..\\node_modules\\sanity\\lib\\_chunks-es\\StructureToolProvider.mjs -> ./resources6.mjs": {
-    "id": 7231,
-    "files": [
-      "static/chunks/7231.4cfa6ff4d348ef74.js"
-    ]
-  },
-  "..\\node_modules\\sanity\\lib\\_chunks-es\\index3.mjs -> ./index.mjs": {
-    "id": 45562,
-    "files": [
-      "static/chunks/5562.d3d69480346dd24c.js"
-    ]
-  },
-  "..\\node_modules\\sanity\\lib\\_chunks-es\\index3.mjs -> ./index2.mjs": {
-    "id": 78778,
-    "files": [
-      "static/chunks/8778.eb2687108d302861.js"
-    ]
-  },
-  "..\\node_modules\\sanity\\lib\\_chunks-es\\index3.mjs -> ./pane.mjs": {
-    "id": 47242,
-    "files": []
-  },
-  "..\\node_modules\\sanity\\lib\\_chunks-es\\pane.mjs -> ./index3.mjs": {
-    "id": 4713,
-    "files": [
-      "static/chunks/4713.ed89b9dff1332376.js"
-    ]
-  },
-  "..\\node_modules\\sanity\\lib\\index.mjs -> ./_chunks-es/VideoPlayer.mjs": {
-    "id": 80271,
-    "files": [
-      "static/chunks/a4634e51.1d18ae59415abd5b.js",
-      "static/chunks/271.b767d8b4501a9af3.js"
+      "static/chunks/_app-pages-browser_node_modules_sanity_ui_dist__chunks-es_refractor_mjs.js"
     ]
   },
   "..\\node_modules\\sanity\\lib\\index.mjs -> ./_chunks-es/ViteDevServerStopped.mjs": {
-    "id": 46521,
+    "id": "..\\node_modules\\sanity\\lib\\index.mjs -> ./_chunks-es/ViteDevServerStopped.mjs",
     "files": [
-      "static/chunks/6521.24ff1e005eb11e43.js"
+      "static/chunks/_app-pages-browser_node_modules_sanity_lib__chunks-es_ViteDevServerStopped_mjs.js"
     ]
   },
   "..\\node_modules\\sanity\\lib\\index.mjs -> ./_chunks-es/resources.mjs": {
-    "id": 45629,
+    "id": "..\\node_modules\\sanity\\lib\\index.mjs -> ./_chunks-es/resources.mjs",
     "files": [
-      "static/chunks/5629.6e9c44caa45c2ad6.js"
+      "static/chunks/_app-pages-browser_node_modules_sanity_lib__chunks-es_resources_mjs.js"
     ]
   },
   "..\\node_modules\\sanity\\lib\\index.mjs -> ./_chunks-es/resources2.mjs": {
-    "id": 32763,
+    "id": "..\\node_modules\\sanity\\lib\\index.mjs -> ./_chunks-es/resources2.mjs",
     "files": [
-      "static/chunks/2763.293c00ab45ced271.js"
+      "static/chunks/_app-pages-browser_node_modules_sanity_lib__chunks-es_resources2_mjs.js"
     ]
   },
   "..\\node_modules\\sanity\\lib\\index.mjs -> ./_chunks-es/resources3.mjs": {
-    "id": 13330,
+    "id": "..\\node_modules\\sanity\\lib\\index.mjs -> ./_chunks-es/resources3.mjs",
     "files": [
-      "static/chunks/3330.303ddff7369e3a12.js"
+      "static/chunks/_app-pages-browser_node_modules_sanity_lib__chunks-es_resources3_mjs.js"
     ]
   },
   "..\\node_modules\\sanity\\lib\\index.mjs -> ./_chunks-es/resources4.mjs": {
-    "id": 8109,
+    "id": "..\\node_modules\\sanity\\lib\\index.mjs -> ./_chunks-es/resources4.mjs",
     "files": [
-      "static/chunks/8109.a7f0f81b44130ec6.js"
-    ]
-  },
-  "..\\node_modules\\sanity\\lib\\index.mjs -> ./_chunks-es/resources5.mjs": {
-    "id": 52620,
-    "files": [
-      "static/chunks/2620.9b8011b2e71ecfee.js"
+      "static/chunks/_app-pages-browser_node_modules_sanity_lib__chunks-es_resources4_mjs.js"
     ]
   }
 }

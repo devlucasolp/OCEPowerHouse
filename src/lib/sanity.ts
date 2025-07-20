@@ -19,7 +19,7 @@ export const getAllPosts = async () => {
       author->{name},
       publishedAt,
       body
-    }`
+    }`,
   );
 };
 
@@ -33,7 +33,7 @@ export const getAllProducts = async () => {
       price,
       category,
       description
-    }`
+    }`,
   );
 };
 
@@ -48,7 +48,7 @@ export const getProductBySlug = async (slug: string) => {
       category,
       description
     }`,
-    { slug }
+    { slug },
   );
 };
 
@@ -63,6 +63,6 @@ export const getPostBySlug = async (slug: string) => {
       publishedAt,
       body
     }`,
-    { slug }
+    { slug },
   );
-}; 
+};

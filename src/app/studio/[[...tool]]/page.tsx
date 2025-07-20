@@ -7,13 +7,72 @@
  * https://github.com/sanity-io/next-sanity
  */
 
-import { NextStudio } from 'next-sanity/studio'
-import config from '../../../../sanity.config'
+'use client';
 
-export const dynamic = 'force-static'
+import { NextStudio } from 'next-sanity/studio';
+import config from '../../../../sanity.config';
+import { useRouter } from 'next/navigation';
+import { useEffect, useState } from 'react';
 
-export { metadata, viewport } from 'next-sanity/studio'
+// Removido dynamic = 'force-static' que causava problemas com o Studio
 
 export default function StudioPage() {
-  return <NextStudio config={config} />
+  const router = useRouter();
+  const [shouldRender, setShouldRender] = useState(false);
+
+  useEffect(() => {
+    // Solução definitiva: remove TODOS os query params problemáticos
+    if (typeof window !== 'undefined') {
+      const currentUrl = window.location.href;
+      
+      // Se a URL tem intent ou outros params problemáticos, limpa completamente
+      if (currentUrl.includes('intent=') || currentUrl.includes('perspective=')) {
+        const baseUrl = window.location.origin + window.location.pathname;
+        
+        // Redireciona para URL base limpa
+        window.history.replaceState({}, '', baseUrl);
+        
+        // Força reload para garantir estado limpo
+        setTimeout(() => {
+          setShouldRender(true);
+        }, 100);
+      } else {
+        setShouldRender(true);
+      }
+    }
+  }, []);
+
+  if (!shouldRender) {
+    return (
+      <div 
+        style={{
+          display: 'flex',
+          justifyContent: 'center',
+          alignItems: 'center',
+          height: '100vh',
+          backgroundColor: '#f1f3f4',
+          fontFamily: 'system-ui, sans-serif',
+          fontSize: '16px',
+          color: '#333'
+        }}
+      >
+        <div style={{ textAlign: 'center' }}>
+          <div style={{ marginBottom: '10px' }}>🔧</div>
+          <div>Preparando Sanity Studio...</div>
+        </div>
+      </div>
+    );
+  }
+
+  // Configuração limpa para evitar problemas
+  const cleanConfig = {
+    ...config,
+    // Desabilita features problemáticas temporariamente
+    __experimental: {
+      // Força modo compatível
+      legacyBrowser: true
+    }
+  };
+
+  return <NextStudio config={cleanConfig} />;
 }

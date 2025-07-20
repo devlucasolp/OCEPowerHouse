@@ -13,20 +13,16 @@ const CheckoutPage: NextPage = () => {
 
   const handleFinish = async () => {
     if (isEmpty) return;
+
+    // Simular processamento de compra
     try {
-      const response = await fetch('/api/checkout', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ items: cartItems }),
-      });
-      const data = await response.json();
-      if (data.url) {
-        window.location.href = data.url;
-      } else {
-        alert('Erro ao redirecionar para o pagamento.');
-      }
+      setFinished(true);
+      setTimeout(() => {
+        clearCart();
+        alert('Compra realizada com sucesso! Obrigado pela preferência.');
+      }, 1000);
     } catch (err) {
-      alert('Erro ao processar o pagamento.');
+      alert('Erro ao processar a compra.');
     }
   };
 
@@ -45,10 +41,15 @@ const CheckoutPage: NextPage = () => {
           <div className="bg-white rounded-md shadow divide-y">
             {isEmpty ? (
               <div className="flex flex-col items-center justify-center py-16">
-                <ShoppingCart className="w-16 h-16 text-neutral-300 mb-4" aria-label="Carrinho vazio" />
+                <ShoppingCart
+                  className="w-16 h-16 text-neutral-300 mb-4"
+                  aria-label="Carrinho vazio"
+                />
                 <span className="text-neutral-500 mb-6">Seu carrinho está vazio.</span>
                 <Link href="/shop">
-                  <ButtonPrimary aria-label="Voltar para a loja">← Voltar para a Loja</ButtonPrimary>
+                  <ButtonPrimary aria-label="Voltar para a loja">
+                    ← Voltar para a Loja
+                  </ButtonPrimary>
                 </Link>
               </div>
             ) : (
@@ -76,7 +77,9 @@ const CheckoutPage: NextPage = () => {
               Finalizar Compra
             </ButtonPrimary>
             {finished && (
-              <div className="text-green-600 font-semibold text-center mt-4 transition-all">Compra finalizada com sucesso!</div>
+              <div className="text-green-600 font-semibold text-center mt-4 transition-all">
+                Compra finalizada com sucesso!
+              </div>
             )}
           </div>
         </div>

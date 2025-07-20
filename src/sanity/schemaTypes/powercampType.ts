@@ -10,4 +10,4 @@ export default {
     { name: 'description', title: 'Descrição', type: 'text' },
     { name: 'year', title: 'Ano', type: 'number' },
   ],
-} 
+};

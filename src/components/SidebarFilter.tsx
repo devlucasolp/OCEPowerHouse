@@ -11,7 +11,10 @@ type SidebarFilterProps = {
   handleSelectCategory: (category: string | null) => void;
 };
 
-const SidebarFilter: React.FC<SidebarFilterProps> = ({ selectedCategory, handleSelectCategory }) => {
+const SidebarFilter: React.FC<SidebarFilterProps> = ({
+  selectedCategory,
+  handleSelectCategory,
+}) => {
   return (
     <aside className="w-full md:w-56 md:sticky md:top-20 z-30">
       {/* Mobile: Disclosure */}
@@ -24,7 +27,9 @@ const SidebarFilter: React.FC<SidebarFilterProps> = ({ selectedCategory, handleS
                 aria-label="Abrir filtro de categorias"
               >
                 Categorias
-                <ChevronDown className={`w-5 h-5 ml-2 transition-transform ${open ? 'rotate-180' : ''}`} />
+                <ChevronDown
+                  className={`w-5 h-5 ml-2 transition-transform ${open ? 'rotate-180' : ''}`}
+                />
               </Disclosure.Button>
               <Disclosure.Panel className="mt-2 px-2">
                 <ul className="flex flex-col gap-2">
@@ -88,4 +93,4 @@ const SidebarFilter: React.FC<SidebarFilterProps> = ({ selectedCategory, handleS
   );
 };
 
-export default SidebarFilter; 
+export default SidebarFilter;

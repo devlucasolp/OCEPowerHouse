@@ -1,7 +1,5 @@
 module.exports = {
-  content: [
-    "./src/**/*.{js,ts,jsx,tsx}"
-  ],
+  content: ['./src/**/*.{js,ts,jsx,tsx}'],
   theme: {
     extend: {
       colors: {
@@ -49,4 +47,4 @@ module.exports = {
     require('@tailwindcss/forms'),
     require('@tailwindcss/aspect-ratio'),
   ],
-}
+};

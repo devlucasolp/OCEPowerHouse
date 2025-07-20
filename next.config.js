@@ -12,4 +12,4 @@ const nextConfig = {
   poweredByHeader: false,
 };
 
-module.exports = nextConfig; 
+module.exports = nextConfig;

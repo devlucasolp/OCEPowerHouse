@@ -1,13 +1,22 @@
 import React from 'react';
 import type { ButtonHTMLAttributes, AnchorHTMLAttributes, ReactNode } from 'react';
 
-export type ButtonPrimaryProps = (ButtonHTMLAttributes<HTMLButtonElement> | AnchorHTMLAttributes<HTMLAnchorElement>) & {
+export type ButtonPrimaryProps = (
+  | ButtonHTMLAttributes<HTMLButtonElement>
+  | AnchorHTMLAttributes<HTMLAnchorElement>
+) & {
   children: ReactNode;
   as?: 'button' | 'a';
   href?: string;
 };
 
-const ButtonPrimary = ({ children, className = '', as = 'button', href, ...props }: ButtonPrimaryProps) => {
+const ButtonPrimary = ({
+  children,
+  className = '',
+  as = 'button',
+  href,
+  ...props
+}: ButtonPrimaryProps) => {
   if (as === 'a' && href) {
     return (
       <a
@@ -33,4 +42,4 @@ const ButtonPrimary = ({ children, className = '', as = 'button', href, ...props
   );
 };
 
-export default ButtonPrimary; 
+export default ButtonPrimary;

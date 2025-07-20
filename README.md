@@ -5,6 +5,7 @@ Plataforma moderna para a Power House Brasil, referência nacional em produtos, 
 ---
 
 ## 🚀 Stack
+
 - **Next.js** (React, SSR/SSG, API Routes)
 - **TypeScript** (tipagem forte e segura)
 - **TailwindCSS** (Design System, responsividade e performance)
@@ -16,6 +17,7 @@ Plataforma moderna para a Power House Brasil, referência nacional em produtos, 
 ---
 
 ## 📦 Scripts
+
 ```bash
 npm run dev       # Inicia o servidor de desenvolvimento
 npm run build     # Gera build de produção
@@ -40,6 +42,7 @@ npm run sitemap   # Gera sitemap.xml automaticamente
    ```
 3. **Configure as variáveis de ambiente:**
    Crie um arquivo `.env.local` na raiz:
+
    ```env
    STRIPE_SECRET_KEY=sk_test_...
    NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY=pk_test_...
@@ -48,6 +51,7 @@ npm run sitemap   # Gera sitemap.xml automaticamente
    SANITY_API_VERSION=2023-07-03
    SANITY_TOKEN=xxxxxx
    ```
+
    > Para testar Stripe, use as chaves de teste do dashboard Stripe.
 
 4. **Imagens:**
@@ -57,6 +61,7 @@ npm run sitemap   # Gera sitemap.xml automaticamente
 ---
 
 ## 🛒 Stripe (Checkout)
+
 - Integração pronta para pagamentos (modo teste).
 - Checkout seguro via Stripe.
 - Configure as chaves no `.env.local` e no painel da Vercel.
@@ -64,12 +69,14 @@ npm run sitemap   # Gera sitemap.xml automaticamente
 ---
 
 ## 📝 Sanity CMS
+
 - Pré-configurado para blog e produtos.
 - Para conectar ao Sanity real, configure as variáveis e schemas no projeto Sanity.
 
 ---
 
 ## ☁️ Deploy na Vercel
+
 1. Crie uma conta em [vercel.com](https://vercel.com)
 2. Importe o repositório do projeto
 3. Configure as variáveis de ambiente no painel do projeto
@@ -79,8 +86,9 @@ npm run sitemap   # Gera sitemap.xml automaticamente
 ---
 
 ## 📄 Licença
+
 MIT
 
 ---
 
-**Desenvolvido com ♥ por Power House Brasil e comunidade open source.** 
+**Desenvolvido com ♥ por Power House Brasil e comunidade open source.**

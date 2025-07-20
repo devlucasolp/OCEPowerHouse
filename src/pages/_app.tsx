@@ -8,4 +8,4 @@ const MyApp = ({ Component, pageProps }: AppProps) => (
   </PageLayout>
 );
 
-export default MyApp; 
+export default MyApp;

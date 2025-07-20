@@ -8,4 +8,4 @@ const Divider = ({ className = '' }: DividerProps) => (
   <hr className={`border-t border-muted my-8 ${className}`} aria-label="Divisor de sessão" />
 );
 
-export default Divider; 
+export default Divider;
