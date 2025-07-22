@@ -8,13 +8,13 @@ import { motion } from 'framer-motion';
 
 const benefitCardVariants = {
   initial: { opacity: 0, y: 40 },
-  animate: { opacity: 1, y: 0, transition: { duration: 0.7, type: "spring" as const } },
+  animate: { opacity: 1, y: 0, transition: { duration: 0.7, type: 'spring' as const } },
   whileHover: { scale: 1.06, boxShadow: '0 8px 32px 0 rgba(0,0,0,0.12)' },
 };
 
 const sectionFade = {
   initial: { opacity: 0, y: 40 },
-  animate: { opacity: 1, y: 0, transition: { duration: 0.8, type: "spring" as const } },
+  animate: { opacity: 1, y: 0, transition: { duration: 0.8, type: 'spring' as const } },
 };
 
 const Home: NextPage = () => {
@@ -60,7 +60,8 @@ const Home: NextPage = () => {
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.6, duration: 0.7, type: 'spring' }}
           >
-            A OCE Powerhouse é referência em ciclismo, saúde e performance. Venha fazer parte dessa comunidade campeã!
+            A OCE Powerhouse é referência em ciclismo, saúde e performance. Venha fazer parte dessa
+            comunidade campeã!
           </motion.p>
         </motion.div>
       </motion.section>
@@ -117,13 +118,30 @@ const Home: NextPage = () => {
         whileInView="animate"
         viewport={{ once: true, amount: 0.2 }}
       >
-        <motion.div className="flex-1 flex flex-col items-start justify-center mb-8 md:mb-0" initial={{ opacity: 0, x: -40 }} whileInView={{ opacity: 1, x: 0 }} transition={{ duration: 0.7, type: 'spring' }} viewport={{ once: true }}>
-          <h2 className="text-2xl md:text-3xl font-bold text-primary mb-4">Como funciona a OCE Powerhouse?</h2>
+        <motion.div
+          className="flex-1 flex flex-col items-start justify-center mb-8 md:mb-0"
+          initial={{ opacity: 0, x: -40 }}
+          whileInView={{ opacity: 1, x: 0 }}
+          transition={{ duration: 0.7, type: 'spring' }}
+          viewport={{ once: true }}
+        >
+          <h2 className="text-2xl md:text-3xl font-bold text-primary mb-4">
+            Como funciona a OCE Powerhouse?
+          </h2>
           <p className="text-base md:text-lg text-foreground/90 mb-2 max-w-lg">
-            Nossos coaches são especialistas em ciclismo e oferecem aulas personalizadas para todos os níveis. O acompanhamento é feito por planos, com foco em evolução, saúde e performance. Aqui, você encontra uma comunidade que valoriza o esporte e a transformação de vidas.
+            Nossos coaches são especialistas em ciclismo e oferecem aulas personalizadas para todos
+            os níveis. O acompanhamento é feito por planos, com foco em evolução, saúde e
+            performance. Aqui, você encontra uma comunidade que valoriza o esporte e a transformação
+            de vidas.
           </p>
         </motion.div>
-        <motion.div className="flex-1 flex items-center justify-center" initial={{ opacity: 0, x: 40 }} whileInView={{ opacity: 1, x: 0 }} transition={{ duration: 0.7, type: 'spring' }} viewport={{ once: true }}>
+        <motion.div
+          className="flex-1 flex items-center justify-center"
+          initial={{ opacity: 0, x: 40 }}
+          whileInView={{ opacity: 1, x: 0 }}
+          transition={{ duration: 0.7, type: 'spring' }}
+          viewport={{ once: true }}
+        >
           <Image
             src="/img/team/DSCF8250.JPG"
             alt="Equipe OCE Powerhouse"
@@ -143,8 +161,16 @@ const Home: NextPage = () => {
         whileInView="animate"
         viewport={{ once: true, amount: 0.2 }}
       >
-        <h2 className="text-2xl md:text-3xl font-bold text-primary mb-6">Conheça a OCE Powerhouse</h2>
-        <motion.div className="w-full max-w-2xl aspect-video rounded-xl overflow-hidden shadow-lg" initial={{ opacity: 0, scale: 0.95 }} whileInView={{ opacity: 1, scale: 1 }} transition={{ duration: 0.7, type: 'spring' }} viewport={{ once: true }}>
+        <h2 className="text-2xl md:text-3xl font-bold text-primary mb-6">
+          Conheça a OCE Powerhouse
+        </h2>
+        <motion.div
+          className="w-full max-w-2xl aspect-video rounded-xl overflow-hidden shadow-lg"
+          initial={{ opacity: 0, scale: 0.95 }}
+          whileInView={{ opacity: 1, scale: 1 }}
+          transition={{ duration: 0.7, type: 'spring' }}
+          viewport={{ once: true }}
+        >
           <iframe
             width="100%"
             height="100%"
@@ -165,7 +191,9 @@ const Home: NextPage = () => {
         whileInView="animate"
         viewport={{ once: true, amount: 0.2 }}
       >
-        <h2 className="text-2xl md:text-3xl font-bold text-primary mb-8 text-center">O que dizem nossos alunos</h2>
+        <h2 className="text-2xl md:text-3xl font-bold text-primary mb-8 text-center">
+          O que dizem nossos alunos
+        </h2>
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
           {[
             {
@@ -193,7 +221,13 @@ const Home: NextPage = () => {
               viewport={{ once: true }}
               whileHover={{ scale: 1.04, boxShadow: '0 8px 32px 0 rgba(0,0,0,0.10)' }}
             >
-              <Image src={d.img} alt={d.name} width={56} height={56} className="mb-2 rounded-full object-cover" />
+              <Image
+                src={d.img}
+                alt={d.name}
+                width={56}
+                height={56}
+                className="mb-2 rounded-full object-cover"
+              />
               <p className="text-neutral-700 italic mb-2">{d.text}</p>
               <span className="text-primary font-semibold">{d.name}</span>
             </motion.div>
@@ -208,8 +242,13 @@ const Home: NextPage = () => {
         whileInView="animate"
         viewport={{ once: true, amount: 0.2 }}
       >
-        <h2 className="text-2xl md:text-3xl font-bold text-primary mb-6 text-center">Conteúdo para ciclistas</h2>
-        <p className="text-neutral-700 mb-6 text-center max-w-2xl">Confira dicas, notícias e novidades no nosso blog. Informação de qualidade para quem quer pedalar mais e melhor!</p>
+        <h2 className="text-2xl md:text-3xl font-bold text-primary mb-6 text-center">
+          Conteúdo para ciclistas
+        </h2>
+        <p className="text-neutral-700 mb-6 text-center max-w-2xl">
+          Confira dicas, notícias e novidades no nosso blog. Informação de qualidade para quem quer
+          pedalar mais e melhor!
+        </p>
         <Link href="/blog">
           <ButtonPrimary className="text-base px-8 py-3 rounded-xl">Acessar Blog</ButtonPrimary>
         </Link>
@@ -222,10 +261,17 @@ const Home: NextPage = () => {
         whileInView="animate"
         viewport={{ once: true, amount: 0.2 }}
       >
-        <h2 className="text-2xl md:text-3xl font-bold text-primary mb-6 text-center">Powercamps Anuais</h2>
-        <p className="text-neutral-700 mb-6 text-center max-w-2xl">Participe dos nossos eventos exclusivos, com experiências imersivas, treinos, workshops e integração entre ciclistas, coaches e convidados especiais.</p>
+        <h2 className="text-2xl md:text-3xl font-bold text-primary mb-6 text-center">
+          Powercamps Anuais
+        </h2>
+        <p className="text-neutral-700 mb-6 text-center max-w-2xl">
+          Participe dos nossos eventos exclusivos, com experiências imersivas, treinos, workshops e
+          integração entre ciclistas, coaches e convidados especiais.
+        </p>
         <Link href="/powercamps">
-          <ButtonPrimary className="text-base px-8 py-3 rounded-xl">Saiba mais sobre os Powercamps</ButtonPrimary>
+          <ButtonPrimary className="text-base px-8 py-3 rounded-xl">
+            Saiba mais sobre os Powercamps
+          </ButtonPrimary>
         </Link>
       </motion.section>
       {/* Parceiros/Patrocinadores */}
@@ -236,10 +282,23 @@ const Home: NextPage = () => {
         whileInView="animate"
         viewport={{ once: true, amount: 0.2 }}
       >
-        <h2 className="text-2xl md:text-3xl font-bold text-primary mb-6 text-center">Nossos Parceiros</h2>
+        <h2 className="text-2xl md:text-3xl font-bold text-primary mb-6 text-center">
+          Nossos Parceiros
+        </h2>
         <div className="flex flex-wrap gap-8 items-center justify-center">
-          <a href="https://alquimiadasaude.com.br" target="_blank" rel="noopener noreferrer" className="flex items-center gap-2">
-            <Image src="/img/static/logo.png" alt="Alquimia da Saúde" width={64} height={64} className="rounded-full bg-white p-2" />
+          <a
+            href="https://alquimiadasaude.com.br"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="flex items-center gap-2"
+          >
+            <Image
+              src="/img/static/logo.png"
+              alt="Alquimia da Saúde"
+              width={64}
+              height={64}
+              className="rounded-full bg-white p-2"
+            />
             <span className="text-primary font-semibold">Alquimia da Saúde</span>
           </a>
         </div>

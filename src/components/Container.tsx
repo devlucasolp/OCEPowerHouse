@@ -6,9 +6,13 @@ interface ContainerProps {
 }
 
 const Container = ({ children, className = '' }: ContainerProps) => (
-  <div className={`w-full max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 ${className}`} tabIndex={-1} aria-label="Container centralizador">
+  <div
+    className={`w-full max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 ${className}`}
+    tabIndex={-1}
+    aria-label="Container centralizador"
+  >
     {children}
   </div>
 );
 
-export default Container; 
+export default Container;

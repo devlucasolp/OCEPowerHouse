@@ -33,4 +33,4 @@ const TrustBar: React.FC = () => {
   );
 };
 
-export default TrustBar; 
+export default TrustBar;

@@ -2,57 +2,63 @@ import type { Product } from '../types/product';
 
 export const products: Product[] = [
   {
+    _id: 'camiseta1',
     id: 'camiseta1',
     title: 'Camiseta Oficial',
     slug: 'camiseta-oficial',
     price: 129.9,
     image: '/img/products/camiseta.jpg',
     description: 'Camiseta confortável para ciclismo urbano.',
-    category: 'Vestuário'
+    category: 'Vestuário',
   },
   {
+    _id: 'bermuda1',
     id: 'bermuda1',
     title: 'Bermuda Esportiva',
     slug: 'bermuda-esportiva',
     price: 159.9,
     image: '/img/products/bermuda.jpg',
     description: 'Bermuda leve e resistente para pedaladas longas.',
-    category: 'Vestuário'
+    category: 'Vestuário',
   },
   {
+    _id: 'jaqueta1',
     id: 'jaqueta1',
     title: 'Jaqueta Corta Vento',
     slug: 'jaqueta-corta-vento',
     price: 199.9,
     image: '/img/products/jaqueta.jpg',
     description: 'Jaqueta impermeável, ideal para dias chuvosos.',
-    category: 'Vestuário'
+    category: 'Vestuário',
   },
   {
+    _id: 'luva1',
     id: 'luva1',
     title: 'Luva de Ciclismo',
     slug: 'luva-ciclismo',
     price: 49.9,
     image: '/img/products/luva.jpg',
     description: 'Luva com proteção e conforto para as mãos.',
-    category: 'Acessórios'
+    category: 'Acessórios',
   },
   {
+    _id: 'garrafa1',
     id: 'garrafa1',
     title: 'Garrafa Térmica',
     slug: 'garrafa-termica',
     price: 39.9,
     image: '/img/products/garrafa.jpg',
     description: 'Garrafa térmica para manter sua bebida na temperatura ideal.',
-    category: 'Acessórios'
+    category: 'Acessórios',
   },
   {
+    _id: 'meia1',
     id: 'meia1',
     title: 'Meia Esportiva',
     slug: 'meia-esportiva',
     price: 19.9,
     image: '/img/products/meia.jpg',
     description: 'Meia confortável e respirável para ciclismo.',
-    category: 'Vestuário'
-  }
-]; 
+    category: 'Vestuário',
+  },
+];

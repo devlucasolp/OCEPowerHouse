@@ -5,10 +5,14 @@ import React from 'react';
 import { Search, ChevronDown } from 'lucide-react';
 
 const navLinks = [
-  { href: '/', label: 'Home', dropdown: [
-    { href: '/coaches', label: 'Quem são os coaches' },
-    { href: '/planos', label: 'Planos' },
-  ] },
+  {
+    href: '/',
+    label: 'Home',
+    dropdown: [
+      { href: '/coaches', label: 'Quem são os coaches' },
+      { href: '/planos', label: 'Planos' },
+    ],
+  },
   { href: '/powercamps', label: 'PowerCamps' },
   { href: '/planos', label: 'Planos' },
   { href: '/shop', label: 'Loja' },
@@ -16,7 +20,7 @@ const navLinks = [
 ];
 
 const Header = () => {
-  const { cartItems } = useCart();
+  const { cartItems, hasHydrated } = useCart();
   const [menuOpen, setMenuOpen] = React.useState(false);
   const [scrolled, setScrolled] = React.useState(false);
   const [homeDropdownOpen, setHomeDropdownOpen] = React.useState(false);
@@ -50,7 +54,14 @@ const Header = () => {
     >
       <div className="max-w-6xl mx-auto flex items-center justify-between px-4 h-20 md:h-24">
         <Link href="/" className="flex items-center" tabIndex={0} aria-label="Power House Brasil">
-          <Image src="/img/static/logo.jpg" alt="Logo Power House Brasil" width={100} height={100} className="rounded-full" priority />
+          <Image
+            src="/img/static/logo.jpg"
+            alt="Logo Power House Brasil"
+            width={100}
+            height={100}
+            className="rounded-full"
+            priority
+          />
         </Link>
         {/* Desktop nav */}
         <nav className="hidden md:block">
@@ -130,7 +141,7 @@ const Header = () => {
                 aria-label="Carrinho"
               >
                 <span className="text-2xl">🛒</span>
-                {cartItems.length > 0 && (
+                {hasHydrated && cartItems.length > 0 && (
                   <span className="absolute -top-2 -right-2 bg-yellow-400 text-blue-900 text-xs rounded-full px-2 py-0.5 font-bold border border-blue-900">
                     {cartItems.reduce((acc, item) => acc + ((item as any).quantity || 1), 0)}
                   </span>
@@ -149,7 +160,20 @@ const Header = () => {
           tabIndex={0}
         >
           <span className="sr-only">Abrir menu</span>
-          <svg width="24" height="24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="text-blue-900"><line x1="3" y1="12" x2="21" y2="12" /><line x1="3" y1="6" x2="21" y2="6" /><line x1="3" y1="18" x2="21" y2="18" /></svg>
+          <svg
+            width="24"
+            height="24"
+            fill="none"
+            stroke="currentColor"
+            strokeWidth="2"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            className="text-blue-900"
+          >
+            <line x1="3" y1="12" x2="21" y2="12" />
+            <line x1="3" y1="6" x2="21" y2="6" />
+            <line x1="3" y1="18" x2="21" y2="18" />
+          </svg>
         </button>
       </div>
       {/* Mobile dropdown */}
@@ -226,7 +250,7 @@ const Header = () => {
                 onClick={() => setMenuOpen(false)}
               >
                 <span className="text-2xl">🛒</span>
-                {cartItems.length > 0 && (
+                {hasHydrated && cartItems.length > 0 && (
                   <span className="absolute -top-2 -right-2 bg-yellow-400 text-blue-900 text-xs rounded-full px-2 py-0.5 font-bold border border-blue-900">
                     {cartItems.reduce((acc, item) => acc + ((item as any).quantity || 1), 0)}
                   </span>
@@ -240,4 +264,4 @@ const Header = () => {
   );
 };
 
-export default Header; 
+export default Header;

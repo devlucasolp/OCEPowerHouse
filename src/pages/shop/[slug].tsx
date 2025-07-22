@@ -69,7 +69,9 @@ const ProductPage = ({ product, related }: ProductPageProps) => {
             Adicionar ao Carrinho
           </ButtonPrimary>
           {added && (
-            <div className="mt-2 text-green-600 font-semibold transition-all">Produto adicionado ao carrinho!</div>
+            <div className="mt-2 text-green-600 font-semibold transition-all">
+              Produto adicionado ao carrinho!
+            </div>
           )}
         </div>
       </div>
@@ -120,4 +122,4 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
   };
 };
 
-export default ProductPage; 
+export default ProductPage;

@@ -1,13 +1,99 @@
-export default {
+import { defineType, defineField } from 'sanity';
+import { TagIcon } from '@sanity/icons';
+
+export const productType = defineType({
   name: 'product',
   title: 'Produto',
   type: 'document',
+  icon: TagIcon,
   fields: [
-    { name: 'title', title: 'Título', type: 'string' },
-    { name: 'slug', title: 'Slug', type: 'slug', options: { source: 'title', maxLength: 96 } },
-    { name: 'image', title: 'Imagem', type: 'image', options: { hotspot: true } },
-    { name: 'price', title: 'Preço', type: 'number' },
-    { name: 'category', title: 'Categoria', type: 'string' },
-    { name: 'description', title: 'Descrição', type: 'text' },
+    defineField({
+      name: 'title',
+      title: 'Título',
+      type: 'string',
+      validation: (Rule) => Rule.required(),
+    }),
+    defineField({
+      name: 'slug',
+      title: 'Slug',
+      type: 'slug',
+      options: {
+        source: 'title',
+        maxLength: 96,
+      },
+      validation: (Rule) => Rule.required(),
+    }),
+    defineField({
+      name: 'price',
+      title: 'Preço',
+      type: 'number',
+      validation: (Rule) => Rule.required().min(0),
+    }),
+    defineField({
+      name: 'category',
+      title: 'Categoria',
+      type: 'string',
+      options: {
+        list: [
+          { title: 'Vestuário', value: 'vestuario' },
+          { title: 'Acessórios', value: 'acessorios' },
+          { title: 'Equipamentos', value: 'equipamentos' },
+          { title: 'Suplementos', value: 'suplementos' },
+        ],
+      },
+      validation: (Rule) => Rule.required(),
+    }),
+    defineField({
+      name: 'description',
+      title: 'Descrição',
+      type: 'text',
+      validation: (Rule) => Rule.required().min(10),
+    }),
+    defineField({
+      name: 'image',
+      title: 'Imagem',
+      type: 'image',
+      options: {
+        hotspot: true,
+      },
+      fields: [
+        defineField({
+          name: 'alt',
+          title: 'Texto Alternativo',
+          type: 'string',
+          validation: (Rule) => Rule.required(),
+        }),
+      ],
+      validation: (Rule) => Rule.required(),
+    }),
+    defineField({
+      name: 'featured',
+      title: 'Produto em Destaque',
+      type: 'boolean',
+      initialValue: false,
+    }),
+    defineField({
+      name: 'inStock',
+      title: 'Em Estoque',
+      type: 'boolean',
+      initialValue: true,
+    }),
   ],
-} 
+  preview: {
+    select: {
+      title: 'title',
+      price: 'price',
+      media: 'image',
+    },
+    prepare(selection) {
+      const { title, price, media } = selection;
+      return {
+        title,
+        subtitle: price ? `R$ ${price.toFixed(2)}` : 'Preço não definido',
+        media,
+      };
+    },
+  },
+});
+
+export default productType;

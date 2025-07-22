@@ -11,7 +11,7 @@ interface BlogIndexProps {
 
 const containerVariants = {
   hidden: { opacity: 0, y: 32 },
-  visible: { opacity: 1, y: 0, transition: { duration: 0.7, ease: 'easeOut', when: 'beforeChildren', staggerChildren: 0.12 } },
+  visible: { opacity: 1, y: 0, transition: { duration: 0.7 } },
 };
 const cardVariants = {
   hidden: { opacity: 0, y: 24 },
@@ -22,14 +22,22 @@ const BlogIndex = ({ posts }: BlogIndexProps) => {
   const isFewPosts = posts.length < 3;
   return (
     <>
-      <Seo title="Blog Power House Brasil - Notícias e Conteúdo para Ciclistas" description="Dicas, novidades e notícias para ciclistas urbanos e apaixonados por bike." />
+      <Seo
+        title="Blog Power House Brasil - Notícias e Conteúdo para Ciclistas"
+        description="Dicas, novidades e notícias para ciclistas urbanos e apaixonados por bike."
+      />
       <motion.div
         className={`max-w-6xl mx-auto py-12 px-4 ${isFewPosts ? 'flex flex-col items-center' : ''}`}
         variants={containerVariants}
         initial="hidden"
         animate="visible"
       >
-        <motion.h1 className="text-3xl font-bold mb-8 text-primary" initial={{ opacity: 0, y: -24 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.7 }}>
+        <motion.h1
+          className="text-3xl font-bold mb-8 text-primary"
+          initial={{ opacity: 0, y: -24 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.7 }}
+        >
           Notícias e Dicas de Ciclismo
         </motion.h1>
         <motion.div
@@ -64,4 +72,4 @@ export const getStaticProps: GetStaticProps = async () => {
   };
 };
 
-export default BlogIndex; 
+export default BlogIndex;

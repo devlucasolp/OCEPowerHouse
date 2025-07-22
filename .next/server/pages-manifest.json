@@ -1,19 +1,6 @@
 {
   "/_app": "pages/_app.js",
   "/_error": "pages/_error.js",
-  "/api/checkout": "pages/api/checkout.js",
-  "/about": "pages/about.js",
-  "/checkout": "pages/checkout.js",
-  "/coach-guilherme-bitencourt": "pages/coach-guilherme-bitencourt.js",
-  "/coach-hugo-prado": "pages/coach-hugo-prado.js",
-  "/coaches": "pages/coaches.js",
-  "/coach-joao-paulo": "pages/coach-joao-paulo.js",
-  "/planos": "pages/planos.js",
-  "/": "pages/index.js",
-  "/blog": "pages/blog.js",
-  "/blog/[slug]": "pages/blog/[slug].js",
-  "/powercamps": "pages/powercamps.js",
-  "/shop": "pages/shop.js",
-  "/shop/[slug]": "pages/shop/[slug].js",
-  "/_document": "pages/_document.js"
+  "/_document": "pages/_document.js",
+  "/": "pages/index.js"
 }

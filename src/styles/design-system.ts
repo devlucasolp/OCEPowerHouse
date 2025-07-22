@@ -56,4 +56,4 @@ export const TRANSITION = {
   property: 'all',
   duration: '300ms',
   timing: 'ease-in-out',
-}; 
+};

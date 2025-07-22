@@ -15,4 +15,4 @@ const SectionTitle = ({ children, className = '' }: SectionTitleProps) => (
   </h2>
 );
 
-export default SectionTitle; 
+export default SectionTitle;

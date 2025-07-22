@@ -7,4 +7,4 @@ export interface Post {
   author?: { name: string } | string;
   publishedAt?: string;
   body: any;
-} 
+}

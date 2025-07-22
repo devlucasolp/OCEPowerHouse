@@ -15,15 +15,16 @@ interface BlogPostProps {
 
 const containerVariants = {
   hidden: { opacity: 0, y: 32 },
-  visible: { opacity: 1, y: 0, transition: { duration: 0.7, ease: 'easeOut' } },
+  visible: { opacity: 1, y: 0, transition: { duration: 0.7 } },
 };
 
 const BlogPost = ({ post }: BlogPostProps) => {
   if (!post) return <div className="text-center py-16">Post não encontrado.</div>;
-  const getSlugString = (slug: any) => typeof slug === 'string' ? slug : slug?.current || '';
-  const description = post.body && typeof post.body === 'string'
-    ? post.body.replace(/<[^>]+>/g, '').slice(0, 160)
-    : '';
+  const getSlugString = (slug: any) => (typeof slug === 'string' ? slug : slug?.current || '');
+  const description =
+    post.body && typeof post.body === 'string'
+      ? post.body.replace(/<[^>]+>/g, '').slice(0, 160)
+      : '';
   const url = `https://powerhousebrasil.com.br/blog/${getSlugString(post.slug)}`;
   return (
     <>
@@ -40,7 +41,12 @@ const BlogPost = ({ post }: BlogPostProps) => {
         animate="visible"
       >
         {post.mainImage && (
-          <motion.div className="relative w-full aspect-[16/7] rounded-xl overflow-hidden mb-8" initial={{ opacity: 0, scale: 0.96 }} animate={{ opacity: 1, scale: 1 }} transition={{ duration: 0.7 }}>
+          <motion.div
+            className="relative w-full aspect-[16/7] rounded-xl overflow-hidden mb-8"
+            initial={{ opacity: 0, scale: 0.96 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ duration: 0.7 }}
+          >
             <Image
               src={urlFor(post.mainImage).width(1200).height(525).url()}
               alt={post.title}
@@ -52,15 +58,31 @@ const BlogPost = ({ post }: BlogPostProps) => {
           </motion.div>
         )}
         <header className="mb-8">
-          <motion.h1 className="text-4xl font-bold text-primary mb-4 leading-tight" initial={{ opacity: 0, y: -24 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.7 }}>
+          <motion.h1
+            className="text-4xl font-bold text-primary mb-4 leading-tight"
+            initial={{ opacity: 0, y: -24 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.7 }}
+          >
             {post.title}
           </motion.h1>
           <div className="flex flex-wrap items-center gap-3 text-sm text-neutral-500 mb-2">
-            <span>{post.publishedAt ? new Date(post.publishedAt).toLocaleDateString('pt-BR') : ''}</span>
-            {post.author && <span className="pl-2 border-l border-neutral-200">{typeof post.author === 'object' ? post.author.name : post.author}</span>}
+            <span>
+              {post.publishedAt ? new Date(post.publishedAt).toLocaleDateString('pt-BR') : ''}
+            </span>
+            {post.author && (
+              <span className="pl-2 border-l border-neutral-200">
+                {typeof post.author === 'object' ? post.author.name : post.author}
+              </span>
+            )}
           </div>
         </header>
-        <motion.section className="prose prose-lg max-w-none mx-auto text-neutral-900 transition-all duration-300 px-0 md:px-0" initial={{ opacity: 0, y: 24 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.7, delay: 0.2 }}>
+        <motion.section
+          className="prose prose-lg max-w-none mx-auto text-neutral-900 transition-all duration-300 px-0 md:px-0"
+          initial={{ opacity: 0, y: 24 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.7, delay: 0.2 }}
+        >
           <PortableText value={post.body} />
         </motion.section>
         <div className="flex justify-center">
@@ -93,4 +115,4 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
   };
 };
 
-export default BlogPost; 
+export default BlogPost;
