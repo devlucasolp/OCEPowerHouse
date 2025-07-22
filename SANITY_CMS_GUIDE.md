@@ -1,16 +1,21 @@
 # Guia do Sanity CMS - OCE PowerHouse
 
-## Como Acessar o Sanity Studio
+## 🚀 Configuração Atualizada (Seguindo Melhores Práticas)
 
 ### 1. Configuração das Variáveis de Ambiente
 
 Primeiro, crie um arquivo `.env.local` na raiz do projeto com as seguintes variáveis:
 
 ```bash
+# Configuração do Sanity CMS
 NEXT_PUBLIC_SANITY_PROJECT_ID=seu_project_id
 NEXT_PUBLIC_SANITY_DATASET=production
 NEXT_PUBLIC_SANITY_API_VERSION=2025-07-17
 SANITY_TOKEN=seu_token_de_escrita
+
+# Configuração do Stripe (para e-commerce)
+STRIPE_SECRET_KEY=sk_test_...
+NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY=pk_test_...
 ```
 
 Para obter essas informações:
@@ -19,7 +24,7 @@ Para obter essas informações:
 2. Faça login na sua conta
 3. Acesse o projeto
 4. Vá em "API" para pegar o Project ID
-5. Crie um token em "API" > "Tokens"
+5. Crie um token em "API" > "Tokens" com permissões de **Editor**
 
 ### 2. Acessando o Studio
 
@@ -29,99 +34,77 @@ Com o projeto rodando (`npm run dev`), acesse:
 http://localhost:3000/studio
 ```
 
-## Tipos de Conteúdo Disponíveis
+## 📋 Estrutura Melhorada do CMS
+
+O Studio agora tem uma organização aprimorada:
+
+### 📝 **Blog**
+
+- Posts
+- Autores
+- Categorias
+
+### 🛒 **E-commerce**
+
+- Produtos
+- Produtos em Destaque (filtrados automaticamente)
+- Produtos por Categoria
+
+### 🏕️ **Eventos**
+
+- Powercamps
+- Eventos em Destaque
+- Eventos por Ano (2024, 2025)
+
+## 🛠️ Tipos de Conteúdo (Com Validações)
 
 ### 1. **Posts (Blog)**
 
-- **Título**: Título do post
+**Campos disponíveis:**
+
+- **Título**: Título do post (obrigatório)
 - **Slug**: URL amigável (gerada automaticamente)
-- **Imagem Principal**: Imagem de destaque do post
+- **Imagem Principal**: Imagem de destaque com texto alternativo
 - **Autor**: Referência ao autor
 - **Data de Publicação**: Data de publicação
 - **Conteúdo**: Texto rico com formatação
+- **Categorias**: Múltiplas categorias
 
 ### 2. **Produtos (Loja)**
 
-- **Título**: Nome do produto
+**Campos disponíveis:**
+
+- **Título**: Nome do produto (obrigatório)
 - **Slug**: URL amigável
-- **Imagem**: Foto do produto
-- **Preço**: Valor em reais
-- **Categoria**: Categoria do produto (ex: "Vestuário", "Acessórios")
-- **Descrição**: Descrição detalhada
+- **Imagem**: Foto do produto com texto alternativo (obrigatório)
+- **Preço**: Valor em reais (mínimo: 0)
+- **Categoria**: Dropdown com opções predefinidas:
+  - Vestuário
+  - Acessórios
+  - Equipamentos
+  - Suplementos
+- **Descrição**: Descrição detalhada (mínimo 10 caracteres)
+- **Produto em Destaque**: Checkbox para destacar
+- **Em Estoque**: Status de disponibilidade
 
 ### 3. **Powercamps (Eventos)**
 
-- **Título**: Nome do evento
+**Campos disponíveis:**
+
+- **Título**: Nome do evento (obrigatório)
 - **Slug**: URL amigável
-- **Imagem**: Foto do evento
-- **Data do Evento**: Data de realização
-- **Descrição**: Descrição do evento
-- **Ano**: Ano de realização
+- **Imagem**: Foto do evento com texto alternativo
+- **Data do Evento**: Data de realização (obrigatório)
+- **Descrição**: Descrição do evento (mínimo 10 caracteres)
+- **Ano**: Ano de realização (2020-2030)
+- **Local**: Local do evento
+- **Evento em Destaque**: Checkbox para destacar
 
-### 4. **Autores**
+## 🔍 Funções de Query Disponíveis
 
-- **Nome**: Nome do autor
-- **Slug**: URL amigável
-- **Imagem**: Foto do autor
-- **Bio**: Biografia
-
-### 5. **Categorias**
-
-- **Título**: Nome da categoria
-- **Slug**: URL amigável
-- **Descrição**: Descrição da categoria
-
-## Como Adicionar Conteúdo
-
-### Adicionando um Post
-
-1. No Studio, clique em "Post"
-2. Clique em "Create new Post"
-3. Preencha:
-   - **Title**: Título do seu post
-   - **Slug**: Clique em "Generate" para gerar automaticamente
-   - **Main image**: Upload da imagem principal
-   - **Author**: Selecione ou crie um autor
-   - **Published at**: Data de publicação
-   - **Body**: Conteúdo do post usando o editor rich text
-
-### Adicionando um Produto
-
-1. No Studio, clique em "Produto"
-2. Clique em "Create new Produto"
-3. Preencha:
-   - **Título**: Nome do produto
-   - **Slug**: Clique em "Generate"
-   - **Imagem**: Upload da foto do produto
-   - **Preço**: Valor sem o símbolo R$ (ex: 129.90)
-   - **Categoria**: Digite a categoria (ex: "Vestuário", "Acessórios")
-   - **Descrição**: Descrição detalhada
-
-### Adicionando um Powercamp
-
-1. No Studio, clique em "Powercamp"
-2. Clique em "Create new Powercamp"
-3. Preencha todos os campos necessários
-
-## Como o Conteúdo Aparece no Site
+O projeto agora tem funções robustas em `src/lib/sanity.ts`:
 
 ### Posts
-
-- **Página do Blog**: `/blog` - Lista todos os posts
-- **Post Individual**: `/blog/[slug]` - Página individual do post
-
-### Produtos
-
-- **Loja**: `/shop` - Lista todos os produtos
-- **Produto Individual**: `/shop/[slug]` - Página do produto
-
-### Powercamps
-
-- **Página de Powercamps**: `/powercamps` - Lista todos os eventos
-
-## Funções de Query Disponíveis
-
-O projeto já tem funções prontas em `src/lib/sanity.ts`:
 
 ```typescript
 // Buscar todos os posts
@@ -130,81 +113,150 @@ const posts = await getAllPosts();
 // Buscar post por slug
 const post = await getPostBySlug('meu-post');
 
+// Buscar posts em destaque
+const featuredPosts = await getFeaturedPosts(3);
+```
+
+### Produtos
+
+```typescript
 // Buscar todos os produtos
 const products = await getAllProducts();
 
 // Buscar produto por slug
 const product = await getProductBySlug('meu-produto');
+
+// Buscar produtos em destaque
+const featuredProducts = await getFeaturedProducts(6);
+
+// Buscar produtos por categoria
+const products = await getProductsByCategory('vestuario');
 ```
 
-## Dicas Importantes
+### Powercamps
 
-### 1. **Slugs**
+```typescript
+// Buscar todos os powercamps
+const powercamps = await getAllPowercamps();
 
-- Sempre gere slugs únicos
-- Use apenas letras minúsculas, números e hífens
-- Exemplo: "minha-primeira-postagem"
+// Buscar powercamp por slug
+const powercamp = await getPowercampBySlug('meu-evento');
 
-### 2. **Imagens**
+// Buscar powercamps em destaque
+const featuredPowercamps = await getFeaturedPowercamps(3);
 
-- Use imagens de alta qualidade
-- Formato recomendado: JPG ou PNG
-- Tamanho recomendado: máximo 2MB
+// Buscar powercamps por ano
+const powercamps2024 = await getPowercampsByYear(2024);
+```
 
-### 3. **Categorias de Produtos**
+### Utilidades
 
-Categorias recomendadas:
+```typescript
+// Buscar todas as categorias
+const categories = await getAllCategories();
 
-- "Vestuário"
-- "Acessórios"
-- "Equipamentos"
-- "Suplementos"
+// Buscar todos os autores
+const authors = await getAllAuthors();
 
-### 4. **Publicação**
+// Busca global
+const results = await searchContent('ciclismo');
+```
 
-- O conteúdo é publicado automaticamente quando salvo
-- Para despublicar, delete o documento no Studio
+## 🚀 Deploy e Convite de Editores
 
-## Troubleshooting
+### 1. Deploy do Studio
 
-### Problema: "Missing environment variable"
-
-**Solução**: Verifique se as variáveis de ambiente estão configuradas corretamente no `.env.local`
-
-### Problema: "Unauthorized"
-
-**Solução**: Verifique se o token do Sanity tem permissões de escrita
-
-### Problema: Conteúdo não aparece no site
-
-**Solução**:
-
-1. Verifique se o documento foi salvo no Studio
-2. Aguarde alguns segundos para a sincronização
-3. Recarregue a página
-
-## Comandos Úteis
+Para fazer deploy do Studio no Vercel:
 
 ```bash
-# Rodar o projeto em desenvolvimento
-npm run dev
+# Build do projeto
+npm run build
 
-# Acessar apenas o Studio do Sanity
-npx sanity dev
-
-# Fazer deploy do Studio
-npx sanity deploy
-
-# Verificar configuração do Sanity
-npx sanity check
+# Deploy no Vercel
+vercel --prod
 ```
 
-## Próximos Passos
+### 2. Configurando Domínio no Sanity
 
-1. **Configure as variáveis de ambiente**
-2. **Acesse o Studio** em `/studio`
-3. **Crie alguns posts de teste**
-4. **Adicione produtos à loja**
-5. **Configure autores e categorias**
+1. Acesse o [painel do Sanity](https://sanity.io)
+2. Vá em **API** > **CORS Origins**
+3. Adicione seus domínios:
+   - `http://localhost:3000` (desenvolvimento)
+   - `https://seudominio.com` (produção)
+   - `https://seudominio.vercel.app` (se usando Vercel)
 
-Para mais informações, consulte a [documentação oficial do Sanity](https://www.sanity.io/docs).
+### 3. Convidando Editores
+
+1. No painel do Sanity, vá em **Members**
+2. Clique em **Invite members**
+3. Adicione o email da pessoa
+4. Escolha a permissão:
+   - **Administrator**: Acesso total
+   - **Editor**: Pode criar/editar conteúdo
+   - **Viewer**: Apenas visualizar
+
+### 4. Variáveis no Vercel
+
+Configure as mesmas variáveis do `.env.local` no painel do Vercel:
+
+1. Acesse o projeto no Vercel
+2. Vá em **Settings** > **Environment Variables**
+3. Adicione todas as variáveis:
+   - `NEXT_PUBLIC_SANITY_PROJECT_ID`
+   - `NEXT_PUBLIC_SANITY_DATASET`
+   - `NEXT_PUBLIC_SANITY_API_VERSION`
+   - `SANITY_TOKEN`
+
+## ✨ Melhorias Implementadas
+
+### 🔒 **Validações de Dados**
+
+- Campos obrigatórios marcados
+- Validação de preços (mínimo 0)
+- Validação de anos (2020-2030)
+- Textos mínimos para descrições
+
+### 🎨 **Interface Melhorada**
+
+- Ícones para cada tipo de conteúdo
+- Organização hierárquica do Studio
+- Filtros automáticos (destacados, categorias)
+- Preview customizado com preços formatados
+
+### 🔍 **Queries Otimizadas**
+
+- GROQ queries seguindo melhores práticas
+- Busca global entre todos os tipos
+- Queries específicas para destacados
+- Performance otimizada
+
+### 🛡️ **Segurança**
+
+- Vision tool apenas em desenvolvimento
+- Validação de environment variables
+- CORS configurado corretamente
+
+## 📚 Links Úteis
+
+- [Documentação do Sanity](https://www.sanity.io/docs)
+- [GROQ Query Language](https://www.sanity.io/docs/groq)
+- [Estrutura do Studio](https://www.sanity.io/docs/structure-builder-cheat-sheet)
+- [Deploy Guide](https://www.sanity.io/docs/deployment)
+
+## 🆘 Troubleshooting
+
+### Problema: Studio não carrega
+
+**Solução:** Verifique as variáveis de ambiente e reinicie o servidor
+
+### Problema: Imagens não aparecem
+
+**Solução:** Configure CORS no painel do Sanity
+
+### Problema: Não consegue editar
+
+**Solução:** Verifique se o token tem permissões de Editor
+
+### Problema: Build falha no Vercel
+
+**Solução:** Certifique-se que todas as env vars estão configuradas

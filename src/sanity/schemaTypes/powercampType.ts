@@ -1,13 +1,90 @@
-export default {
+import { defineType, defineField } from 'sanity';
+import { CalendarIcon } from '@sanity/icons';
+
+export const powercampType = defineType({
   name: 'powercamp',
   title: 'Powercamp',
   type: 'document',
+  icon: CalendarIcon,
   fields: [
-    { name: 'title', title: 'Título', type: 'string' },
-    { name: 'slug', title: 'Slug', type: 'slug', options: { source: 'title', maxLength: 96 } },
-    { name: 'image', title: 'Imagem', type: 'image', options: { hotspot: true } },
-    { name: 'date', title: 'Data do Evento', type: 'date' },
-    { name: 'description', title: 'Descrição', type: 'text' },
-    { name: 'year', title: 'Ano', type: 'number' },
+    defineField({
+      name: 'title',
+      title: 'Título',
+      type: 'string',
+      validation: (Rule) => Rule.required(),
+    }),
+    defineField({
+      name: 'slug',
+      title: 'Slug',
+      type: 'slug',
+      options: {
+        source: 'title',
+        maxLength: 96,
+      },
+      validation: (Rule) => Rule.required(),
+    }),
+    defineField({
+      name: 'image',
+      title: 'Imagem',
+      type: 'image',
+      options: {
+        hotspot: true,
+      },
+      fields: [
+        defineField({
+          name: 'alt',
+          title: 'Texto Alternativo',
+          type: 'string',
+          validation: (Rule) => Rule.required(),
+        }),
+      ],
+      validation: (Rule) => Rule.required(),
+    }),
+    defineField({
+      name: 'date',
+      title: 'Data do Evento',
+      type: 'date',
+      validation: (Rule) => Rule.required(),
+    }),
+    defineField({
+      name: 'description',
+      title: 'Descrição',
+      type: 'text',
+      validation: (Rule) => Rule.required().min(10),
+    }),
+    defineField({
+      name: 'year',
+      title: 'Ano',
+      type: 'number',
+      validation: (Rule) => Rule.required().min(2020).max(2030),
+    }),
+    defineField({
+      name: 'location',
+      title: 'Local',
+      type: 'string',
+    }),
+    defineField({
+      name: 'featured',
+      title: 'Evento em Destaque',
+      type: 'boolean',
+      initialValue: false,
+    }),
   ],
-};
+  preview: {
+    select: {
+      title: 'title',
+      date: 'date',
+      media: 'image',
+    },
+    prepare(selection) {
+      const { title, date, media } = selection;
+      return {
+        title,
+        subtitle: date ? new Date(date).toLocaleDateString('pt-BR') : 'Data não definida',
+        media,
+      };
+    },
+  },
+});
+
+export default powercampType;

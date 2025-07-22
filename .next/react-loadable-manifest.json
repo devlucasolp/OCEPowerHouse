@@ -17,6 +17,46 @@
       "static/chunks/_app-pages-browser_node_modules_sanity_ui_dist__chunks-es_refractor_mjs.js"
     ]
   },
+  "..\\node_modules\\@sanity\\vision\\lib\\_chunks-es\\index.mjs -> ./SanityVision.mjs": {
+    "id": "..\\node_modules\\@sanity\\vision\\lib\\_chunks-es\\index.mjs -> ./SanityVision.mjs",
+    "files": [
+      "static/chunks/_app-pages-browser_node_modules_sanity_vision_lib__chunks-es_SanityVision_mjs.js"
+    ]
+  },
+  "..\\node_modules\\@sanity\\vision\\lib\\_chunks-es\\index.mjs -> ./resources.mjs": {
+    "id": "..\\node_modules\\@sanity\\vision\\lib\\_chunks-es\\index.mjs -> ./resources.mjs",
+    "files": [
+      "static/chunks/_app-pages-browser_node_modules_sanity_vision_lib__chunks-es_resources_mjs.js"
+    ]
+  },
+  "..\\node_modules\\sanity\\lib\\_chunks-es\\StructureToolProvider.mjs -> ./resources5.mjs": {
+    "id": "..\\node_modules\\sanity\\lib\\_chunks-es\\StructureToolProvider.mjs -> ./resources5.mjs",
+    "files": [
+      "static/chunks/_app-pages-browser_node_modules_sanity_lib__chunks-es_resources5_mjs.js"
+    ]
+  },
+  "..\\node_modules\\sanity\\lib\\_chunks-es\\index3.mjs -> ./index.mjs": {
+    "id": "..\\node_modules\\sanity\\lib\\_chunks-es\\index3.mjs -> ./index.mjs",
+    "files": [
+      "static/chunks/_app-pages-browser_node_modules_sanity_lib__chunks-es_index_mjs.js"
+    ]
+  },
+  "..\\node_modules\\sanity\\lib\\_chunks-es\\index3.mjs -> ./index2.mjs": {
+    "id": "..\\node_modules\\sanity\\lib\\_chunks-es\\index3.mjs -> ./index2.mjs",
+    "files": [
+      "static/chunks/_app-pages-browser_node_modules_sanity_lib__chunks-es_index2_mjs.js"
+    ]
+  },
+  "..\\node_modules\\sanity\\lib\\_chunks-es\\index3.mjs -> ./pane.mjs": {
+    "id": "..\\node_modules\\sanity\\lib\\_chunks-es\\index3.mjs -> ./pane.mjs",
+    "files": []
+  },
+  "..\\node_modules\\sanity\\lib\\_chunks-es\\pane.mjs -> ./index3.mjs": {
+    "id": "..\\node_modules\\sanity\\lib\\_chunks-es\\pane.mjs -> ./index3.mjs",
+    "files": [
+      "static/chunks/_app-pages-browser_node_modules_sanity_lib__chunks-es_index3_mjs.js"
+    ]
+  },
   "..\\node_modules\\sanity\\lib\\index.mjs -> ./_chunks-es/ViteDevServerStopped.mjs": {
     "id": "..\\node_modules\\sanity\\lib\\index.mjs -> ./_chunks-es/ViteDevServerStopped.mjs",
     "files": [

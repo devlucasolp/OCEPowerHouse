@@ -24,14 +24,14 @@ export default function StudioPage() {
     // Solução definitiva: remove TODOS os query params problemáticos
     if (typeof window !== 'undefined') {
       const currentUrl = window.location.href;
-      
+
       // Se a URL tem intent ou outros params problemáticos, limpa completamente
       if (currentUrl.includes('intent=') || currentUrl.includes('perspective=')) {
         const baseUrl = window.location.origin + window.location.pathname;
-        
+
         // Redireciona para URL base limpa
         window.history.replaceState({}, '', baseUrl);
-        
+
         // Força reload para garantir estado limpo
         setTimeout(() => {
           setShouldRender(true);
@@ -44,7 +44,7 @@ export default function StudioPage() {
 
   if (!shouldRender) {
     return (
-      <div 
+      <div
         style={{
           display: 'flex',
           justifyContent: 'center',
@@ -53,7 +53,7 @@ export default function StudioPage() {
           backgroundColor: '#f1f3f4',
           fontFamily: 'system-ui, sans-serif',
           fontSize: '16px',
-          color: '#333'
+          color: '#333',
         }}
       >
         <div style={{ textAlign: 'center' }}>
@@ -70,8 +70,8 @@ export default function StudioPage() {
     // Desabilita features problemáticas temporariamente
     __experimental: {
       // Força modo compatível
-      legacyBrowser: true
-    }
+      legacyBrowser: true,
+    },
   };
 
   return <NextStudio config={cleanConfig} />;
