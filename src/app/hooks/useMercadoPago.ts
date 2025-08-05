@@ -1,6 +1,6 @@
-import { useEffect } from "react";
-import { initMercadoPago } from "@mercadopago/sdk-react";
-import { useRouter } from "next/navigation";
+import { useEffect } from 'react';
+import { initMercadoPago } from '@mercadopago/sdk-react';
+import { useRouter } from 'next/navigation';
 
 const useMercadoPago = () => {
   const router = useRouter();
@@ -11,10 +11,10 @@ const useMercadoPago = () => {
 
   async function createMercadoPagoCheckout(checkoutData: any) {
     try {
-      const response = await fetch("/api/mercado-pago/create-checkout", {
-        method: "POST",
+      const response = await fetch('/api/mercado-pago/create-checkout', {
+        method: 'POST',
         headers: {
-          "Content-Type": "application/json",
+          'Content-Type': 'application/json',
         },
         body: JSON.stringify(checkoutData),
       });

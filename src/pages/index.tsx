@@ -38,9 +38,11 @@ const Hero = () => (
       <h1 className="text-4xl md:text-6xl font-extrabold text-white drop-shadow-lg mb-6 font-hero">
         Somos campeões do mundo
       </h1>
-      <a href="/planos" className="text-lg px-8 py-4 rounded-xl shadow-lg bg-yellow-400 hover:bg-yellow-300 text-blue-900 font-bold transition-all">
-        Treine com a OCE
-      </a>
+      <Link href="/planos">
+        <a className="text-lg px-8 py-4 rounded-xl shadow-lg bg-yellow-400 hover:bg-yellow-300 text-blue-900 font-bold transition-all">
+          Treine com a OCE
+        </a>
+      </Link>
     </div>
   </section>
 );

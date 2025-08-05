@@ -85,10 +85,16 @@ const PowerCamps = ({ powercamps }: PowerCampsProps) => {
                 )}
                 <div className="p-8 flex flex-col items-center text-center">
                   <span className="text-yellow-500 text-2xl font-bold mb-2">{camp.year || ''}</span>
-                  <h2 className="text-2xl md:text-3xl font-bold text-blue-900 mb-4">{camp.title}</h2>
+                  <h2 className="text-2xl md:text-3xl font-bold text-blue-900 mb-4">
+                    {camp.title}
+                  </h2>
                   {camp.date && (
                     <span className="text-neutral-500 text-base mb-2 block">
-                      {new Date(camp.date).toLocaleDateString('pt-BR', { day: '2-digit', month: 'long', year: 'numeric' })}
+                      {new Date(camp.date).toLocaleDateString('pt-BR', {
+                        day: '2-digit',
+                        month: 'long',
+                        year: 'numeric',
+                      })}
                     </span>
                   )}
                   {camp.location && (

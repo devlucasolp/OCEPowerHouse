@@ -25,4 +25,4 @@ const WhatsAppFloatButton = () => (
   </a>
 );
 
-export default WhatsAppFloatButton; 
+export default WhatsAppFloatButton;

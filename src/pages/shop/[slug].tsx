@@ -33,19 +33,20 @@ const ProductPage = ({ product, related }: ProductPageProps) => {
   const { addToCart } = useCart();
   const [added, setAdded] = useState(false);
   const [selectedVariant, setSelectedVariant] = useState<number | null>(
-    product.variants && product.variants.length > 0 ? 0 : null
+    product.variants && product.variants.length > 0 ? 0 : null,
   );
 
   if (!product) return <div className="text-center py-16">Produto não encontrado.</div>;
   // Produto final para adicionar ao carrinho
-  const productToCart = selectedVariant !== null && product.variants && product.variants[selectedVariant]
-    ? {
-        ...product,
-        price: product.variants[selectedVariant].price ?? product.price,
-        image: product.variants[selectedVariant].image ?? product.image,
-        variant: product.variants[selectedVariant].name,
-      }
-    : product;
+  const productToCart =
+    selectedVariant !== null && product.variants && product.variants[selectedVariant]
+      ? {
+          ...product,
+          price: product.variants[selectedVariant].price ?? product.price,
+          image: product.variants[selectedVariant].image ?? product.image,
+          variant: product.variants[selectedVariant].name,
+        }
+      : product;
 
   const handleAddToCart = () => {
     addToCart(productToCart);
@@ -60,7 +61,9 @@ const ProductPage = ({ product, related }: ProductPageProps) => {
         title={product.title}
         description={description}
         image={
-          selectedVariant !== null && product.variants && product.variants[selectedVariant]?.image?.asset?.url
+          selectedVariant !== null &&
+          product.variants &&
+          product.variants[selectedVariant]?.image?.asset?.url
             ? product.variants[selectedVariant].image.asset.url
             : product.image?.asset?.url || ''
         }
@@ -72,7 +75,9 @@ const ProductPage = ({ product, related }: ProductPageProps) => {
           <div className="relative w-full aspect-video max-w-md rounded-xl shadow-lg overflow-hidden">
             <Image
               src={
-                selectedVariant !== null && product.variants && product.variants[selectedVariant]?.image?.asset?.url
+                selectedVariant !== null &&
+                product.variants &&
+                product.variants[selectedVariant]?.image?.asset?.url
                   ? product.variants[selectedVariant].image.asset.url
                   : product.image?.asset?.url || ''
               }
@@ -88,17 +93,20 @@ const ProductPage = ({ product, related }: ProductPageProps) => {
         <div className="flex flex-col gap-6">
           <h1 className="text-3xl font-bold text-primary mb-2">{product.title}</h1>
           <span className="text-2xl text-accent font-semibold">
-            R$ {
-              (() => {
-                if (selectedVariant !== null && product.variants && product.variants[selectedVariant]) {
-                  const variantPrice = product.variants[selectedVariant].price;
-                  if (typeof variantPrice === 'number' && !isNaN(variantPrice)) {
-                    return variantPrice.toFixed(2);
-                  }
+            R${' '}
+            {(() => {
+              if (
+                selectedVariant !== null &&
+                product.variants &&
+                product.variants[selectedVariant]
+              ) {
+                const variantPrice = product.variants[selectedVariant].price;
+                if (typeof variantPrice === 'number' && !isNaN(variantPrice)) {
+                  return variantPrice.toFixed(2);
                 }
-                return product.price.toFixed(2);
-              })()
-            }
+              }
+              return product.price.toFixed(2);
+            })()}
           </span>
           {/* Seleção de variantes */}
           {product.variants && product.variants.length > 0 && (

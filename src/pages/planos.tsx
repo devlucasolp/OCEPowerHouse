@@ -95,7 +95,9 @@ const Planos = () => {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.7, delay: 0.1 }}
         >
-          Temos o programa de treinamento ideal para você.<br />Valores mensais. Sem contrato.
+          Temos o programa de treinamento ideal para você.
+          <br />
+          Valores mensais. Sem contrato.
         </motion.p>
         {/* Botão acima dos cards - só desktop/tablet */}
         <motion.div
@@ -110,9 +112,7 @@ const Planos = () => {
             rel="noopener noreferrer"
             className="w-full max-w-xs"
           >
-            <ButtonPrimary className="w-full">
-              Clique aqui e treine com a OCE!
-            </ButtonPrimary>
+            <ButtonPrimary className="w-full">Clique aqui e treine com a OCE!</ButtonPrimary>
           </a>
         </motion.div>
         <motion.div
@@ -132,9 +132,15 @@ const Planos = () => {
               tabIndex={0}
               aria-label={`Card do plano ${plano.nome}`}
             >
-              <h2 className="text-2xl font-extrabold text-blue-900 mb-2 text-center drop-shadow-lg tracking-tight uppercase">{plano.nome}</h2>
-              <span className="text-4xl font-black text-yellow-500 mb-2 text-center drop-shadow-lg">{plano.valor}</span>
-              <span className="text-base font-semibold text-blue-800 mb-4 text-center">{plano.treinador}</span>
+              <h2 className="text-2xl font-extrabold text-blue-900 mb-2 text-center drop-shadow-lg tracking-tight uppercase">
+                {plano.nome}
+              </h2>
+              <span className="text-4xl font-black text-yellow-500 mb-2 text-center drop-shadow-lg">
+                {plano.valor}
+              </span>
+              <span className="text-base font-semibold text-blue-800 mb-4 text-center">
+                {plano.treinador}
+              </span>
               <ul className="mb-6 space-y-2 text-blue-900 text-base text-left w-full max-w-xs mx-auto">
                 {plano.beneficios.map((b, idx) => (
                   <li key={idx} className="flex items-start gap-2">
@@ -156,9 +162,7 @@ const Planos = () => {
                   rel="noopener noreferrer"
                   className="w-full block"
                 >
-                  <ButtonPrimary className="w-full">
-                    Clique aqui e treine com a OCE!
-                  </ButtonPrimary>
+                  <ButtonPrimary className="w-full">Clique aqui e treine com a OCE!</ButtonPrimary>
                 </a>
               </motion.div>
             </motion.div>
@@ -177,9 +181,7 @@ const Planos = () => {
             rel="noopener noreferrer"
             className="w-full max-w-xs"
           >
-            <ButtonPrimary className="w-full">
-              Clique aqui e treine com a OCE!
-            </ButtonPrimary>
+            <ButtonPrimary className="w-full">Clique aqui e treine com a OCE!</ButtonPrimary>
           </a>
         </motion.div>
       </motion.section>

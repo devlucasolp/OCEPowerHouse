@@ -87,14 +87,25 @@ export const productType = defineType({
         {
           type: 'object',
           fields: [
-            { name: 'name', type: 'string', title: 'Nome da Variação', validation: (Rule) => Rule.required() },
-            { name: 'image', type: 'image', title: 'Imagem da Variação', options: { hotspot: true } },
+            {
+              name: 'name',
+              type: 'string',
+              title: 'Nome da Variação',
+              validation: (Rule) => Rule.required(),
+            },
+            {
+              name: 'image',
+              type: 'image',
+              title: 'Imagem da Variação',
+              options: { hotspot: true },
+            },
             { name: 'price', type: 'number', title: 'Preço (opcional)' },
             { name: 'stock', type: 'number', title: 'Estoque (opcional)' },
-          ]
-        }
+          ],
+        },
       ],
-      description: 'Adicione variações como sabor, cor, etc. Deixe vazio se o produto não tiver variantes.'
+      description:
+        'Adicione variações como sabor, cor, etc. Deixe vazio se o produto não tiver variantes.',
     }),
   ],
   preview: {
