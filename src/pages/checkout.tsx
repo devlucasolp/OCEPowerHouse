@@ -6,21 +6,19 @@ import Seo from '../components/Seo';
 import ButtonPrimary from '../components/ButtonPrimary';
 import Link from 'next/link';
 import { ShoppingCart } from 'lucide-react';
+import useMercadoPago from '../app/hooks/useMercadoPago';
 
 const CheckoutPage: NextPage = () => {
   const { cartItems, removeFromCart, clearCart, totalPrice } = useCart();
   const [finished, setFinished] = useState(false);
+  const { createMercadoPagoCheckout } = useMercadoPago();
+  const [userEmail, setUserEmail] = useState('');
 
   const handleFinish = async () => {
     if (isEmpty) return;
-
-    // Simular processamento de compra
     try {
-      setFinished(true);
-      setTimeout(() => {
-        clearCart();
-        alert('Compra realizada com sucesso! Obrigado pela preferência.');
-      }, 1000);
+      await createMercadoPagoCheckout({ cartItems, userEmail });
+      // O redirecionamento é feito pelo hook
     } catch (err) {
       alert('Erro ao processar a compra.');
     }
@@ -67,12 +65,20 @@ const CheckoutPage: NextPage = () => {
               <span className="text-lg">Total:</span>
               <span className="text-xl text-accent font-bold">R$ {totalPrice.toFixed(2)}</span>
             </div>
+            <input
+              type="email"
+              className="border rounded px-3 py-2 mt-4"
+              placeholder="Seu e-mail para o pagamento"
+              value={userEmail}
+              onChange={e => setUserEmail(e.target.value)}
+              required
+            />
             <ButtonPrimary
               className="mt-6 w-full text-lg py-4"
               onClick={handleFinish}
               aria-label="Finalizar Compra"
               tabIndex={0}
-              disabled={isEmpty}
+              disabled={isEmpty || !userEmail}
             >
               Finalizar Compra
             </ButtonPrimary>

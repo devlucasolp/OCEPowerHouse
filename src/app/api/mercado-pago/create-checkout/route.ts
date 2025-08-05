@@ -1,64 +1,61 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { Preference } from 'mercadopago';
 import mpClient from '@/app/lib/mercado-pago';
+import { sanityClient } from '@/lib/sanity';
 
 export async function POST(req: NextRequest) {
-  const { testeId, userEmail } = await req.json();
+  const { cartItems, userEmail } = await req.json();
 
   try {
-    const preference = new Preference(mpClient);
+    // Buscar todos os produtos do carrinho no Sanity pelo _id
+    const ids = cartItems.map((item: any) => item.id);
+    const products = await sanityClient.fetch(
+      `*[_type == "product" && _id in $ids]{
+        _id,
+        title,
+        price,
+        category,
+        description
+      }`,
+      { ids }
+    );
 
+    // Montar os itens para o Mercado Pago
+    const items = cartItems.map((item: any) => {
+      const product = products.find((p: any) => p._id === item.id);
+      return {
+        id: product._id,
+        title: product.title,
+        description: product.description || '',
+        quantity: item.quantity || 1,
+        unit_price: product.price,
+        currency_id: 'BRL',
+        category_id: product.category || 'default',
+      };
+    });
+
+    const preference = new Preference(mpClient);
     const createdPreference = await preference.create({
       body: {
-        external_reference: testeId, // IMPORTANTE: Isso aumenta a pontuação da sua integração com o Mercado Pago - É o id da compra no nosso sistema
+        external_reference: userEmail || '',
         metadata: {
-          testeId, // O Mercado Pago converte para snake_case, ou seja, testeId vai virar teste_id
-          // userEmail: userEmail,
-          // plan: '123'
-          //etc
+          userEmail,
+          cart: items,
         },
         ...(userEmail && {
           payer: {
             email: userEmail,
           },
         }),
-
-        items: [
-          {
-            id: 'id-do-seu-produto',
-            description: 'Descrição do produto',
-            title: 'Nome do produto',
-            quantity: 1,
-            unit_price: 9.99,
-            currency_id: 'BRL',
-            category_id: 'category', // Recomendado inserir, mesmo que não tenha categoria - Aumenta a pontuação da sua integração com o Mercado Pago
-          },
-        ],
+        items,
         payment_methods: {
-          // Descomente para desativar métodos de pagamento
-          //   excluded_payment_methods: [
-          //     {
-          //       id: "bolbradesco",
-          //     },
-          //     {
-          //       id: "pec",
-          //     },
-          //   ],
-          //   excluded_payment_types: [
-          //     {
-          //       id: "debit_card",
-          //     },
-          //     {
-          //       id: "credit_card",
-          //     },
-          //   ],
-          installments: 12, // Número máximo de parcelas permitidas - calculo feito automaticamente
+          installments: 12,
         },
         auto_return: 'approved',
         back_urls: {
           success: `${req.headers.get('origin')}/?status=sucesso`,
           failure: `${req.headers.get('origin')}/?status=falha`,
-          pending: `${req.headers.get('origin')}/api/mercado-pago/pending`, // Criamos uma rota para lidar com pagamentos pendentes
+          pending: `${req.headers.get('origin')}/api/mercado-pago/pending`,
         },
       },
     });
