@@ -5,24 +5,23 @@ import { handleMercadoPagoPayment } from '@/app/server/mercado-pago/handle-payme
 
 export async function GET(request: Request) {
   try {
-    console.log('Mercado Pago pending payment callback received');
+    console.log('Mercado Pago success payment callback received');
     
-    // Rota para lidar com pagamentos pendentes do Mercado Pago (i.e Pix)
-    // Quando o cliente clica no botão 'Voltar para o site' no Checkout depois de pagar (ou não) o Pix
+    // Rota para lidar com pagamentos aprovados do Mercado Pago
     const { searchParams } = new URL(request.url);
-    console.log('Search params:', Object.fromEntries(searchParams.entries()));
+    console.log('Success params:', Object.fromEntries(searchParams.entries()));
     
     // Pegamos o ID do pagamento no Mercado Pago
     const paymentId = searchParams.get('payment_id');
     // Pegamos o ID do pagamento do nosso sistema
-    const testeId = searchParams.get('external_reference');
-    // Status do pagamento (se disponível)
+    const externalReference = searchParams.get('external_reference');
+    // Status do pagamento (deve ser 'approved')
     const status = searchParams.get('status');
     
-    console.log(`Payment callback: ID=${paymentId}, Reference=${testeId}, Status=${status}`);
+    console.log(`Success callback: ID=${paymentId}, Reference=${externalReference}, Status=${status}`);
 
     if (!paymentId) {
-      console.error('Missing payment_id in callback URL');
+      console.error('Missing payment_id in success callback URL');
       return NextResponse.redirect(new URL(`/?status=erro&message=pagamento-invalido`, request.url));
     }
 
@@ -40,29 +39,21 @@ export async function GET(request: Request) {
       });
       
       if (paymentData.status === 'approved' || paymentData.date_approved !== null) {
-        // Pagamento já foi realizado. Processamos e redirecionamos para a página de sucesso
+        // Pagamento aprovado. Processamos e redirecionamos para a página de sucesso
         console.log('Payment is approved, processing...');
         await handleMercadoPagoPayment(paymentData);
         return NextResponse.redirect(new URL(`/?status=sucesso&payment_id=${paymentId}`, request.url));
-      } else if (paymentData.status === 'pending') {
-        // Pagamento pendente (ex: aguardando pagamento do Pix)
-        console.log('Payment is pending');
-        return NextResponse.redirect(new URL(`/?status=pendente&payment_id=${paymentId}`, request.url));
-      } else if (paymentData.status === 'rejected' || paymentData.status === 'cancelled') {
-        // Pagamento rejeitado ou cancelado
-        console.log(`Payment is ${paymentData.status}`);
-        return NextResponse.redirect(new URL(`/?status=falha&reason=${paymentData.status}&payment_id=${paymentId}`, request.url));
+      } else {
+        // Status inesperado para uma rota de sucesso
+        console.log(`Unexpected payment status in success route: ${paymentData.status}`);
+        return NextResponse.redirect(new URL(`/?status=${paymentData.status}&payment_id=${paymentId}`, request.url));
       }
-      
-      // Outros status (in_process, refunded, etc)
-      console.log(`Payment has status: ${paymentData.status}`);
-      return NextResponse.redirect(new URL(`/?status=${paymentData.status}&payment_id=${paymentId}`, request.url));
     } catch (paymentError) {
-      console.error('Error fetching payment data:', paymentError);
+      console.error('Error fetching payment data in success route:', paymentError);
       return NextResponse.redirect(new URL(`/?status=erro&message=erro-ao-verificar-pagamento`, request.url));
     }
   } catch (error) {
-    console.error('Error in pending payment handler:', error);
+    console.error('Error in success payment handler:', error);
     return NextResponse.redirect(new URL(`/?status=erro&message=erro-interno`, request.url));
   }
 }

@@ -1,26 +1,54 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import type { NextPage } from 'next';
 import CartItem from '../components/CartItem';
 import { useCart } from '../lib/useCart';
 import Seo from '../components/Seo';
 import ButtonPrimary from '../components/ButtonPrimary';
 import Link from 'next/link';
-import { ShoppingCart } from 'lucide-react';
+import { ShoppingCart, AlertCircle } from 'lucide-react';
 import useMercadoPago from '../app/hooks/useMercadoPago';
+import { useRouter } from 'next/router';
 
 const CheckoutPage: NextPage = () => {
   const { cartItems, removeFromCart, clearCart, totalPrice } = useCart();
   const [finished, setFinished] = useState(false);
   const { createMercadoPagoCheckout } = useMercadoPago();
   const [userEmail, setUserEmail] = useState('');
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState<string | null>(null);
+  const router = useRouter();
+  
+  // Verificar status de pagamento na URL quando a página carrega
+  useEffect(() => {
+    const { status } = router.query;
+    if (status === 'sucesso') {
+      setFinished(true);
+      clearCart();
+    } else if (status === 'falha') {
+      setError('Houve um problema com o pagamento. Por favor, tente novamente.');
+    }
+  }, [router.query, clearCart]);
 
   const handleFinish = async () => {
-    if (isEmpty) return;
+    if (isEmpty || !userEmail) return;
+    
+    setLoading(true);
+    setError(null);
+    
     try {
+      // Validar email
+      if (!userEmail.includes('@') || !userEmail.includes('.')) {
+        throw new Error('Por favor, insira um email válido.');
+      }
+      
+      console.log('Iniciando checkout com MercadoPago...');
       await createMercadoPagoCheckout({ cartItems, userEmail });
       // O redirecionamento é feito pelo hook
     } catch (err) {
-      alert('Erro ao processar a compra.');
+      console.error('Erro ao processar checkout:', err);
+      setError(err instanceof Error ? err.message : 'Erro ao processar a compra. Tente novamente.');
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -44,7 +72,7 @@ const CheckoutPage: NextPage = () => {
                   aria-label="Carrinho vazio"
                 />
                 <span className="text-neutral-500 mb-6">Seu carrinho está vazio.</span>
-                <Link href="/shop">
+                <Link href="/shop" className="inline-block">
                   <ButtonPrimary aria-label="Voltar para a loja">
                     ← Voltar para a Loja
                   </ButtonPrimary>
@@ -70,7 +98,7 @@ const CheckoutPage: NextPage = () => {
               className="border rounded px-3 py-2 mt-4"
               placeholder="Seu e-mail para o pagamento"
               value={userEmail}
-              onChange={e => setUserEmail(e.target.value)}
+              onChange={(e) => setUserEmail(e.target.value)}
               required
             />
             <ButtonPrimary
@@ -78,13 +106,21 @@ const CheckoutPage: NextPage = () => {
               onClick={handleFinish}
               aria-label="Finalizar Compra"
               tabIndex={0}
-              disabled={isEmpty || !userEmail}
+              disabled={isEmpty || !userEmail || loading}
             >
-              Finalizar Compra
+              {loading ? 'Processando...' : 'Finalizar Compra'}
             </ButtonPrimary>
+            
+            {error && (
+              <div className="flex items-center gap-2 text-red-600 font-medium text-center mt-4 p-3 bg-red-50 rounded-md">
+                <AlertCircle size={18} />
+                <span>{error}</span>
+              </div>
+            )}
+            
             {finished && (
-              <div className="text-green-600 font-semibold text-center mt-4 transition-all">
-                Compra finalizada com sucesso!
+              <div className="text-green-600 font-semibold text-center mt-4 p-3 bg-green-50 rounded-md transition-all">
+                Compra finalizada com sucesso! Obrigado por sua compra.
               </div>
             )}
           </div>
