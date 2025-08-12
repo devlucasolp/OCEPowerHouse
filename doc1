@@ -1,0 +1,489 @@
+Tipos de integração
+A integração com o Checkout Transparente pode ser feita utilizando procedimentos diferentes que variam de acordo com o conhecimento técnico e necessidade de negócio. Veja a tabela abaixo com o detalhamento de cada uma das opções disponíveis.
+
+Tipo de integração	Meios de pagamento	Complexidade a nível frontend	User interface (UI)
+Checkout Bricks	Crédito, débito virtual Caixa, Pix, boleto, Conta Mercado Pago e Parcelamento sem cartão. Veja mais detalhes em nossa documentação Meios de pagamento disponíveis.	Fácil	Componentes com UI já definida e que pode ser personalizada caso necessário.
+Cardform	Cartão.	Médio	O formulário não possui nenhuma estilização, o que permite total flexibilidade na personalização da aparência.
+Core Methods Web	Cartão.	Alto	Crie seu formulário e suas estilizações.
+Core Methods Mobile	Cartão.	Alto	Crie seu formulário e suas estilizações para aplicações móveis.
+Os quatro tipos de integração citados anteriormente são elegíveis a certificação PCI SAQ A. Isso porque os dados de cartão, CVV e data de expiração trafegam através de um iframe diretamente aos servidores do Mercado Pago, que impedem que os dados PCI (número do cartão, código de segurança e data de vencimento) sejam acessíveis a terceiros.
+
+Além dos meios de pagamento mostrados na tabela acima, também é possível oferecer outras formas de pagamento. Para obter uma lista detalhada com todos as opções disponíveis para integração, envie um GET ao endpoint /v1/payment_methods e execute a requisição. Na resposta você terá acesso a cada uma das opções.
+
+Pré-requisitos
+Para integrar o Checkout Transparente , é importante atender aos requisitos mostrados abaixo.
+
+Requisito	Descrição
+Aplicação	As aplicações são as diferentes integrações contidas em uma ou mais lojas. Você pode criar uma aplicação para cada solução que implementar, a fim de ter tudo organizado e manter um controle que facilite a gestão. Veja Suas integrações para mais informações sobre como criar uma aplicação.
+Credenciais	As credenciais são chaves únicas que fornecemos para que você possa configurar as suas integrações. Você precisará de um par de credenciais de teste para testar a integração e um par de credenciais de produção para receber pagamentos reais. Veja Credenciais para mais informações.
+MercadoPago.js	MercadoPago.js te permite gerenciar os dados do cartão para cumprir com os requerimentos de segurança necessários e evitar o envio de dados sensíveis para seus servidores. Para isso, nossa biblioteca gera um token que representa esta informação e te permite operar de forma segura. Veja SDKs para ter acesso ao MercadoPago.js.
+Chave Pix	Caso queira oferecer pagamentos via Pix, é necessário ter as chaves cadastradas. Caso ainda não tenha, clique aqui para mais informações sobre como cadastrá-las.
+Se todos os pré-requisitos foram cumpridos, você poderá realizar a integração do Checkout Transparente .
+
+Anterior
+Tipos de integração
+Conheça os tipos de integração disponíveis para o Checkout Transparente.
+Próximo
+Configuração da integração
+Saiba quais são os meios de pagamentos disponíveis para integração com Checkout Transparente.
+
+Integração para websites
+A integração de pagamentos via cartão para websites é realizada via CardForm. Neste modo de integração, o MercadoPago.js é responsável pelos fluxos necessários para obtenção das informações obrigatórias para a criação de um pagamento. Quando inicializado, uma busca é realizada para recolher os tipos de documentos disponíveis para o país em questão.
+
+À medida que os dados do cartão são inseridos, ocorre uma busca automática das informações de emissor e parcelas disponíveis para aquele meio de pagamento. Com isso, a implementação do fluxo é transparente para quem realiza a integração.
+
+Importante
+Além das opções disponíveis nesta documentação, também é possível integrar pagamentos com cartão utilizando o Brick de Card Payment. Veja a documentação Renderização padrão do Card Payment para mais detalhes. Também recomendamos a adoção do protocolo 3DS 2.0 para aumentar a probabilidade de aprovação dos seus pagamentos. Para obter mais informações, consulte a documentação sobre Como integrar 3DS com Checkout Transparente.
+Confira abaixo o diagrama que ilustra o processo de pagamento via cartão utilizando o CardForm.
+
+API-integration-flowchart
+
+Para integrar pagamentos com cartão no Checkout Transparente siga as etapas abaixo.
+
+Importar MercadoPago.js
+A primeira etapa do processo de integração de pagamentos com cartões é a captura de dados do cartão. Esta captura é feita a partir da inclusão da biblioteca MercadoPago.js em seu projeto, seguida do formulário de pagamento. Utilize o código abaixo para importar a biblioteca MercadoPago.js antes de adicionar o formulário de pagamento.
+
+<body>
+  <script src="https://sdk.mercadopago.com/js/v2"></script>
+</body>
+Configurar credenciais
+As credenciais são chaves únicas com as quais identificamos uma integração na sua conta. Servem para capturar pagamentos em lojas virtuais e outras aplicações de forma segura.
+
+Esta é a primeira etapa de uma estrutura completa de código que deverá ser seguida para a correta integração do pagamento via cartão.
+
+<script>
+  const mp = new MercadoPago("YOUR_PUBLIC_KEY");
+</script>
+Adicionar formulário de pagamento
+A captura dos dados do cartão é feita através do CardForm da biblioteca MercadoPago.js. Nosso CardForm se conectará ao seu formulário de pagamento HTML, facilitando a obtenção e validação de todos os dados necessários para processar o pagamento.
+
+Para adicionar o formulário de pagamento, insira o HTML abaixo diretamente no projeto.
+
+<style>
+    #form-checkout {
+      display: flex;
+      flex-direction: column;
+      max-width: 600px;
+    }
+
+    .container {
+      height: 18px;
+      display: inline-block;
+      border: 1px solid rgb(118, 118, 118);
+      border-radius: 2px;
+      padding: 1px 2px;
+    }
+  </style>
+  <form id="form-checkout">
+    <div id="form-checkout__cardNumber" class="container"></div>
+    <div id="form-checkout__expirationDate" class="container"></div>
+    <div id="form-checkout__securityCode" class="container"></div>
+    <input type="text" id="form-checkout__cardholderName" />
+    <select id="form-checkout__issuer"></select>
+    <select id="form-checkout__installments"></select>
+    <select id="form-checkout__identificationType"></select>
+    <input type="text" id="form-checkout__identificationNumber" />
+    <input type="email" id="form-checkout__cardholderEmail" />
+
+    <button type="submit" id="form-checkout__submit">Pagar</button>
+    <progress value="0" class="progress-bar">Carregando...</progress>
+  </form>
+Inicializar formulário de pagamento
+Após adicionar o formulário de pagamento, é preciso inicializá-lo. Esta etapa consiste em relacionar o ID de cada campo do formulário com os atributos correspondentes. A biblioteca será responsável pelo preenchimento, obtenção e validação de todos os dados necessários no momento de confirmação do pagamento.
+
+Importante
+Ao enviar o formulário, um token, chamado de CardToken, é gerado, representando de forma segura os dados do cartão. É possível acessá-lo através da função cardForm.getCardFormData(), como mostrado abaixo no callback onSubmit. Além disso, este token também é armazenado em um input oculto dentro do formulário no qual poderá ser encontrado com a nomenclatura MPHiddenInputToken. Leve em consideração que o CardToken pode ser usado somente uma vez e expira dentro de 7 dias.
+const cardForm = mp.cardForm({
+      amount: "100.5",
+      iframe: true,
+      form: {
+        id: "form-checkout",
+        cardNumber: {
+          id: "form-checkout__cardNumber",
+          placeholder: "Número do cartão",
+        },
+        expirationDate: {
+          id: "form-checkout__expirationDate",
+          placeholder: "MM/YY",
+        },
+        securityCode: {
+          id: "form-checkout__securityCode",
+          placeholder: "Código de segurança",
+        },
+        cardholderName: {
+          id: "form-checkout__cardholderName",
+          placeholder: "Titular do cartão",
+        },
+        issuer: {
+          id: "form-checkout__issuer",
+          placeholder: "Banco emissor",
+        },
+        installments: {
+          id: "form-checkout__installments",
+          placeholder: "Parcelas",
+        },        
+        identificationType: {
+          id: "form-checkout__identificationType",
+          placeholder: "Tipo de documento",
+        },
+        identificationNumber: {
+          id: "form-checkout__identificationNumber",
+          placeholder: "Número do documento",
+        },
+        cardholderEmail: {
+          id: "form-checkout__cardholderEmail",
+          placeholder: "E-mail",
+        },
+      },
+      callbacks: {
+        onFormMounted: error => {
+          if (error) return console.warn("Form Mounted handling error: ", error);
+          console.log("Form mounted");
+        },
+        onSubmit: event => {
+          event.preventDefault();
+
+          const {
+            paymentMethodId: payment_method_id,
+            issuerId: issuer_id,
+            cardholderEmail: email,
+            amount,
+            token,
+            installments,
+            identificationNumber,
+            identificationType,
+          } = cardForm.getCardFormData();
+
+          fetch("/process_payment", {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
+              token,
+              issuer_id,
+              payment_method_id,
+              transaction_amount: Number(amount),
+              installments: Number(installments),
+              description: "Descrição do produto",
+              payer: {
+                email,
+                identification: {
+                  type: identificationType,
+                  number: identificationNumber,
+                },
+              },
+            }),
+          });
+        },
+        onFetching: (resource) => {
+          console.log("Fetching resource: ", resource);
+
+          // Animate progress bar
+          const progressBar = document.querySelector(".progress-bar");
+          progressBar.removeAttribute("value");
+
+          return () => {
+            progressBar.setAttribute("value", "0");
+          };
+        }
+      },
+    });
+Importante
+Caso necessite adicionar ou modificar alguma lógica no fluxo dos métodos do Javascript consulte a documentação Integração via Métodos Core
+Enviar pagamento
+Para continuar o processo de integração de pagamento via cartão, é necessário que o backend receba a informação do formulário com o token gerado e os dados completos conforme indicado nas etapas anteriores.
+
+No exemplo da seção anterior, enviamos todos os dados necessários para criar o pagamento para o endpoint process_payment do backend .
+
+Com todas as informações coletadas no backend , envie um POST com os atributos necessários, atentando-se aos parâmetros token, transaction_amount, installments, payment_method_id e o payer.email ao endpoint /v1/payments e execute a requisição ou, se preferir, faça o envio das informações utilizando nossos SDKs.
+
+Importante
+Para aumentar as chances de aprovação do pagamento e evitar que a análise antifraude não autorize a transação, recomendamos inserir o máximo de informação sobre o comprador ao realizar a requisição. Para mais detalhes sobre como aumentar as chances de aprovação, veja Como melhorar a aprovação dos pagamentos.
+
+Além disso, você deverá enviar obrigatoriamente o atributo X-Idempotency-Key. Seu preenchimento é importante para garantir a execução e reexecução de requisições de forma segura, sem o risco de realizar a mesma ação mais de uma vez por engano. Para isso, atualize nossa biblioteca de SDK ou gere um UUID V4 e envie-o no header de suas chamadas. Importante: Os valores admitidos no cabeçalho têm limitações e não é permitido o formato "prefixo" + "_". Exemplo inválido: payment_1298ey98sdsdh12hsd-12esvv. Exemplo válido: payment192839qw8sd7db-2xx2s-23wds.
+<?php
+  use MercadoPago\Client\Payment\PaymentClient;
+  use MercadoPago\Client\Common\RequestOptions;
+  use MercadoPago\MercadoPagoConfig;
+
+  MercadoPagoConfig::setAccessToken("YOUR_ACCESS_TOKEN");
+
+  $client = new PaymentClient();
+  $request_options = new RequestOptions();
+  $request_options->setCustomHeaders(["X-Idempotency-Key: <SOME_UNIQUE_VALUE>"]);
+
+  $payment = $client->create([
+    "transaction_amount" => (float) $_POST['<TRANSACTION_AMOUNT>'],
+    "token" => $_POST['<TOKEN>'],
+    "description" => $_POST['<DESCRIPTION>'],
+    "installments" => $_POST['<INSTALLMENTS>'],
+    "payment_method_id" => $_POST['<PAYMENT_METHOD_ID'],
+    "issuer_id" => $_POST['<ISSUER>'],
+    "payer" => [
+      "email" => $_POST['<EMAIL>'],
+      "identification" => [
+        "type" => $_POST['<IDENTIFICATION_TYPE'],
+        "number" => $_POST['<NUMBER>']
+      ]
+    ]
+  ], $request_options);
+  echo implode($payment);
+?>
+A resposta trará o seguinte resultado
+
+{
+   "status": "approved",
+   "status_detail": "accredited",
+   "id": 3055677,
+   "date_approved": "2019-02-23T00:01:10.000-04:00",
+   "payer": {
+       ...
+   },
+   "payment_method_id": "visa",
+   "payment_type_id": "credit_card",
+   "refunds": [],
+   ...
+}
+Atenção
+Os pagamentos criados possuem os seguintes status: "Pendente", "Rejeitado" e "Aprovado". Para acompanhar as atualizações é necessário configurar seu sistema para receber as notificações de pagamentos e outras atualizações de status. Veja Notificações para mais detalhes.
+Exemplo de código
+
+Conta Mercado Pago
+A opção de pagar com a Conta Mercado Pago, por padrão, é apresentada em todos os Checkouts do Mercado Pago em combinação com pagamentos de usuários guest (sem login).
+
+Importante
+Além das opções disponíveis nesta documentação, também é possível integrar pagamentos com a Conta Mercado Pago utilizando o Brick de Wallet. Veja a documentação Renderização padrão de Wallet para mais detalhes.
+Esta opção permite que usuários cadastrados no Mercado Pago e/ou Mercado Livre façam login e utilizem-se dos métodos disponíveis para efetuar seus pagamentos, além de poder incluir novas opções de pagamento, como cartões de crédito.
+
+É possível pagar com cartão, saldo disponível e Linha de Crédito em um ambiente seguro e otimizado, aumentando as chances de conversão de vendas, além de permitir ao vendedor oferecer somente pagamentos com Conta Mercado Pago. Com isso, a opção de pagar sem se logar não existirá, porém, contribuirá para um aumento na conversão de pagamentos.
+
+Importante
+Ao adicionar esta opção, não será possível receber pagamentos de usuários não cadastrados no Mercado Pago, assim como não poderá receber pagamentos via dinheiro ou transferência.
+Siga as etapas abaixo para configurar a Conta Mercado Pago como meio de pagamento.
+
+Criar preferência
+Server-Side
+
+Se você é um usuário e deseja que todos os seus pagamentos sejam feitos via Wallet, é possível determinar isso através de um atributo na chamada de preferências. Para criar uma preferência, utilize um dos SDKs disponíveis abaixo.
+
+Além dos SDKs, também é possível criar uma preferência através da API de preferências. Para isso, envie um POST com o parâmetro purpose e o valor wallet_purchase ao endpoint /checkout/preferences e execute a requisição.
+O modo Conta Mercado Pago funciona adicionando o atributo purpose na preferência.
+
+<?php
+// Cria um objeto de preferência
+$preference = new MercadoPago\Preference();
+
+// Cria um item na preferência
+$item = new MercadoPago\Item();
+$item->title = 'Meu produto';
+$item->quantity = 1;
+$item->unit_price = 75;
+$preference->items = array($item);
+$preference->purpose = 'wallet_purchase';
+$preference->save();
+?>
+Adicionar checkout
+Client-Side
+
+Após ter criado a preferência no backend, será necessário instalar o SDK de frontend do Mercado Pago ao projeto para adicionar o botão de pagamento.
+
+A instalação é feita, em duas etapas: incluindo o SDK do Mercado Pago ao projeto com suas credenciais configuradas e iniciando o checkout a partir da preferência gerada anteriormente. Para isso, siga os passos listados abaixo.
+
+Para incluir o SDK MercadoPago.js, adicione o código abaixo no HTML do projeto ou instale via NPM conforme indicado nos exemplos a seguir.
+<body>
+  <script src="https://sdk.mercadopago.com/js/v2"></script>
+</body>
+Em seguida, inicialize a integração definindo sua chave pública usando o seguinte código.
+
+<script>
+  const mp = new MercadoPago("YOUR_PUBLIC_KEY");
+</script>
+Feito isso, é necessário criar um container para definir o local que o botão será inserido na tela. A criação do container é feita inserindo um elemento no código HTML da página no qual o componente será renderizado.
+
+Importante
+O valor exibido abaixo na propriedade ID é apenas um exemplo e pode ser alterado, mas deve sempre corresponder ao ID indicado na etapa de renderização.
+<div id="wallet_container"></div>
+Ao finalizar a etapa anterior, inicialize seu checkout utilizando o ID da preferência previamente criada com o identificador do elemento onde o botão deverá ser exibido.
+mp.bricks().create("wallet", "wallet_container", {
+  initialization: {
+    preferenceId: "<PREFERENCE_ID>",
+  },
+});
+Os pagamentos criados possuem os seguintes status: Pendente, Rejeitado e Aprovado. Para acompanhar as atualizações é necessário configurar seu sistema para receber as notificações de pagamentos e outras atualizações de status. Veja Notificações para mais detalhes.
+
+Pix
+Pix é um meio de pagamento eletrônico instantâneo oferecido pelo Banco Central do Brasil a pessoas físicas e jurídicas. Através do Checkout Transparente, é possível oferecer esta opção de pagamento por meio de código QR ou código de pagamento.
+
+Importante
+Além das opções disponíveis nesta documentação, também é possível integrar pagamentos com Pix utilizando o Brick de Payment. Veja a documentação Renderização padrão de Payment para mais detalhes.
+Para integrar pagamentos via Pix, siga as etapas abaixo, mas caso você já tenha integrado pagamentos via cartão, inicie a integração a partir da etapa Adicionar formulário de pagamento.
+
+Importar MercadoPago.js
+Após a criação das chaves Pix, é preciso realizar a captura de dados para pagamento. Esta captura é feita a partir da inclusão da biblioteca MercadoPago.js em seu projeto, seguida do formulário de pagamento. Utilize o código abaixo para importar a biblioteca MercadoPago.js antes de adicionar o formulário de pagamento.
+
+<body>
+  <script src="https://sdk.mercadopago.com/js/v2"></script>
+</body>
+Configurar credencial
+As credenciais são chaves únicas com as quais identificamos uma integração na sua conta. Servem para capturar pagamentos em lojas virtuais e outras aplicações de forma segura.
+
+Esta é a primeira etapa de uma estrutura completa de código que deverá ser seguida para a correta integração do pagamento via Pix. Atente-se aos blocos abaixo para adicionar aos códigos conforme indicado.
+
+<script>
+  const mp = new MercadoPago("YOUR_PUBLIC_KEY");
+</script>
+Adicionar formulário de pagamento
+Com a biblioteca MercadoPago.js incluída e a credencial configurada, adicione o formulário de pagamento abaixo ao seu projeto para garantir a captura segura dos dados dos clientes.
+
+<form id="form-checkout" action="/process_payment" method="post">
+    <div>
+      <div>
+        <label for="payerFirstName">Nome</label>
+        <input id="form-checkout__payerFirstName" name="payerFirstName" type="text">
+      </div>
+      <div>
+        <label for="payerLastName">Sobrenome</label>
+        <input id="form-checkout__payerLastName" name="payerLastName" type="text">
+      </div>
+      <div>
+        <label for="email">E-mail</label>
+        <input id="form-checkout__email" name="email" type="text">
+      </div>
+      <div>
+        <label for="identificationType">Tipo de documento</label>
+        <select id="form-checkout__identificationType" name="identificationType" type="text"></select>
+      </div>
+      <div>
+        <label for="identificationNumber">Número do documento</label>
+        <input id="form-checkout__identificationNumber" name="identificationNumber" type="text">
+      </div>
+    </div>
+
+    <div>
+      <div>
+        <input type="hidden" name="transactionAmount" id="transactionAmount" value="100">
+        <input type="hidden" name="description" id="description" value="Nome do Produto">
+        <br>
+        <button type="submit">Pagar</button>
+      </div>
+    </div>
+  </form>
+Obter tipos de documento
+Após configurar a credencial e adicionar o formulário de pagamento, é preciso obter os tipos de documento que farão parte do preenchimento do formulário para pagamento.
+
+Ao incluir o elemento do tipo select com o id: form-checkout__identificationType que está no formulário, será possível preencher automaticamente as opções disponíveis quando chamar a função a seguir:
+
+(async function getIdentificationTypes() {
+      try {
+        const identificationTypes = await mp.getIdentificationTypes();
+        const identificationTypeElement = document.getElementById('form-checkout__identificationType');
+
+        createSelectOptions(identificationTypeElement, identificationTypes);
+      } catch (e) {
+        return console.error('Error getting identificationTypes: ', e);
+      }
+    })();
+
+    function createSelectOptions(elem, options, labelsAndKeys = { label: "name", value: "id" }) {
+      const { label, value } = labelsAndKeys;
+
+      elem.options.length = 0;
+
+      const tempOptions = document.createDocumentFragment();
+
+      options.forEach(option => {
+        const optValue = option[value];
+        const optLabel = option[label];
+
+        const opt = document.createElement('option');
+        opt.value = optValue;
+        opt.textContent = optLabel;
+
+        tempOptions.appendChild(opt);
+      });
+
+      elem.appendChild(tempOptions);
+    }
+Enviar pagamento
+Ao finalizar a inclusão do formulário de pagamento, é preciso enviar o e-mail do comprador, tipo e número de documento, o meio de pagamento utilizado (pix) e o detalhe do valor.
+
+Importante
+Ao executar as APIs citadas nesta documentação, você deverá enviar o atributo X-Idempotency-Key. Seu preenchimento é importante para garantir a execução e reexecução de requisições sem que haja situações indesejadas como, por exemplo, pagamentos em duplicidade.
+Para configurar pagamento com Pix, envie um POST ao endpoint /v1/payments e execute a requisição ou, se preferir, faça a requisição utilizando nossos SDKs.
+
+<?php
+  use MercadoPago\Client\Payment\PaymentClient;
+  use MercadoPago\Client\Common\RequestOptions;
+  use MercadoPago\MercadoPagoConfig;
+
+  MercadoPagoConfig::setAccessToken("YOUR_ACCESS_TOKEN");
+
+  $client = new PaymentClient();
+  $request_options = new RequestOptions();
+  $request_options->setCustomHeaders(["X-Idempotency-Key: <SOME_UNIQUE_VALUE>"]);
+
+  $payment = $client->create([
+ "transaction_amount" => (float) $_POST['<TRANSACTION_AMOUNT>'],
+    "payment_method_id" => $_POST['<PAYMENT_METHOD_ID>'],
+    "payer" => [
+      "email" => $_POST['<EMAIL>']
+    ]
+  ], $request_options);
+  echo implode($payment);
+?>
+A resposta mostrará o estado pendente do pagamento e todas as informações que você precisa para mostrar ao comprador. O valor transaction_data retornará os dados para código QR.
+
+{
+  ...,
+ "id": 5466310457,
+ "status": "pending",
+ "status_detail": "pending_waiting_transfer",
+ ...,
+ "transaction_details": {
+     "net_received_amount": 0,
+     "total_paid_amount": 100,
+     "overpaid_amount": 0,
+     "external_resource_url": null,
+     "installment_amount": 0,
+     "financial_institution": null,
+     "transaction_id": null
+ },
+ "point_of_interaction": {
+     "type": "PIX",
+     "sub_type": null,
+     "application_data": {
+       "name": "NAME_SDK",
+       "version": "VERSION_NUMBER"
+     },
+     "transaction_data": {
+       "qr_code_base64": "iVBORw0KGgoAAAANSUhEUgAABRQAAAUUCAYAAACu5p7oAAAABGdBTUEAALGPC/xhBQAAAAFzUkdCAK7OHOkAAAAgY0hSTQAAeiYAAICEAAD6AAAAgOgAAHUwAADqYAAAOpgAABdwnLpRPAAAIABJREFUeJzs2luO3LiWQNFmI+Y/Zd6vRt36KGNXi7ZOBtcagHD4kNLeiLX33v8DAAAAABD879sDAAAAAAA/h6AIAAAAAGSCIgAAAACQCYoAAAAAQCYoAgAAAACZoAgAAAAAZIIiAAAAAJAJigAAAABAJigCAAAAAJmgCAAAAABkgiIAAAAAkAmKAAAAAEAmKAIAAAAAmaAIAAAAAGSCIgAAAACQCYoAAAAAQCYoAgAAAACZoAgAAAAAZIIiAAAAAJAJigAAAABAJigCA...",
+       "qr_code": "00020126600014br.gov.bcb.pix0117john@yourdomain.com0217additional data520400005303986540510.005802BR5913Maria Silva6008Brasilia62070503***6304E2CA",
+       "ticket_url": "https://www.mercadopago.com.br/payments/123456789/ticket?caller_id=123456&hash=123e4567-e89b-12d3-a456-426655440000",
+       "transaction_id": null
+     }
+ }
+ ...,
+}
+Com Pix, você também pode escolher o prazo que o cliente terá para pagar a compra, definindo a validade do código de pagamento enviado a ele após a realização do pedido.
+
+Importante
+Por padrão, a data de vencimento para pagamentos com Pix é de 24 horas, mas você pode alterá-la enviando o campo date_of_expiration na solicitação de criação de pagamento. A data configurada deve estar entre 30 minutos até 30 dias a partir da data de emissão do pagamento.
+Visualização de pagamento
+Para o usuário efetuar o pagamento, você deve escolher a forma de abertura do mesmo, que pode ser através de um botão ou de um código QR que deve ser renderizado.
+
+Selecione a opção que mais se adéqua ao seu modelo de negócio e siga as etapas descritas abaixo.
+
+Adicionar Link ou botão: Ao optar por adicionar um link ou botão para pagamento com Pix, o comprador será direcionado a uma nova janela contendo todas as informações para pagamento, como QR Code, Pix Copia e Cola e as instruções de pagamento.
+Para oferecer esta opção, utilize o atributo ticket_url, que mostra um Pix em uma nova janela com todas as informações de QR Code, Pix Copia e Cola e instruções de pagamentos.
+
+<a href="https://www.mercadopago.com.br/payments/123456789/ticket?caller_id=123456&hash=123e4567-e89b-12d3-a456-426655440000" target="_blank">Pagar com Pix</a>
+Renderizar código QR: É possível renderizar o código QR vigente, que deverá ser utilizado somente uma vez, na própria tela. Além disso, também é possível adicionar uma opção para copiar e colar o código de pagamento, o que permitirá realizar a transação a partir de um Internet Banking.
+Siga as etapas abaixo para renderizar o QR code e disponibilizar o recurso copia e cola.
+
+Adicione o qr_code_base64 para exibir o código QR.
+<img src={`data:image/jpeg;base64,${qr_code_base64}`}/>
+Para apresentar a opção que permitirá copiar e colar o código de pagamento, adicione o qr_code da seguinte forma:
+<label for="copiar">Copiar Hash:</label>
+    <input type="text" id="copiar" value={qr_code} readonly/>
+Ao concluir essas etapas, o código QR terá sido renderizado e será exibido para o comprador no momento do pagamento.
