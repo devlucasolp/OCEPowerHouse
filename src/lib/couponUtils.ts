@@ -10,28 +10,46 @@ export const validateCoupon = (
   cartItems: CartProduct[],
   totalAmount: number
 ): CouponValidationResult => {
+  console.log('🔍 DEBUG validateCoupon: iniciando validação', {
+    couponCode: coupon.code,
+    totalAmount,
+    cartItems: cartItems.map(item => ({
+      title: item.title,
+      category: item.category,
+      price: item.price
+    }))
+  });
+
   // Verificar se o cupom está ativo
   if (!coupon.isActive) {
+    console.log('❌ DEBUG validateCoupon: cupom não está ativo');
     return { isValid: false, error: 'Cupom não está ativo' };
   }
 
   // Verificar data de início
   if (coupon.startDate && new Date() < new Date(coupon.startDate)) {
+    console.log('❌ DEBUG validateCoupon: cupom ainda não está válido');
     return { isValid: false, error: 'Cupom ainda não está válido' };
   }
 
   // Verificar data de expiração
   if (coupon.endDate && new Date() > new Date(coupon.endDate)) {
+    console.log('❌ DEBUG validateCoupon: cupom expirado');
     return { isValid: false, error: 'Cupom expirado' };
   }
 
   // Verificar limite de uso
   if (coupon.usageLimit > 0 && coupon.usageCount >= coupon.usageLimit) {
+    console.log('❌ DEBUG validateCoupon: cupom esgotado');
     return { isValid: false, error: 'Cupom esgotado' };
   }
 
   // Verificar valor mínimo da compra
   if (coupon.minPurchaseAmount && totalAmount < coupon.minPurchaseAmount) {
+    console.log('❌ DEBUG validateCoupon: valor mínimo não atingido', {
+      required: coupon.minPurchaseAmount,
+      current: totalAmount
+    });
     return { 
       isValid: false, 
       error: `Valor mínimo da compra: R$ ${coupon.minPurchaseAmount.toFixed(2)}` 
@@ -40,10 +58,19 @@ export const validateCoupon = (
 
   // Verificar categorias aplicáveis
   if (coupon.applicableCategories && coupon.applicableCategories.length > 0) {
+    console.log('🔍 DEBUG validateCoupon: verificando categorias', {
+      requiredCategories: coupon.applicableCategories,
+      productCategories: cartItems.map(item => item.category)
+    });
+    
     const hasApplicableCategory = cartItems.some(item => 
       coupon.applicableCategories!.includes(item.category)
     );
+    
+    console.log('🔍 DEBUG validateCoupon: categoria aplicável encontrada?', hasApplicableCategory);
+    
     if (!hasApplicableCategory) {
+      console.log('❌ DEBUG validateCoupon: nenhuma categoria aplicável');
       return { isValid: false, error: 'Cupom não se aplica aos produtos no carrinho' };
     }
   }
@@ -54,10 +81,12 @@ export const validateCoupon = (
       coupon.excludedProducts!.includes(item._id || item.id || '')
     );
     if (hasExcludedProduct) {
+      console.log('❌ DEBUG validateCoupon: produto excluído encontrado');
       return { isValid: false, error: 'Alguns produtos no carrinho não permitem este cupom' };
     }
   }
 
+  console.log('✅ DEBUG validateCoupon: cupom válido!');
   return { isValid: true };
 };
 
@@ -105,19 +134,37 @@ export const applyCoupon = (
   cartItems: CartProduct[],
   totalAmount: number
 ): CouponApplication | null => {
+  console.log('🧮 DEBUG couponUtils: applyCoupon chamado', {
+    couponCode: coupon.code,
+    totalAmount,
+    cartItemsCount: cartItems.length
+  });
+  
   const validation = validateCoupon(coupon, cartItems, totalAmount);
+  console.log('🧮 DEBUG couponUtils: validação', validation);
+  
   if (!validation.isValid) {
+    console.log('❌ DEBUG couponUtils: Cupom inválido, retornando null');
     return null;
   }
 
   const discountAmount = calculateDiscount(coupon, cartItems, totalAmount);
   const finalPrice = Math.max(0, totalAmount - discountAmount);
 
-  return {
+  console.log('🧮 DEBUG couponUtils: cálculos finais', {
+    originalTotal: totalAmount,
+    discountAmount,
+    finalPrice
+  });
+
+  const result = {
     coupon,
     discountAmount,
     finalPrice: Math.round(finalPrice * 100) / 100
   };
+
+  console.log('✅ DEBUG couponUtils: retornando resultado', result);
+  return result;
 };
 
 /**

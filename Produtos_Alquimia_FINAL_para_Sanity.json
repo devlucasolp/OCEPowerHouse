@@ -1,0 +1,886 @@
+[
+  {
+    "_createdAt": "2025-08-13T04:04:06.308103Z",
+    "_id": "14442fe8-052a-4df6-82ee-f269b6257796",
+    "_rev": "eeb52426-653d-8bdd-be7d-f8db5fcc6947",
+    "_type": "product",
+    "_updatedAt": "2025-08-13T04:04:06.308103Z",
+    "title": "Duragel Box 27g (15 sachês)",
+    "slug": {
+      "_type": "slug",
+      "current": "duragel-box-27g-15-saches"
+    },
+    "price": 45.9,
+    "category": "nutricao",
+    "inStock": true,
+    "featured": false,
+    "description": "Gel de carboidrato (27g por dose) para energia rápida em treinos curtos; com eletrólitos. Sabores: Café e Limão.",
+    "brand": "Alquimia da Saúde",
+    "image": {
+      "_type": "image",
+      "alt": "Duragel Box 27g (15 sachês)",
+      "asset": {
+        "_ref": "image-duragel-box-27g-15-s-feac7dea-800x600-jpg",
+        "_type": "reference"
+      }
+    }
+  },
+  {
+    "_createdAt": "2025-08-13T04:04:06.308103Z",
+    "_id": "3e15b68c-1f4d-4c29-8687-3bf584ec9690",
+    "_rev": "e55695ba-b51c-671e-03a8-7a7d57933c36",
+    "_type": "product",
+    "_updatedAt": "2025-08-13T04:04:06.308103Z",
+    "title": "Duragel Box 40g (15 sachês)",
+    "slug": {
+      "_type": "slug",
+      "current": "duragel-box-40g-15-saches"
+    },
+    "price": 45.9,
+    "category": "nutricao",
+    "inStock": true,
+    "featured": false,
+    "description": "Gel de carboidrato (40g por dose) para treinos longos, com liberação estável de energia. Sabores: Café, Neutro e Tangerina.",
+    "brand": "Alquimia da Saúde",
+    "image": {
+      "_type": "image",
+      "alt": "Duragel Box 40g (15 sachês)",
+      "asset": {
+        "_ref": "image-duragel-box-40g-15-s-0665a041-800x600-jpg",
+        "_type": "reference"
+      }
+    }
+  },
+  {
+    "_createdAt": "2025-08-13T04:04:06.308103Z",
+    "_id": "6556c3f4-f26b-436a-9c9b-6b51ffe4727c",
+    "_rev": "7bf239c7-46d9-05ea-da11-9df47a0450c3",
+    "_type": "product",
+    "_updatedAt": "2025-08-13T04:04:06.308103Z",
+    "title": "Duragel Box 50g (15 sachês)",
+    "slug": {
+      "_type": "slug",
+      "current": "duragel-box-50g-15-saches"
+    },
+    "price": 45.9,
+    "category": "nutricao",
+    "inStock": true,
+    "featured": false,
+    "description": "Gel de carboidrato (50g por dose) focado em energia e endurance para esforços prolongados.",
+    "brand": "Alquimia da Saúde",
+    "image": {
+      "_type": "image",
+      "alt": "Duragel Box 50g (15 sachês)",
+      "asset": {
+        "_ref": "image-duragel-box-50g-15-s-f4f8eb27-800x600-jpg",
+        "_type": "reference"
+      }
+    }
+  },
+  {
+    "_createdAt": "2025-08-13T04:04:06.308103Z",
+    "_id": "0b6d1af9-b4a6-487b-928d-1c174f65063c",
+    "_rev": "32c532fa-2d81-fbcb-7d58-eecb7a78b3a4",
+    "_type": "product",
+    "_updatedAt": "2025-08-13T04:04:06.308103Z",
+    "title": "Palatinose Box (15 sachês)",
+    "slug": {
+      "_type": "slug",
+      "current": "palatinose-box-15-saches"
+    },
+    "price": 166.5,
+    "category": "nutricao",
+    "inStock": true,
+    "featured": false,
+    "description": "Sachês de isomaltulose (Palatinose™) para energia constante e menor fadiga em treinos de endurance.",
+    "brand": "Alquimia da Saúde",
+    "image": {
+      "_type": "image",
+      "alt": "Palatinose Box (15 sachês)",
+      "asset": {
+        "_ref": "image-palatinose-box-15-sa-a271cbf5-800x600-jpg",
+        "_type": "reference"
+      }
+    }
+  },
+  {
+    "_createdAt": "2025-08-13T04:04:06.308103Z",
+    "_id": "1d9d7762-e072-431a-a4f8-52c5d4286143",
+    "_rev": "73bab5b5-5fc1-f31f-48ac-4942555c0fb1",
+    "_type": "product",
+    "_updatedAt": "2025-08-13T04:04:06.308103Z",
+    "title": "Impulse - Box 15 sachês",
+    "slug": {
+      "_type": "slug",
+      "current": "impulse-box-15-saches"
+    },
+    "price": 89.9,
+    "category": "nutricao",
+    "inStock": true,
+    "featured": false,
+    "description": "Gel intra com 27g de carboidratos de pico para energia imediata e boa tolerância gastrointestinal.",
+    "brand": "Alquimia da Saúde",
+    "image": {
+      "_type": "image",
+      "alt": "Impulse - Box 15 sachês",
+      "asset": {
+        "_ref": "image-impulse---box-15-sac-f100b3d3-800x600-jpg",
+        "_type": "reference"
+      }
+    }
+  },
+  {
+    "_createdAt": "2025-08-13T04:04:06.308103Z",
+    "_id": "239d68e6-f53c-434d-91f9-77e62afc58e9",
+    "_rev": "0719128c-d67c-c1f6-886c-5a348fb91d89",
+    "_type": "product",
+    "_updatedAt": "2025-08-13T04:04:06.308103Z",
+    "title": "Palatinose em Pó - 300g",
+    "slug": {
+      "_type": "slug",
+      "current": "palatinose-em-po-300g"
+    },
+    "price": 129.9,
+    "category": "nutricao",
+    "inStock": true,
+    "featured": false,
+    "description": "Isomaltulose em pó para liberação sustentada de energia; poupa glicogênio e reduz fadiga em treinos longos.",
+    "brand": "Alquimia da Saúde",
+    "image": {
+      "_type": "image",
+      "alt": "Palatinose em Pó - 300g",
+      "asset": {
+        "_ref": "image-palatinose-em-pó---3-b4e7bcd8-800x600-jpg",
+        "_type": "reference"
+      }
+    }
+  },
+  {
+    "_createdAt": "2025-08-13T04:04:06.308103Z",
+    "_id": "cbd76391-c5c0-458d-a2f1-d5628ca527af",
+    "_rev": "00ecd99b-8456-aaba-cd63-50dd1ed3f4e3",
+    "_type": "product",
+    "_updatedAt": "2025-08-13T04:04:06.308103Z",
+    "title": "Palatinose em Pó - Smart Carb 300g",
+    "slug": {
+      "_type": "slug",
+      "current": "palatinose-em-po-smart-carb-300g"
+    },
+    "price": 139.9,
+    "category": "nutricao",
+    "inStock": true,
+    "featured": false,
+    "description": "Palatinose™ Smart Carb 300g para endurance e desempenho estável.",
+    "brand": "Alquimia da Saúde",
+    "image": {
+      "_type": "image",
+      "alt": "Palatinose em Pó - Smart Carb 300g",
+      "asset": {
+        "_ref": "image-palatinose-em-pó---s-1ad7467e-800x600-jpg",
+        "_type": "reference"
+      }
+    }
+  },
+  {
+    "_createdAt": "2025-08-13T04:04:06.308103Z",
+    "_id": "0239d339-e745-47c1-8c1e-ed7592195bea",
+    "_rev": "ae95a7b5-21a1-fc01-348b-3d95787e52da",
+    "_type": "product",
+    "_updatedAt": "2025-08-13T04:04:06.308103Z",
+    "title": "Smart Drink Hydro - 750g",
+    "slug": {
+      "_type": "slug",
+      "current": "smart-drink-hydro-750g"
+    },
+    "price": 79.9,
+    "category": "nutricao",
+    "inStock": true,
+    "featured": false,
+    "description": "Bebida de hidratação com eletrólitos e carbo para esforços prolongados; repõe minerais e energia.",
+    "brand": "Alquimia da Saúde",
+    "image": {
+      "_type": "image",
+      "alt": "Smart Drink Hydro - 750g",
+      "asset": {
+        "_ref": "image-smart-drink-hydro----dabf4110-800x600-jpg",
+        "_type": "reference"
+      }
+    }
+  },
+  {
+    "_createdAt": "2025-08-13T04:04:06.308103Z",
+    "_id": "f4bf4d26-614d-4ebb-a159-2331f5e14bc4",
+    "_rev": "22edd12c-14d4-361f-15e6-593718926cda",
+    "_type": "product",
+    "_updatedAt": "2025-08-13T04:04:06.308103Z",
+    "title": "Smart Drink Hydro - Laranja & Hortelã 350g",
+    "slug": {
+      "_type": "slug",
+      "current": "smart-drink-hydro-laranja-hortela-350g"
+    },
+    "price": 69.9,
+    "category": "nutricao",
+    "inStock": true,
+    "featured": false,
+    "description": "Hidratação e reposição inteligente de minerais/eletrólitos com sabor Laranja & Hortelã.",
+    "brand": "Alquimia da Saúde",
+    "image": {
+      "_type": "image",
+      "alt": "Smart Drink Hydro - Laranja & Hortelã 350g",
+      "asset": {
+        "_ref": "image-smart-drink-hydro----4e1ba687-800x600-jpg",
+        "_type": "reference"
+      }
+    }
+  },
+  {
+    "_createdAt": "2025-08-13T04:04:06.308103Z",
+    "_id": "e64b6644-f775-421f-b051-e70eaf385850",
+    "_rev": "1318260c-eb74-e136-3fef-a4e3aca47ce8",
+    "_type": "product",
+    "_updatedAt": "2025-08-13T04:04:06.308103Z",
+    "title": "Smart Drink Hydro - Limão & Hortelã 350g",
+    "slug": {
+      "_type": "slug",
+      "current": "smart-drink-hydro-limao-hortela-350g"
+    },
+    "price": 69.9,
+    "category": "nutricao",
+    "inStock": true,
+    "featured": false,
+    "description": "Hidratação esportiva eficiente com reposição de eletrólitos e energia. Sabor Limão & Hortelã.",
+    "brand": "Alquimia da Saúde",
+    "image": {
+      "_type": "image",
+      "alt": "Smart Drink Hydro - Limão & Hortelã 350g",
+      "asset": {
+        "_ref": "image-smart-drink-hydro----28ac766f-800x600-jpg",
+        "_type": "reference"
+      }
+    }
+  },
+  {
+    "_createdAt": "2025-08-13T04:04:06.308103Z",
+    "_id": "456c5c26-1ad8-4e2c-baeb-b1b05d55c125",
+    "_rev": "31837014-b24d-0e97-bf4f-a794eefb24ae",
+    "_type": "product",
+    "_updatedAt": "2025-08-13T04:04:06.308103Z",
+    "title": "Smart Drink Hydro - Pink Lemonade 750g - OUTLET",
+    "slug": {
+      "_type": "slug",
+      "current": "smart-drink-hydro-pink-lemonade-750g-outlet"
+    },
+    "price": 69.9,
+    "category": "nutricao",
+    "inStock": true,
+    "featured": false,
+    "description": "Versão 750g do Hydro com sabor Pink Lemonade para hidratação e energia durante treinos intensos.",
+    "brand": "Alquimia da Saúde",
+    "image": {
+      "_type": "image",
+      "alt": "Smart Drink Hydro - Pink Lemonade 750g - OUTLET",
+      "asset": {
+        "_ref": "image-smart-drink-hydro----61a30522-800x600-jpg",
+        "_type": "reference"
+      }
+    }
+  },
+  {
+    "_createdAt": "2025-08-13T04:04:06.308103Z",
+    "_id": "567659a2-c402-4bdb-8f33-261208b5bcab",
+    "_rev": "843f1889-2098-054c-60a4-e9125472d61a",
+    "_type": "product",
+    "_updatedAt": "2025-08-13T04:04:06.308103Z",
+    "title": "Hydro Salts - Box 10 unidades",
+    "slug": {
+      "_type": "slug",
+      "current": "hydro-salts-box-10-unidades"
+    },
+    "price": 35.9,
+    "category": "nutricao",
+    "inStock": true,
+    "featured": false,
+    "description": "Sais de reposição eletrolítica para uso durante treinos/competições (cápsulas).",
+    "brand": "Alquimia da Saúde",
+    "image": {
+      "_type": "image",
+      "alt": "Hydro Salts - Box 10 unidades",
+      "asset": {
+        "_ref": "image-hydro-salts---box-10-97a31500-800x600-jpg",
+        "_type": "reference"
+      }
+    }
+  },
+  {
+    "_createdAt": "2025-08-13T04:04:06.308103Z",
+    "_id": "51a46d50-b9e0-4be8-9285-f3a5a7565a9a",
+    "_rev": "2723ad79-9606-9662-caa7-f977dc79515f",
+    "_type": "product",
+    "_updatedAt": "2025-08-13T04:04:06.308103Z",
+    "title": "Energia Performance - Nitro 600 - 390g",
+    "slug": {
+      "_type": "slug",
+      "current": "energia-performance-nitro-600-390g"
+    },
+    "price": 99.9,
+    "category": "nutricao",
+    "inStock": true,
+    "featured": false,
+    "description": "Pré-treino focado em performance com matriz de energia e suporte ao alto rendimento.",
+    "brand": "Alquimia da Saúde",
+    "image": {
+      "_type": "image",
+      "alt": "Energia Performance - Nitro 600 - 390g",
+      "asset": {
+        "_ref": "image-energia-performance--643f5900-800x600-jpg",
+        "_type": "reference"
+      }
+    }
+  },
+  {
+    "_createdAt": "2025-08-13T04:04:06.308103Z",
+    "_id": "28d48ddc-ee27-4dc2-9050-d584c1d593b5",
+    "_rev": "16f1aa74-36b4-cd4f-2c67-7254b5aea00c",
+    "_type": "product",
+    "_updatedAt": "2025-08-13T04:04:06.308103Z",
+    "title": "Energia Performance – Uva Orgânica, Beterraba e Cacau 300g",
+    "slug": {
+      "_type": "slug",
+      "current": "energia-performance-uva-organica-beterraba-e-cacau-300g"
+    },
+    "price": 99.9,
+    "category": "nutricao",
+    "inStock": true,
+    "featured": false,
+    "description": "Fórmula natural para energia com beterraba, cacau e uva; suporte à performance.",
+    "brand": "Alquimia da Saúde",
+    "image": {
+      "_type": "image",
+      "alt": "Energia Performance – Uva Orgânica, Beterraba e Cacau 300g",
+      "asset": {
+        "_ref": "image-energia-performance--0a00deb1-800x600-jpg",
+        "_type": "reference"
+      }
+    }
+  },
+  {
+    "_createdAt": "2025-08-13T04:04:06.308103Z",
+    "_id": "860a6619-5f52-42f2-a83e-ef17688f8a82",
+    "_rev": "1f25d1bf-f798-92d8-91c0-7e27c7f3ab9c",
+    "_type": "product",
+    "_updatedAt": "2025-08-13T04:04:06.308103Z",
+    "title": "Creatina Monohidratada - 300 g",
+    "slug": {
+      "_type": "slug",
+      "current": "creatina-monohidratada-300-g"
+    },
+    "price": 89.9,
+    "category": "suplementos",
+    "inStock": true,
+    "featured": false,
+    "description": "Creatina monohidratada em pó para força e potência muscular.",
+    "brand": "Alquimia da Saúde",
+    "image": {
+      "_type": "image",
+      "alt": "Creatina Monohidratada - 300 g",
+      "asset": {
+        "_ref": "image-creatina-monohidrata-398590a6-800x600-jpg",
+        "_type": "reference"
+      }
+    }
+  },
+  {
+    "_createdAt": "2025-08-13T04:04:06.308103Z",
+    "_id": "d270015b-91c7-408e-9347-2200f609a6e1",
+    "_rev": "5a58b73a-bdf5-87c9-fcc6-3940ac95cc61",
+    "_type": "product",
+    "_updatedAt": "2025-08-13T04:04:06.308103Z",
+    "title": "Recover Físico - 60 Cápsulas Vegetais",
+    "slug": {
+      "_type": "slug",
+      "current": "recover-fisico-60-capsulas-vegetais"
+    },
+    "price": 129.9,
+    "category": "suplementos",
+    "inStock": true,
+    "featured": false,
+    "description": "Fórmula de recuperação muscular e redução de fadiga em cápsulas.",
+    "brand": "Alquimia da Saúde",
+    "image": {
+      "_type": "image",
+      "alt": "Recover Físico - 60 Cápsulas Vegetais",
+      "asset": {
+        "_ref": "image-recover-físico---60--3c670cca-800x600-jpg",
+        "_type": "reference"
+      }
+    }
+  },
+  {
+    "_createdAt": "2025-08-13T04:04:06.308103Z",
+    "_id": "1f521e3e-e17c-4920-bdcf-f6170bc867b4",
+    "_rev": "4f4edd7c-f70f-d398-09a8-28df8243fd6f",
+    "_type": "product",
+    "_updatedAt": "2025-08-13T04:04:06.308103Z",
+    "title": "Energia Day Use - Smoothie Frutas Silvestres 350g",
+    "slug": {
+      "_type": "slug",
+      "current": "energia-day-use-smoothie-frutas-silvestres-350g"
+    },
+    "price": 119.9,
+    "category": "nutricao",
+    "inStock": true,
+    "featured": false,
+    "description": "Smoothie energético para uso diário com frutas silvestres; suporte a disposição e foco.",
+    "brand": "Alquimia da Saúde",
+    "image": {
+      "_type": "image",
+      "alt": "Energia Day Use - Smoothie Frutas Silvestres 350g",
+      "asset": {
+        "_ref": "image-energia-day-use---sm-a8604fb2-800x600-jpg",
+        "_type": "reference"
+      }
+    }
+  },
+  {
+    "_createdAt": "2025-08-13T04:04:06.308103Z",
+    "_id": "bca70bb2-aaad-45a6-bb05-153714a538e9",
+    "_rev": "60a30f19-0385-99bf-8f50-f11e0770bcc4",
+    "_type": "product",
+    "_updatedAt": "2025-08-13T04:04:06.308103Z",
+    "title": "Clean Protein - Cacau 675g",
+    "slug": {
+      "_type": "slug",
+      "current": "clean-protein-cacau-675g"
+    },
+    "price": 169.9,
+    "category": "suplementos",
+    "inStock": true,
+    "featured": false,
+    "description": "Proteína vegana (ervilha) sem aditivos e sem adoçantes. Sabor cacau.",
+    "brand": "Alquimia da Saúde",
+    "image": {
+      "_type": "image",
+      "alt": "Clean Protein - Cacau 675g",
+      "asset": {
+        "_ref": "image-clean-protein---caca-d01a8fc9-800x600-jpg",
+        "_type": "reference"
+      }
+    }
+  },
+  {
+    "_createdAt": "2025-08-13T04:04:06.308103Z",
+    "_id": "9187ce21-fbb8-4832-8baa-97f12ca04140",
+    "_rev": "da56ee50-d4b2-8a1f-56f4-9fd4e6f75bbe",
+    "_type": "product",
+    "_updatedAt": "2025-08-13T04:04:06.308103Z",
+    "title": "Clean Protein - Banana & Canela 675g",
+    "slug": {
+      "_type": "slug",
+      "current": "clean-protein-banana-canela-675g"
+    },
+    "price": 169.9,
+    "category": "suplementos",
+    "inStock": true,
+    "featured": false,
+    "description": "Proteína vegana clean label com sabor Banana & Canela.",
+    "brand": "Alquimia da Saúde",
+    "image": {
+      "_type": "image",
+      "alt": "Clean Protein - Banana & Canela 675g",
+      "asset": {
+        "_ref": "image-clean-protein---bana-d142b0a5-800x600-jpg",
+        "_type": "reference"
+      }
+    }
+  },
+  {
+    "_createdAt": "2025-08-13T04:04:06.308103Z",
+    "_id": "78de1f83-c530-4dc9-9fd0-7d2305ebfe9e",
+    "_rev": "0c7252d1-4bbd-7ca6-221f-b08c420b793d",
+    "_type": "product",
+    "_updatedAt": "2025-08-13T04:04:06.308103Z",
+    "title": "Clean Protein",
+    "slug": {
+      "_type": "slug",
+      "current": "clean-protein"
+    },
+    "price": 169.9,
+    "category": "suplementos",
+    "inStock": true,
+    "featured": false,
+    "description": "Proteína vegana pura, feita com 4 ingredientes reais; sem açúcar, sem glúten e sem lactose.",
+    "brand": "Alquimia da Saúde",
+    "image": {
+      "_type": "image",
+      "alt": "Clean Protein",
+      "asset": {
+        "_ref": "image-clean-protein-95743f4b-800x600-jpg",
+        "_type": "reference"
+      }
+    }
+  },
+  {
+    "_createdAt": "2025-08-13T04:04:06.308103Z",
+    "_id": "a2d29d9c-5867-483e-987f-ea07eff1105b",
+    "_rev": "513ba858-fd85-69c4-3f6d-6404d5fb7483",
+    "_type": "product",
+    "_updatedAt": "2025-08-13T04:04:06.308103Z",
+    "title": "Pólen Protein - Smoothie Açaí & Banana 350g",
+    "slug": {
+      "_type": "slug",
+      "current": "polen-protein-smoothie-acai-banana-350g"
+    },
+    "price": 149.9,
+    "category": "suplementos",
+    "inStock": true,
+    "featured": false,
+    "description": "Smoothie proteico com pólen e frutas; suporte a recuperação e energia.",
+    "brand": "Alquimia da Saúde",
+    "image": {
+      "_type": "image",
+      "alt": "Pólen Protein - Smoothie Açaí & Banana 350g",
+      "asset": {
+        "_ref": "image-pólen-protein---smoo-7aa256c1-800x600-jpg",
+        "_type": "reference"
+      }
+    }
+  },
+  {
+    "_createdAt": "2025-08-13T04:04:06.308103Z",
+    "_id": "47ffe807-c162-4881-bf73-570c01717619",
+    "_rev": "9d80c8dd-a1bc-12e3-127d-46e3e45ce0cd",
+    "_type": "product",
+    "_updatedAt": "2025-08-13T04:04:06.308103Z",
+    "title": "Pólen Protein - Smoothie Frutas Vermelhas 350g",
+    "slug": {
+      "_type": "slug",
+      "current": "polen-protein-smoothie-frutas-vermelhas-350g"
+    },
+    "price": 149.9,
+    "category": "suplementos",
+    "inStock": true,
+    "featured": false,
+    "description": "Smoothie proteico com pólen e frutas vermelhas.",
+    "brand": "Alquimia da Saúde",
+    "image": {
+      "_type": "image",
+      "alt": "Pólen Protein - Smoothie Frutas Vermelhas 350g",
+      "asset": {
+        "_ref": "image-pólen-protein---smoo-e35ba461-800x600-jpg",
+        "_type": "reference"
+      }
+    }
+  },
+  {
+    "_createdAt": "2025-08-13T04:04:06.308103Z",
+    "_id": "21a6bd45-18e8-40d0-9c44-80ffff3e34a9",
+    "_rev": "8ff43716-cd36-3f80-2f02-a9ae11dbf563",
+    "_type": "product",
+    "_updatedAt": "2025-08-13T04:04:06.308103Z",
+    "title": "NAC N-Acetil L-Cisteína 500mg - 120 Cápsulas Vegetais",
+    "slug": {
+      "_type": "slug",
+      "current": "nac-n-acetil-l-cisteina-500mg-120-capsulas-vegetais"
+    },
+    "price": 79.9,
+    "category": "suplementos",
+    "inStock": true,
+    "featured": false,
+    "description": "NAC 500mg em cápsulas vegetais.",
+    "brand": "Alquimia da Saúde",
+    "image": {
+      "_type": "image",
+      "alt": "NAC N-Acetil L-Cisteína 500mg - 120 Cápsulas Vegetais",
+      "asset": {
+        "_ref": "image-nac-n-acetil-l-ciste-c3243a8f-800x600-jpg",
+        "_type": "reference"
+      }
+    }
+  },
+  {
+    "_createdAt": "2025-08-13T04:04:06.308103Z",
+    "_id": "f4fd58be-c22c-4821-8436-93354ff718f9",
+    "_rev": "735e0bd2-2cef-7654-9733-e0b415ede3d4",
+    "_type": "product",
+    "_updatedAt": "2025-08-13T04:04:06.308103Z",
+    "title": "NAC N-Acetil Cisteína 500mg - OUTLET",
+    "slug": {
+      "_type": "slug",
+      "current": "nac-n-acetil-cisteina-500mg-outlet"
+    },
+    "price": 79.9,
+    "category": "suplementos",
+    "inStock": true,
+    "featured": false,
+    "description": "NAC 500mg com condição promocional (outlet).",
+    "brand": "Alquimia da Saúde",
+    "image": {
+      "_type": "image",
+      "alt": "NAC N-Acetil Cisteína 500mg - OUTLET",
+      "asset": {
+        "_ref": "image-nac-n-acetil-cisteín-514397aa-800x600-jpg",
+        "_type": "reference"
+      }
+    }
+  },
+  {
+    "_createdAt": "2025-08-13T04:04:06.308103Z",
+    "_id": "8f348930-df8d-4a72-8065-d1f284ef5e43",
+    "_rev": "0faa04a2-c148-de55-9724-88da3792427a",
+    "_type": "product",
+    "_updatedAt": "2025-08-13T04:04:06.308103Z",
+    "title": "CO-Q10 Coenzima Q10 - 60 Cápsulas Vegetais",
+    "slug": {
+      "_type": "slug",
+      "current": "co-q10-coenzima-q10-60-capsulas-vegetais"
+    },
+    "price": 149.9,
+    "category": "suplementos",
+    "inStock": true,
+    "featured": false,
+    "description": "Coenzima Q10 em cápsulas vegetais.",
+    "brand": "Alquimia da Saúde",
+    "image": {
+      "_type": "image",
+      "alt": "CO-Q10 Coenzima Q10 - 60 Cápsulas Vegetais",
+      "asset": {
+        "_ref": "image-co-q10-coenzima-q10--45b41da2-800x600-jpg",
+        "_type": "reference"
+      }
+    }
+  },
+  {
+    "_createdAt": "2025-08-13T04:04:06.308103Z",
+    "_id": "fa2666c4-0c09-427c-856d-13187fba3bbd",
+    "_rev": "b5e6594f-aa65-1743-fffc-dd7dba2242c0",
+    "_type": "product",
+    "_updatedAt": "2025-08-13T04:04:06.308103Z",
+    "title": "Açafrão Blend Termogênico - 60 Cápsulas Vegetais",
+    "slug": {
+      "_type": "slug",
+      "current": "acafrao-blend-termogenico-60-capsulas-vegetais"
+    },
+    "price": 89.9,
+    "category": "suplementos",
+    "inStock": true,
+    "featured": false,
+    "description": "Blend termogênico em cápsulas com cúrcuma e especiarias.",
+    "brand": "Alquimia da Saúde",
+    "image": {
+      "_type": "image",
+      "alt": "Açafrão Blend Termogênico - 60 Cápsulas Vegetais",
+      "asset": {
+        "_ref": "image-açafrão-blend-termog-93f78dd6-800x600-jpg",
+        "_type": "reference"
+      }
+    }
+  },
+  {
+    "_createdAt": "2025-08-13T04:04:06.308103Z",
+    "_id": "9c74c5e2-d58b-45f5-a4b6-3ecf339f44f3",
+    "_rev": "0389af97-b2f9-2770-59c6-da9baff9e18b",
+    "_type": "product",
+    "_updatedAt": "2025-08-13T04:04:06.308103Z",
+    "title": "Cúrcuma - 60 Cápsulas Vegetais",
+    "slug": {
+      "_type": "slug",
+      "current": "curcuma-60-capsulas-vegetais"
+    },
+    "price": 69.9,
+    "category": "suplementos",
+    "inStock": true,
+    "featured": false,
+    "description": "Cápsulas vegetais de cúrcuma.",
+    "brand": "Alquimia da Saúde",
+    "image": {
+      "_type": "image",
+      "alt": "Cúrcuma - 60 Cápsulas Vegetais",
+      "asset": {
+        "_ref": "image-cúrcuma---60-cápsula-78a104d2-800x600-jpg",
+        "_type": "reference"
+      }
+    }
+  },
+  {
+    "_createdAt": "2025-08-13T04:04:06.308103Z",
+    "_id": "656eaa0b-f91d-440e-a46a-07ce0aef6adc",
+    "_rev": "94af7bb4-0f7f-ef23-7a1b-ba4d2d9a3138",
+    "_type": "product",
+    "_updatedAt": "2025-08-13T04:04:06.308103Z",
+    "title": "Spirulina - 110 Cápsulas Vegetais",
+    "slug": {
+      "_type": "slug",
+      "current": "spirulina-110-capsulas-vegetais"
+    },
+    "price": 99.9,
+    "category": "suplementos",
+    "inStock": true,
+    "featured": false,
+    "description": "Spirulina em cápsulas vegetais.",
+    "brand": "Alquimia da Saúde",
+    "image": {
+      "_type": "image",
+      "alt": "Spirulina - 110 Cápsulas Vegetais",
+      "asset": {
+        "_ref": "image-spirulina---110-cáps-2ed8c9f5-800x600-jpg",
+        "_type": "reference"
+      }
+    }
+  },
+  {
+    "_createdAt": "2025-08-13T04:04:06.308103Z",
+    "_id": "c35593ce-1480-47e9-8af9-318b7baa928e",
+    "_rev": "33fcadb2-f6e9-c7d1-eb56-9b948ad04366",
+    "_type": "product",
+    "_updatedAt": "2025-08-13T04:04:06.308103Z",
+    "title": "Ora-Pro-Nóbis Orgânica 500mg - 60 Cápsulas Vegetais",
+    "slug": {
+      "_type": "slug",
+      "current": "ora-pro-nobis-organica-500mg-60-capsulas-vegetais"
+    },
+    "price": 59.9,
+    "category": "suplementos",
+    "inStock": true,
+    "featured": false,
+    "description": "Ora-pro-nóbis orgânica 500mg em cápsulas vegetais.",
+    "brand": "Alquimia da Saúde",
+    "image": {
+      "_type": "image",
+      "alt": "Ora-Pro-Nóbis Orgânica 500mg - 60 Cápsulas Vegetais",
+      "asset": {
+        "_ref": "image-ora-pro-nóbis-orgâni-91b9b51b-800x600-jpg",
+        "_type": "reference"
+      }
+    }
+  },
+  {
+    "_createdAt": "2025-08-13T04:04:06.308103Z",
+    "_id": "a0888af6-3d48-4eea-a3e4-5ed13a619ba3",
+    "_rev": "7aa70c7f-f035-da12-c039-2323596c8eb1",
+    "_type": "product",
+    "_updatedAt": "2025-08-13T04:04:06.308103Z",
+    "title": "Detox Supergreens - 90 Cápsulas Vegetais",
+    "slug": {
+      "_type": "slug",
+      "current": "detox-supergreens-90-capsulas-vegetais"
+    },
+    "price": 119.9,
+    "category": "suplementos",
+    "inStock": true,
+    "featured": false,
+    "description": "Blend detox com supergreens em cápsulas.",
+    "brand": "Alquimia da Saúde",
+    "image": {
+      "_type": "image",
+      "alt": "Detox Supergreens - 90 Cápsulas Vegetais",
+      "asset": {
+        "_ref": "image-detox-supergreens----44845115-800x600-jpg",
+        "_type": "reference"
+      }
+    }
+  },
+  {
+    "_createdAt": "2025-08-13T04:04:06.308103Z",
+    "_id": "b7188c7a-cc89-46b1-8f2c-94dd50b759d7",
+    "_rev": "4fa3aa38-693e-8bf7-acd8-e5c180c29523",
+    "_type": "product",
+    "_updatedAt": "2025-08-13T04:04:06.308103Z",
+    "title": "Digestivo Ayurvédico - 60 Cápsulas Vegetais",
+    "slug": {
+      "_type": "slug",
+      "current": "digestivo-ayurvedico-60-capsulas-vegetais"
+    },
+    "price": 89.9,
+    "category": "suplementos",
+    "inStock": true,
+    "featured": false,
+    "description": "Fórmula digestiva inspirada na ayurveda.",
+    "brand": "Alquimia da Saúde",
+    "image": {
+      "_type": "image",
+      "alt": "Digestivo Ayurvédico - 60 Cápsulas Vegetais",
+      "asset": {
+        "_ref": "image-digestivo-ayurvédico-54357106-800x600-jpg",
+        "_type": "reference"
+      }
+    }
+  },
+  {
+    "_createdAt": "2025-08-13T04:04:06.308103Z",
+    "_id": "a5fe6129-189e-4e0e-9c17-c9f7a286af41",
+    "_rev": "ef01166b-6b3a-375a-804e-fbdae379f1d3",
+    "_type": "product",
+    "_updatedAt": "2025-08-13T04:04:06.308103Z",
+    "title": "Manteiga Ghee 500g",
+    "slug": {
+      "_type": "slug",
+      "current": "manteiga-ghee-500g"
+    },
+    "price": 49.9,
+    "category": "nutricao",
+    "inStock": true,
+    "featured": false,
+    "description": "Ghee tradicional (manteiga clarificada).",
+    "brand": "Alquimia da Saúde",
+    "image": {
+      "_type": "image",
+      "alt": "Manteiga Ghee 500g",
+      "asset": {
+        "_ref": "image-manteiga-ghee-500g-b02a690f-800x600-jpg",
+        "_type": "reference"
+      }
+    }
+  },
+  {
+    "_createdAt": "2025-08-13T04:04:06.308103Z",
+    "_id": "ffa7f5b3-1813-4a6a-8f13-9e9d29985877",
+    "_rev": "01ff5f3c-26aa-a469-677e-aee9e0dc9809",
+    "_type": "product",
+    "_updatedAt": "2025-08-13T04:04:06.308103Z",
+    "title": "Óleo de Coco em Pó - 250g",
+    "slug": {
+      "_type": "slug",
+      "current": "oleo-de-coco-em-po-250g"
+    },
+    "price": 39.9,
+    "category": "nutricao",
+    "inStock": true,
+    "featured": false,
+    "description": "Óleo de coco em pó para uso em receitas e shakes.",
+    "brand": "Alquimia da Saúde",
+    "image": {
+      "_type": "image",
+      "alt": "Óleo de Coco em Pó - 250g",
+      "asset": {
+        "_ref": "image-óleo-de-coco-em-pó---552e486b-800x600-jpg",
+        "_type": "reference"
+      }
+    }
+  },
+  {
+    "_createdAt": "2025-08-13T04:04:06.308103Z",
+    "_id": "65f95133-1570-40f6-86c3-114d9aabf8f7",
+    "_rev": "eb17ef55-c298-0257-aba2-cc1cfe588152",
+    "_type": "product",
+    "_updatedAt": "2025-08-13T04:04:06.308103Z",
+    "title": "Boné exclusivo - Alquimia da Saúde",
+    "slug": {
+      "_type": "slug",
+      "current": "bone-exclusivo-alquimia-da-saude"
+    },
+    "price": 79.9,
+    "category": "acessorios",
+    "inStock": true,
+    "featured": false,
+    "description": "Boné exclusivo da marca.",
+    "brand": "Alquimia da Saúde",
+    "image": {
+      "_type": "image",
+      "alt": "Boné exclusivo - Alquimia da Saúde",
+      "asset": {
+        "_ref": "image-boné-exclusivo---alq-abc1f60f-800x600-jpg",
+        "_type": "reference"
+      }
+    }
+  }
+]

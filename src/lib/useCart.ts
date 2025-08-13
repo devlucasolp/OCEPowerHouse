@@ -247,17 +247,40 @@ export const useCart = create<CartState>()(
         closeCart: () => set({ isCartOpen: false }),
         
         applyCouponToCart: (coupon: Coupon) => {
+          console.log('🔧 DEBUG useCart: applyCouponToCart chamado', {
+            couponCode: coupon.code,
+            discountType: coupon.discountType,
+            discountValue: coupon.discountValue
+          });
+          
           const state = get();
+          console.log('🔧 DEBUG useCart: Estado atual', {
+            cartItemsCount: state.cartItems.length,
+            subtotal: state.subtotal,
+            currentCoupon: state.appliedCoupon?.coupon?.code || 'nenhum'
+          });
+          
           const couponResult = applyCoupon(coupon, state.cartItems, state.subtotal);
+          console.log('🔧 DEBUG useCart: Resultado applyCoupon', couponResult);
           
           if (couponResult) {
+            console.log('🔧 DEBUG useCart: Aplicando cupom - novo estado', {
+              discountAmount: couponResult.discountAmount,
+              finalPrice: couponResult.finalPrice,
+              oldTotal: state.subtotal
+            });
+            
             set({
               appliedCoupon: couponResult,
               discountAmount: couponResult.discountAmount,
               finalTotal: couponResult.finalPrice,
             });
+            
+            console.log('✅ DEBUG useCart: Cupom aplicado com sucesso!');
             return true;
           }
+          
+          console.log('❌ DEBUG useCart: Falha ao aplicar cupom');
           return false;
         },
         

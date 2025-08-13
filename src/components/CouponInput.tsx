@@ -36,33 +36,63 @@ const CouponInput = () => {
     setSuccess(null);
 
     try {
+      console.log('🎫 DEBUG: Aplicando cupom...', {
+        code: couponCode.trim(),
+        cartItems: cartItems.length,
+        subtotal: subtotal
+      });
+
       // Buscar cupom no Sanity
       const coupon = await getCouponByCode(couponCode.trim());
       
       if (!coupon) {
+        console.log('❌ DEBUG: Cupom não encontrado');
         setError('Cupom não encontrado');
         setIsLoading(false);
         return;
       }
 
+      console.log('✅ DEBUG: Cupom encontrado:', {
+        code: coupon.code,
+        discountType: coupon.discountType,
+        discountValue: coupon.discountValue,
+        applicableCategories: coupon.applicableCategories,
+        minPurchaseAmount: coupon.minPurchaseAmount
+      });
+
+      console.log('🛒 DEBUG: Itens do carrinho:', cartItems.map(item => ({
+        title: item.title,
+        category: item.category,
+        price: item.price,
+        quantity: item.quantity
+      })));
+
       // Validar cupom
       const validation = validateCoupon(coupon, cartItems, subtotal);
+      console.log('🔍 DEBUG: Validação do cupom:', validation);
+      
       if (!validation.isValid) {
+        console.log('❌ DEBUG: Cupom inválido:', validation.error);
         setError(validation.error || 'Cupom inválido');
         setIsLoading(false);
         return;
       }
 
       // Aplicar cupom
+      console.log('⚡ DEBUG: Aplicando cupom ao carrinho...');
       const applied = applyCouponToCart(coupon);
+      console.log('📊 DEBUG: Resultado da aplicação:', applied);
+      
       if (applied) {
+        console.log('✅ DEBUG: Cupom aplicado com sucesso!');
         setSuccess(`Cupom aplicado! ${formatDiscount(coupon)}`);
         setCouponCode('');
       } else {
+        console.log('❌ DEBUG: Falha ao aplicar cupom');
         setError('Erro ao aplicar cupom');
       }
     } catch (err) {
-      console.error('Erro ao aplicar cupom:', err);
+      console.error('❌ DEBUG: Erro ao aplicar cupom:', err);
       setError('Erro ao processar cupom');
     } finally {
       setIsLoading(false);

@@ -12,8 +12,45 @@ export const sanityClient = createClient({
   apiVersion: '2023-01-01',
 });
 
+// Função para testar a conexão com o Sanity
+export const testSanityConnection = async () => {
+  try {
+    console.log('🔧 Testando conexão com Sanity...');
+    console.log('📍 Project ID:', projectId);
+    console.log('🗂️ Dataset:', dataset);
+    
+    // Testa uma query simples
+    const test = await sanityClient.fetch('*[_type == "post"] | order(_updatedAt desc) [0...5] { _id, title, _type, _updatedAt }');
+    
+    console.log('✅ Conexão bem-sucedida!');
+    console.log('📊 Posts encontrados (teste):', test?.length || 0);
+    
+    if (test && test.length > 0) {
+      console.log('📝 Primeiros posts:', test.map((p: any) => ({ id: p._id, title: p.title })));
+    }
+    
+    return {
+      success: true,
+      projectId,
+      dataset,
+      postsCount: test?.length || 0,
+      testPosts: test || []
+    };
+  } catch (error) {
+    console.error('❌ Erro na conexão com Sanity:', error);
+    return {
+      success: false,
+      error: error instanceof Error ? error.message : 'Erro desconhecido',
+      projectId,
+      dataset
+    };
+  }
+};
+
 export const getAllPosts = async () => {
   try {
+    console.log('📱 Buscando todos os posts...');
+    
     const posts = await sanityClient.fetch(
       `*[_type == "post"] | order(publishedAt desc) {
         _id,
@@ -35,10 +72,18 @@ export const getAllPosts = async () => {
         mainImage
       }`
     );
+    
+    console.log('📊 Posts retornados:', posts?.length || 0);
+    
+    if (posts && posts.length > 0) {
+      console.log('📝 Lista de posts:', posts.map((p: any) => ({ id: p._id, title: p.title, published: p.publishedAt })));
+    } else {
+      console.log('⚠️ Nenhum post encontrado no dataset');
+    }
+    
     return posts || [];
   } catch (error) {
     console.error('❌ Erro ao buscar posts do Sanity:', error);
-
     return [];
   }
 };

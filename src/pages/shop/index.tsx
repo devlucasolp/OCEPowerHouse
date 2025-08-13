@@ -16,20 +16,19 @@ interface ShopIndexProps {
 const ShopIndex = ({ products }: ShopIndexProps) => {
   const [selectedCategory, setSelectedCategory] = React.useState<string | null>(null);
 
-  // Categorias oficiais exibidas no filtro (independentes dos produtos já cadastrados)
+  // Categorias oficiais exibidas no filtro (novas categorias)
   const categories = React.useMemo(
     () => [
       'vestuario',
-      'acessorios',
       'suplementos',
-      'nutricao',
-      'bike_pneus',
-      'bike_acessorios',
+      'equipamento',
+      'bolsas',
+      'bikes',
     ],
     []
   );
 
-  // Normaliza categorias vindas do Sanity (inclui valores legados)
+  // Normaliza categorias vindas do Sanity (inclui valores legados e novos)
   const normalizeCategory = (raw?: string | null): string | null => {
     if (!raw) return null;
     const base = String(raw)
@@ -38,18 +37,26 @@ const ShopIndex = ({ products }: ShopIndexProps) => {
       .replace(/[\u0300-\u036f]/g, ''); // remove acentos
 
     const map: Record<string, string> = {
+      // Mapeamento das categorias atuais
       vestuario: 'vestuario',
-      acessorios: 'acessorios',
       suplementos: 'suplementos',
-      nutricao: 'nutricao',
-      'nutricao & geis': 'nutricao',
-      comestiveis: 'nutricao',
-      geis: 'nutricao',
-      ciclismo: 'bike_acessorios',
-      bike: 'bike_acessorios',
-      'acessorios de bike': 'bike_acessorios',
-      pneus: 'bike_pneus',
-      'pneus de bike': 'bike_pneus',
+      equipamento: 'equipamento',
+      bolsas: 'bolsas',
+      bikes: 'bikes',
+      
+      // Mapeamento de categorias legadas (para compatibilidade)
+      acessorios: 'equipamento',
+      nutricao: 'suplementos',
+      'nutricao & geis': 'suplementos',
+      comestiveis: 'suplementos',
+      geis: 'suplementos',
+      ciclismo: 'bikes',
+      bike: 'bikes',
+      'acessorios de bike': 'equipamento',
+      'bike_acessorios': 'equipamento',
+      pneus: 'bikes',
+      'pneus de bike': 'bikes',
+      'bike_pneus': 'bikes',
     };
 
     return map[base] || base;

@@ -2,14 +2,13 @@ import React from 'react';
 import { Disclosure } from '@headlessui/react';
 import { ChevronDown, Package } from 'lucide-react';
 
-// Mapeamento de categorias para nomes elegantes
+// Mapeamento de categorias para nomes elegantes - NOVAS CATEGORIAS
 const categoryMapping = {
   'vestuario': 'Vestuário',
-  'acessorios': 'Acessórios',
-  'suplementos': 'Suplementos',
-  'nutricao': 'Nutrição & Géis',
-  'bike_pneus': 'Pneus de Bike',
-  'bike_acessorios': 'Acessórios de Bike'
+  'suplementos': 'Suplemento',
+  'equipamento': 'Equipamento',
+  'bolsas': 'Bolsas',
+  'bikes': 'Bikes'
 };
 
 type SidebarFilterProps = {

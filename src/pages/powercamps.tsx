@@ -10,13 +10,20 @@ import { getDescriptionText, truncateText } from '../lib/textUtils';
 interface PowerCamp {
   _id: string;
   title: string;
-  description?: string | any; // Can be string or Sanity rich text blocks
+  description?: string | any;
   date: string;
   location?: string;
   year?: number;
   featured?: boolean;
   registrationLink?: string;
-  image?: any;
+  image?: {
+    _type: string;
+    alt?: string;
+    asset: {
+      _ref: string;
+      _type: string;
+    };
+  };
   slug?: {
     current: string;
   };
@@ -24,7 +31,7 @@ interface PowerCamp {
 
 const containerVariants = {
   hidden: { opacity: 0, y: 32 },
-  visible: { opacity: 1, y: 0 },
+  visible: { opacity: 1, y: 0, transition: { duration: 0.6, staggerChildren: 0.1 } },
 };
 
 const cardVariants = {
@@ -38,147 +45,167 @@ const PowerCamps = ({ camps: staticCamps }: { camps: PowerCamp[] }) => {
 
   return (
     <>
-      <Seo title="PowerCamps | Power House Brasil" description="Conheça nossos PowerCamps: experiências exclusivas para ciclistas que buscam performance, saúde e comunidade." />
-      <motion.section
-        className="max-w-5xl mx-auto px-4 py-12 pt-20"
-        variants={containerVariants}
-        initial="hidden"
-        animate="visible"
-        transition={{ duration: 0.7, ease: [0.25, 0.46, 0.45, 0.94], when: 'beforeChildren', staggerChildren: 0.12 }}
-      >
-        <motion.h1 className="text-3xl md:text-4xl font-bold text-black mb-4" initial={{ opacity: 0, y: -24 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.7 }}>
-          PowerCamps
-        </motion.h1>
-        <motion.p className="text-lg text-[#1a1a1a] mb-10 max-w-2xl" initial={{ opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.7, delay: 0.1 }}>
-          Experiências exclusivas que combinam treino, natureza e comunidade para ciclistas apaixonados.
-        </motion.p>
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+      <Seo title="PowerCamps | Power House Brasil"
+           description="Conheça nossos PowerCamps: experiências exclusivas para ciclistas que buscam performance, saúde e comunidade." />
+      
+      <div className="min-h-screen bg-gradient-to-br from-blue-50 via-white to-gray-50 py-16">
+        <div className="container mx-auto px-4">
+          <motion.div 
+            className="text-center mb-12"
+            initial={{ opacity: 0, y: -32 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6 }}
+          >
+            <h1 className="text-4xl md:text-5xl font-bold text-gray-900 mb-4">
+              PowerCamps
+            </h1>
+            <p className="text-xl text-gray-600 max-w-2xl mx-auto">
+              Experiências exclusivas para ciclistas que buscam performance, saúde e comunidade.
+            </p>
+          </motion.div>
+
           {loading ? (
-            <motion.div className="col-span-full text-center text-black font-semibold py-12" initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 0.5 }}>
+            <motion.div className="text-center py-20" initial={{ opacity: 0 }} animate={{ opacity: 1 }}>
+              <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-600 mx-auto mb-4"></div>
               Carregando PowerCamps...
             </motion.div>
           ) : camps.length > 0 ? (
-            camps.map((camp) => {
-              const imageUrl = camp.image ? getImageUrl(camp.image, 400, 300) : null;
-              const descriptionText = camp.description ? getDescriptionText(camp.description) : '';
-              const shortDescription = descriptionText ? truncateText(descriptionText, 150) : '';
-              
-              return (
-                <motion.div 
-                  key={camp._id} 
-                  className="bg-white rounded-2xl shadow-md overflow-hidden flex flex-col"
-                  variants={cardVariants} 
-                  whileHover={{ scale: 1.02, boxShadow: '0 8px 32px rgba(0,0,0,0.10)' }} 
-                  whileFocus={{ scale: 1.02, boxShadow: '0 8px 32px rgba(0,0,0,0.10)' }} 
-                  tabIndex={0} 
-                  aria-label={`Card do powercamp ${camp.title}`}
-                >
-                  {imageUrl && (
-                    <motion.div 
-                      className="relative w-full aspect-video overflow-hidden"
-                      initial={{ opacity: 0, scale: 0.96 }} 
-                      animate={{ opacity: 1, scale: 1 }} 
-                      transition={{ duration: 0.7 }}
-                    >
-                      <Image
-                        src={imageUrl}
-                        alt={camp.image?.alt || camp.title}
-                        fill
-                        className="object-cover"
-                      />
-                      {camp.featured && (
-                        <div className="absolute top-4 right-4 bg-blue-600 text-white px-3 py-1 rounded-full text-xs font-semibold">
-                          Destaque
+            <motion.div 
+              className="grid grid-cols-1 gap-8 max-w-6xl mx-auto"
+              variants={containerVariants}
+              initial="hidden"
+              animate="visible"
+            >
+              {camps.map((camp) => {
+                // Seguir exatamente o padrão do BlogCard
+                const imageUrl = getImageUrl(camp.image, 800, 450);
+                const descriptionText = camp.description ? getDescriptionText(camp.description) : '';
+                const shortDescription = descriptionText ? truncateText(descriptionText, 150) : '';
+                
+                return (
+                  <motion.div 
+                    key={camp._id} 
+                    className="bg-white rounded-2xl shadow-lg overflow-hidden flex flex-col transition-all duration-200 hover:scale-[1.02] focus-within:scale-[1.02] border border-gray-100 h-full"
+                    variants={cardVariants} 
+                    tabIndex={0} 
+                    aria-label={`Card do powercamp ${camp.title}`}
+                  >
+                    {/* Imagem com altura maior */}
+                    {imageUrl ? (
+                      <div className="relative w-full h-80 md:h-96">
+                        <Image
+                          src={imageUrl}
+                          alt={camp.image?.alt || camp.title}
+                          fill
+                          className="object-cover"
+                          sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                          priority={false}
+                        />
+                        
+                        {/* Badge de destaque sobre a imagem */}
+                        {camp.featured && (
+                          <div className="absolute top-4 right-4 bg-gradient-to-r from-blue-600 to-blue-700 text-white px-4 py-2 rounded-full text-sm font-semibold shadow-lg backdrop-blur-sm bg-opacity-90">
+                            ⭐ Destaque
+                          </div>
+                        )}
+                        
+                        {/* Overlay gradiente para melhor legibilidade */}
+                        <div className="absolute inset-0 bg-gradient-to-t from-black/20 via-transparent to-transparent"></div>
+                      </div>
+                    ) : (
+                      <div className="w-full h-80 md:h-96 bg-gradient-to-br from-blue-100 via-blue-200 to-blue-300 flex items-center justify-center border-b border-blue-300 relative">
+                        <div className="text-center">
+                          <div className="w-20 h-20 mx-auto mb-4 bg-blue-500 rounded-full flex items-center justify-center shadow-xl">
+                            <svg className="w-10 h-10 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2z" />
+                            </svg>
+                          </div>
+                          <span className="text-blue-800 text-lg font-semibold">PowerCamp</span>
+                          <p className="text-blue-700 text-sm mt-1">Imagem em breve</p>
                         </div>
-                      )}
-                    </motion.div>
-                  )}
-                  
-                  <div className="p-6 flex flex-col flex-1">
-                    <h2 className="text-xl font-semibold text-blue-900 mb-2">{camp.title}</h2>
-                    
-                    {shortDescription && (
-                      <p className="text-neutral-600 mb-4 flex-1 leading-relaxed">{shortDescription}</p>
+                        
+                        {camp.featured && (
+                          <div className="absolute top-4 right-4 bg-gradient-to-r from-blue-600 to-blue-700 text-white px-4 py-2 rounded-full text-sm font-semibold shadow-lg">
+                            ⭐ Destaque
+                          </div>
+                        )}
+                      </div>
                     )}
                     
-                    <div className="space-y-3 text-sm text-neutral-500 mb-4">
-                      <div className="flex items-center">
-                        <CalendarDays className="w-4 h-4 mr-2 flex-shrink-0" />
-                        <span>{new Date(camp.date).toLocaleDateString('pt-BR', {
-                          day: '2-digit',
-                          month: 'long',
-                          year: 'numeric'
-                        })}</span>
-                      </div>
+                    <div className="px-8 py-8 flex flex-col flex-1">
+                      <h2 className="text-2xl md:text-3xl font-bold text-black mb-4 leading-tight">{camp.title}</h2>
                       
-                      {camp.location && (
-                        <div className="flex items-start">
-                          <MapPin className="w-4 h-4 mr-2 flex-shrink-0 mt-0.5" />
-                          <span className="line-clamp-2">{camp.location}</span>
-                        </div>
+                      {shortDescription && (
+                        <p className="text-gray-700 mb-6 flex-1 text-lg leading-relaxed">
+                          {shortDescription}
+                        </p>
                       )}
-                      
-                      {camp.year && (
-                        <div className="text-xs text-neutral-400">
-                          Edição {camp.year}
-                        </div>
+
+                      <div className="space-y-4 mb-8">
+                        {camp.date && (
+                          <div className="flex items-center text-gray-600 text-lg bg-gray-50 p-3 rounded-lg">
+                            <CalendarDays className="h-6 w-6 mr-3 text-yellow-500" />
+                            <span className="font-medium">
+                              {new Date(camp.date).toLocaleDateString('pt-BR', {
+                                day: '2-digit',
+                                month: 'long',
+                                year: 'numeric'
+                              })}
+                            </span>
+                          </div>
+                        )}
+                        
+                        {camp.location && (
+                          <div className="flex items-center text-gray-600 text-lg bg-gray-50 p-3 rounded-lg">
+                            <MapPin className="h-6 w-6 mr-3 text-yellow-500" />
+                            <span className="font-medium">{camp.location}</span>
+                          </div>
+                        )}
+                      </div>
+
+                      {camp.registrationLink && (
+                        <a
+                          href={camp.registrationLink}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="inline-flex items-center justify-center bg-gradient-to-r from-yellow-500 to-yellow-600 text-white px-8 py-4 rounded-xl font-bold hover:from-yellow-700 hover:to-yellow-800 transition-all duration-200 text-lg shadow-lg hover:shadow-xl transform hover:-translate-y-0.5"
+                        >
+                          Inscrever-se Agora
+                          <ExternalLink className="ml-3 h-5 w-5" />
+                        </a>
                       )}
                     </div>
-                    
-                    {camp.registrationLink && (
-                      <a
-                        href={camp.registrationLink}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="inline-flex items-center justify-center bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-lg text-sm font-medium transition-colors duration-200 group"
-                      >
-                        <span>Fazer Inscrição</span>
-                        <ExternalLink className="w-4 h-4 ml-2 group-hover:translate-x-0.5 transition-transform" />
-                      </a>
-                    )}
-                  </div>
-                </motion.div>
-              );
-            })
+                  </motion.div>
+                );
+              })}
+            </motion.div>
           ) : (
-            <motion.div className="col-span-full text-center py-16" initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 0.5 }}>
-              <div className="max-w-md mx-auto">
-                <div className="text-6xl mb-4">🏕️</div>
-                <h3 className="text-xl font-semibold text-gray-800 mb-2">
-                  Nenhum PowerCamp disponível
-                </h3>
-                <p className="text-gray-600 mb-6">
-                  Nossos próximos eventos estão sendo preparados. Fique ligado nas nossas redes sociais para não perder as novidades!
-                </p>
-                <div className="flex justify-center space-x-4">
-                  <a 
-                    href="#" 
-                    className="inline-flex items-center px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors"
-                  >
-                    📱 Instagram
-                  </a>
-                  <a 
-                    href="#" 
-                    className="inline-flex items-center px-4 py-2 bg-gray-600 text-white rounded-lg hover:bg-gray-700 transition-colors"
-                  >
-                    📧 Newsletter
-                  </a>
-                </div>
+            <motion.div 
+              className="text-center py-20"
+              initial={{ opacity: 0, y: 32 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6 }}
+            >
+              <div className="text-gray-400 mb-4">
+                <CalendarDays className="h-16 w-16 mx-auto" />
               </div>
+              <h3 className="text-xl font-semibold text-gray-700 mb-2">
+                Nenhum PowerCamp disponível
+              </h3>
+              <p className="text-gray-600">
+                Novos eventos serão anunciados em breve. Fique atento às nossas redes sociais!
+              </p>
             </motion.div>
           )}
         </div>
-      </motion.section>
+      </div>
     </>
   );
 };
 
 export async function getStaticProps() {
   try {
-    // Usar cliente com perspective 'published' para pegar apenas conteúdo publicado
-    const publishedClient = sanityClient.clone().config({ perspective: 'published' });
-    
-    const camps = await publishedClient.fetch(
+    const camps = await sanityClient.fetch(
       `*[_type == "powercamp"] | order(date desc) {
         _id,
         title,
@@ -191,26 +218,37 @@ export async function getStaticProps() {
         slug,
         image {
           _type,
-          alt,
-          asset -> {
-            _id,
+          asset {
             _ref,
-            url
-          }
+            _type
+          },
+          alt
         }
       }`
     );
 
-    console.log('PowerCamps fetched:', camps);
+    // Filtrar dados válidos
+    const validCamps = camps.filter((camp: any) => {
+      if (!camp._id || !camp.title) {
+        return false;
+      }
+      
+      // Se tem imagem inválida, remover mas manter o camp
+      if (camp.image && camp.image.asset && (!camp.image.asset._ref || camp.image.asset._ref.trim() === '')) {
+        camp.image = null;
+      }
+      
+      return true;
+    });
 
     return {
       props: {
-        camps: camps || [],
+        camps: validCamps || [],
       },
-      revalidate: 60, // Revalida a cada 60 segundos
+      revalidate: 60,
     };
   } catch (error) {
-    console.error('Erro ao buscar PowerCamps:', error);
+    console.error('❌ Erro ao buscar PowerCamps:', error);
     return {
       props: {
         camps: [],

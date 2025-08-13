@@ -79,7 +79,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
       const pictureUrl = processImageUrl(item.image);
       
       // Validar dados do item
-      const price = parseFloat(Number(item.price || 0).toFixed(2));
+      let price = parseFloat(Number(item.price || 0).toFixed(2));
       const quantity = parseInt(item.quantity || 1);
       
       if (price <= 0) {
@@ -90,6 +90,20 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
         throw new Error(`Item ${index + 1}: Quantidade inválida (${quantity})`);
       }
 
+      // AJUSTE: Se há cupom aplicado, calcular preço unitário com desconto
+      if (appliedCoupon && appliedCoupon.discountAmount > 0) {
+        const itemTotal = price * quantity;
+        const discountPercentage = appliedCoupon.discountAmount / (subtotal || itemTotal);
+        const itemDiscount = itemTotal * discountPercentage;
+        price = (itemTotal - itemDiscount) / quantity;
+        
+        console.log(`🎫 Item ${index + 1} com cupom aplicado:`, {
+          originalPrice: parseFloat(Number(item.price || 0).toFixed(2)),
+          discountAmount: itemDiscount.toFixed(2),
+          newPrice: price.toFixed(2)
+        });
+      }
+
       const formattedItem = {
         id: String(item.id || item._id || `item-${index + 1}`),
         title: String(item.title || 'Produto PowerHouse').substring(0, 256),
@@ -98,14 +112,15 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
         category_id: String(item.category || 'general'),
         quantity: quantity,
         currency_id: 'BRL' as const,
-        unit_price: price
+        unit_price: parseFloat(price.toFixed(2))
       };
       
       console.log(`📦 Item ${index + 1} processado: ${formattedItem.title}`, {
         id: formattedItem.id,
         price: formattedItem.unit_price,
         quantity: formattedItem.quantity,
-        has_image: !!pictureUrl
+        has_image: !!pictureUrl,
+        has_coupon_discount: appliedCoupon && appliedCoupon.discountAmount > 0
       });
       
       return formattedItem;
@@ -114,18 +129,23 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
     // Gera referência externa
     const externalReference = `powerhouse_${Date.now()}_${Math.random().toString(36).substr(2, 9)}`;
     
-    // Calcular total dos itens
+    // Calcular total dos itens (agora já com desconto aplicado se houver)
     const itemsTotal = mercadoPagoItems.reduce((acc, item) => {
       return acc + (item.unit_price * item.quantity);
     }, 0);
     
-    // Usar o total recebido (já com desconto aplicado) ou calcular dos itens
-    const finalTotal = total && total > 0 ? parseFloat(total.toFixed(2)) : parseFloat(itemsTotal.toFixed(2));
+    // Usar o total recebido do frontend (que já tem desconto) ou total calculado
+    const finalTotal = total && total > 0 ? 
+      parseFloat(total.toFixed(2)) : 
+      parseFloat(itemsTotal.toFixed(2));
     
     console.log('💰 Totais calculados:', {
-      itemsTotal: itemsTotal.toFixed(2),
-      finalTotal: finalTotal.toFixed(2),
-      hasCouponDiscount: appliedCoupon && appliedCoupon.discountAmount > 0
+      originalSubtotal: subtotal || 0,
+      itemsTotalWithDiscount: itemsTotal.toFixed(2),
+      finalTotalSent: finalTotal.toFixed(2),
+      hasCouponDiscount: appliedCoupon && appliedCoupon.discountAmount > 0,
+      couponCode: appliedCoupon?.code || 'nenhum',
+      discountAmount: appliedCoupon?.discountAmount || 0
     });
 
     // URLs de retorno - certificar que estão completas e válidas

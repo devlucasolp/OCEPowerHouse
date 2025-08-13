@@ -14,11 +14,10 @@ export default {
       options: {
         list: [
           { title: 'Vestuário', value: 'vestuario' },
-          { title: 'Acessórios', value: 'acessorios' },
-          { title: 'Suplementos', value: 'suplementos' },
-          { title: 'Nutrição & Géis', value: 'nutricao' },
-          { title: 'Pneus de Bike', value: 'bike_pneus' },
-          { title: 'Acessórios de Bike', value: 'bike_acessorios' }
+          { title: 'Suplemento', value: 'suplementos' },
+          { title: 'Equipamento', value: 'equipamento' },
+          { title: 'Bolsas', value: 'bolsas' },
+          { title: 'Bikes', value: 'bikes' }
         ]
       },
       validation: (Rule: any) => Rule.required()
