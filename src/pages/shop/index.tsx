@@ -3,8 +3,8 @@ import Seo from '../../components/Seo';
 import SidebarFilter from '../../components/SidebarFilter';
 import React from 'react';
 import ButtonPrimary from '../../components/ButtonPrimary';
-import { GetStaticProps } from 'next';
-import { getAllProducts } from '../../lib/sanity';
+import { GetServerSideProps } from 'next';
+import { getAllProducts, getAllProductsAlternative } from '../../lib/sanity';
 import { urlFor } from '../../lib/sanityImage';
 
 import type { Product } from '../../types/product';
@@ -94,6 +94,7 @@ const ShopIndex = ({ products }: ShopIndexProps) => {
                     price={product.price}
                     slug={(product.slug as any).current}
                     description={product.description}
+                    product={product}
                   />
                 ))
               )}
@@ -105,12 +106,23 @@ const ShopIndex = ({ products }: ShopIndexProps) => {
   );
 };
 
-export const getStaticProps: GetStaticProps = async () => {
-  const products = await getAllProducts();
-  return {
-    props: { products },
-    revalidate: 60,
-  };
+export const getServerSideProps: GetServerSideProps = async () => {
+  try {
+    const products = await getAllProducts();
+    
+    return {
+      props: { 
+        products: products || [] 
+      },
+    };
+  } catch (error) {
+    console.error('❌ [SSR] Erro ao buscar produtos:', error);
+    return {
+      props: { 
+        products: [] 
+      },
+    };
+  }
 };
 
 export default ShopIndex;

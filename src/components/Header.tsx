@@ -16,7 +16,7 @@ const navLinks = [
 ];
 
 const Header = () => {
-  const { cartItems } = useCart();
+  const { cartItems, openCart, totalItems } = useCart();
   const router = useRouter();
   const [menuOpen, setMenuOpen] = React.useState(false);
   const [scrolled, setScrolled] = React.useState(false);
@@ -178,14 +178,14 @@ const Header = () => {
             </li>
             {/* Ícone do carrinho */}
             <li>
-              <Link
-                href="/checkout"
+              <button
+                onClick={openCart}
                 className={`relative flex items-center ml-2 transition-colors focus:outline-none focus:ring-2 ${getLinkClasses()}`}
                 tabIndex={0}
-                aria-label="Carrinho"
+                aria-label="Abrir carrinho"
               >
                 <ShoppingCart className="w-6 h-6" aria-hidden="true" />
-                {cartItems.length > 0 && (
+                {totalItems > 0 && (
                   <span className={`absolute -top-2 -right-2 text-xs rounded-full px-2 py-0.5 font-bold border ${
                     isHomePage && !scrolled
                       ? 'bg-yellow-400 text-black border-yellow-400 shadow-lg' // Sombra para destaque na home transparente
@@ -193,10 +193,10 @@ const Header = () => {
                       ? 'bg-yellow-400 text-black border-yellow-400' 
                       : 'bg-white text-gray-800 border-gray-800'
                   }`}>
-                    {cartItems.reduce((acc, item) => acc + ((item as any).quantity || 1), 0)}
+                    {totalItems}
                   </span>
                 )}
-              </Link>
+              </button>
             </li>
           </ul>
         </nav>
@@ -314,20 +314,22 @@ const Header = () => {
               </button>
               
               {/* Ícone do carrinho */}
-              <Link
-                href="/checkout"
+              <button
+                onClick={() => {
+                  openCart();
+                  setMenuOpen(false);
+                }}
                 className="relative flex items-center justify-center w-12 h-12 rounded-full bg-yellow-400 text-black hover:bg-yellow-500 transition-colors"
                 tabIndex={0}
-                aria-label="Carrinho"
-                onClick={() => setMenuOpen(false)}
+                aria-label="Abrir carrinho"
               >
                 <ShoppingCart className="w-6 h-6" aria-hidden="true" />
-                {cartItems.length > 0 && (
+                {totalItems > 0 && (
                   <span className="absolute -top-1 -right-1 bg-red-500 text-white text-xs rounded-full w-6 h-6 flex items-center justify-center font-bold">
-                    {cartItems.reduce((acc, item) => acc + ((item as any).quantity || 1), 0)}
+                    {totalItems}
                   </span>
                 )}
-              </Link>
+              </button>
             </div>
           </nav>
         </>

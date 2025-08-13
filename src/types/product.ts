@@ -1,6 +1,8 @@
+import type { Coupon } from './coupon';
+
 export interface ProductVariant {
   _key?: string;
-  name: string;
+  name?: string;
   image?: any;
   priceModifier?: number;
   inStock?: boolean;
@@ -18,4 +20,5 @@ export interface Product {
   featured?: boolean;
   inStock?: boolean;
   variants?: ProductVariant[];
+  applicableCoupons?: Coupon[]; // Cupons que podem ser aplicados a este produto
 }

@@ -33,8 +33,8 @@ const SidebarFilter: React.FC<SidebarFilterProps> = ({
       {/* Mobile: Disclosure */}
       <div className="block md:hidden mb-4">
         <Disclosure>
-          {({ open }: { open: boolean }) => (
-            <>
+          {({ open }) => (
+            <div>
               <Disclosure.Button className="flex items-center justify-between w-full px-4 py-3 bg-black text-white font-semibold rounded-xl shadow-lg focus:outline-none focus:ring-2 focus:ring-accent transition-all duration-200 hover:bg-black/90">
                 <div className="flex items-center gap-2">
                   <Package className="w-5 h-5" />
@@ -76,7 +76,7 @@ const SidebarFilter: React.FC<SidebarFilterProps> = ({
                   ))}
                 </ul>
               </Disclosure.Panel>
-            </>
+            </div>
           )}
         </Disclosure>
       </div>

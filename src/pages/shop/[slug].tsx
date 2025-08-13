@@ -3,6 +3,7 @@ import Image from 'next/image';
 import { getAllProducts, getProductBySlug } from '../../lib/sanity';
 import { urlFor } from '../../lib/sanityImage';
 import { getDescriptionText, getTruncatedDescription } from '../../lib/textUtils';
+import { getProductImageUrl } from '../../lib/productUtils';
 import { useCart } from '../../lib/useCart';
 import Seo from '../../components/Seo';
 import ButtonPrimary from '../../components/ButtonPrimary';
@@ -46,12 +47,29 @@ const ProductPage = ({ product, related }: ProductPageProps) => {
   const priceModifier = selectedVariant?.priceModifier ? Number(selectedVariant.priceModifier) : 0;
   const finalPrice = basePrice + priceModifier;
 
+  // Placeholder SVG como data URI
+  const placeholderImage = "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='800' height='600' viewBox='0 0 800 600'%3E%3Crect width='800' height='600' fill='%23f3f4f6'/%3E%3Ctext x='50%25' y='50%25' dominant-baseline='middle' text-anchor='middle' font-family='Arial, sans-serif' font-size='24' fill='%236b7280'%3EProduto%3C/text%3E%3C/svg%3E";
+
   // Escolher imagem de exibição: variante selecionada > imagem do produto
-  const displayImageUrl = selectedVariant?.image
-    ? urlFor(selectedVariant.image as any).width(800).height(600).url()
-    : product.image
-    ? urlFor(product.image as any).width(800).height(600).url()
-    : '/img/placeholder.jpg';
+  let displayImageUrl = '';
+  
+  try {
+    if (selectedVariant?.image) {
+      displayImageUrl = getProductImageUrl({ ...product, image: selectedVariant.image } as Product, 800, 600) || '';
+    } else {
+      displayImageUrl = getProductImageUrl(product, 800, 600) || '';
+    }
+    
+    // Se ainda não temos URL, usar placeholder
+    if (!displayImageUrl) {
+      displayImageUrl = placeholderImage;
+    }
+    
+    console.log('🖼️ URL da imagem final:', displayImageUrl);
+  } catch (error) {
+    console.error('Erro ao processar imagem:', error);
+    displayImageUrl = placeholderImage;
+  }
 
   const handleAddToCart = () => {
     // Monta um produto com identificação única por variante para o carrinho
@@ -77,15 +95,57 @@ const ProductPage = ({ product, related }: ProductPageProps) => {
       <div className="max-w-5xl mx-auto px-4 py-10 grid grid-cols-1 md:grid-cols-2 gap-12 items-start">
         {/* Imagem do produto (ou da variante selecionada) */}
         <div className="w-full flex justify-center">
-          <div className="relative w-full aspect-video max-w-md rounded-xl shadow-lg overflow-hidden">
-            <Image
-              src={displayImageUrl}
-              alt={selectedVariant?.name ? `${product.title} - ${selectedVariant.name}` : product.title}
-              fill
-              className="object-cover object-center"
-              sizes="(max-width: 768px) 100vw, 50vw"
-              priority
-            />
+          <div className="absolute w-full aspect-square max-w-md rounded-xl overflow-hidden">
+            {displayImageUrl && displayImageUrl !== placeholderImage ? (
+               <>
+                {/* Teste com img tag normal */}
+                <img
+                  src={displayImageUrl}
+                  alt={selectedVariant?.name ? `${product.title} - ${selectedVariant.name}` : product.title}
+                  className="w-full h-full object-cover object-center"
+                  onLoad={() => {
+                    console.log('✅ Imagem carregada com sucesso (img tag):', displayImageUrl);
+                  }}
+                  onError={(e) => {
+                    console.error('❌ Erro ao carregar imagem (img tag):', displayImageUrl);
+                    // Fallback para Image do Next.js se img falhar
+                    const imgElement = e.target as HTMLImageElement;
+                    imgElement.style.display = 'none';
+                    const nextImageContainer = imgElement.parentElement?.querySelector('.next-image-fallback');
+                    if (nextImageContainer) {
+                      (nextImageContainer as HTMLElement).style.display = 'block';
+                    }
+                  }}
+                />
+                
+                {/* Fallback com Next.js Image (inicialmente escondido) */}
+                <div className="next-image-fallback absolute inset-0" style={{ display: 'none' }}>
+                  <Image
+                    src={displayImageUrl}
+                    alt={selectedVariant?.name ? `${product.title} - ${selectedVariant.name}` : product.title}
+                    fill
+                    className="object-cover object-center"
+                    sizes="(max-width: 768px) 100vw, 50vw"
+                    unoptimized
+                    onLoad={() => {
+                      console.log('✅ Imagem carregada com sucesso (Next.js Image):', displayImageUrl);
+                    }}
+                    onError={(e) => {
+                      console.error('❌ Erro ao carregar imagem (Next.js Image):', displayImageUrl);
+                      (e.target as HTMLImageElement).src = placeholderImage;
+                    }}
+                  />
+                </div>
+              </>
+            ) : (
+              <div className="w-full h-full flex items-center justify-center bg-gray-200">
+                <div className="text-center text-gray-500">
+                  <div className="text-4xl mb-2">📦</div>
+                  <div>Imagem não disponível</div>
+                  <div className="text-xs mt-2">URL: {displayImageUrl}</div>
+                </div>
+              </div>
+            )}
           </div>
         </div>
 
@@ -155,6 +215,7 @@ const ProductPage = ({ product, related }: ProductPageProps) => {
                 price={item.price}
                 slug={(item.slug as any).current}
                 description={item.description}
+                product={item}
               />
             ))}
           </div>

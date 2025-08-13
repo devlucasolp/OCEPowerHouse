@@ -1,14 +1,25 @@
 import React, { useState } from 'react';
 import type { NextPage } from 'next';
 import CartItem from '../components/CartItem';
-import { useCart } from '../lib/useCart';
+import CouponInput from '../components/CouponInput';
+import { useCart, calculateItemTotal } from '../lib/useCart';
 import Seo from '../components/Seo';
 import ButtonPrimary from '../components/ButtonPrimary';
 import Link from 'next/link';
 import { ShoppingCart, CreditCard, Shield, Loader2 } from 'lucide-react';
 
 const CheckoutPage: NextPage = () => {
-  const { cartItems, removeFromCart, clearCart, totalPrice } = useCart();
+  const { 
+    cartItems, 
+    removeFromCart, 
+    updateQuantity, 
+    clearCart, 
+    totalItems,
+    subtotal,
+    appliedCoupon,
+    discountAmount,
+    finalTotal
+  } = useCart();
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
 
@@ -21,10 +32,21 @@ const CheckoutPage: NextPage = () => {
     try {
       console.log('🚀 Iniciando checkout com', cartItems.length, 'itens');
       
+      // Preparar dados para envio (usar finalTotal se houver cupom aplicado)
+      const checkoutData = {
+        items: cartItems,
+        subtotal,
+        appliedCoupon: appliedCoupon ? {
+          code: appliedCoupon.coupon.code,
+          discountAmount: appliedCoupon.discountAmount
+        } : null,
+        total: finalTotal
+      };
+      
       const response = await fetch('/api/checkout', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ items: cartItems }),
+        body: JSON.stringify(checkoutData),
       });
       
       const data = await response.json();
@@ -63,8 +85,15 @@ const CheckoutPage: NextPage = () => {
       <div className="max-w-6xl mx-auto px-4 py-12 pt-20 grid grid-cols-1 lg:grid-cols-3 gap-8">
         {/* Itens do carrinho */}
         <div className="lg:col-span-2">
-          <h1 className="text-2xl font-bold text-gray-900 mb-6">Seu Carrinho</h1>
-          <div className="bg-white rounded-xl shadow-sm border border-gray-200 divide-y divide-gray-200">
+          <div className="flex items-center justify-between mb-6">
+            <h1 className="text-2xl font-bold text-gray-900">Seu Carrinho</h1>
+            {!isEmpty && (
+              <span className="text-sm text-gray-600">
+                {totalItems} {totalItems === 1 ? 'item' : 'itens'}
+              </span>
+            )}
+          </div>
+          <div className="bg-white rounded-xl shadow-sm border border-gray-200">
             {isEmpty ? (
               <div className="flex flex-col items-center justify-center py-16">
                 <ShoppingCart className="w-16 h-16 text-gray-300 mb-4" aria-label="Carrinho vazio" />
@@ -75,7 +104,12 @@ const CheckoutPage: NextPage = () => {
               </div>
             ) : (
               cartItems.map((item) => (
-                <CartItem key={item.id} product={item} onRemove={removeFromCart} />
+                <CartItem 
+                  key={item.id || item._id} 
+                  product={item} 
+                  onRemove={removeFromCart}
+                  onUpdateQuantity={updateQuantity}
+                />
               ))
             )}
           </div>
@@ -84,58 +118,92 @@ const CheckoutPage: NextPage = () => {
         {/* Resumo do pedido */}
         <div className="lg:col-span-1">
           <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-6 sticky top-24">
-            <h2 className="text-xl font-bold mb-6 text-gray-900">Resumo do Pedido</h2>
-            
+            <h2 className="text-xl font-semibold text-gray-900 mb-4">Resumo do Pedido</h2>
+
             {!isEmpty && (
               <div className="space-y-4 mb-6">
-                <div className="flex justify-between text-sm">
-                  <span className="text-gray-600">Subtotal ({cartItems.length} {cartItems.length === 1 ? 'item' : 'itens'})</span>
-                  <span className="font-medium">R$ {totalPrice.toFixed(2)}</span>
+                {/* Lista detalhada dos itens */}
+                <div className="space-y-2">
+                  {cartItems.map((item) => {
+                    const itemTotal = calculateItemTotal(item.price, item.quantity);
+                    
+                    return (
+                      <div key={item.id || item._id} className="flex items-center justify-between text-sm">
+                        <span className="text-gray-600">
+                          {item.title} × {item.quantity}
+                        </span>
+                        <span className="font-medium">
+                          R$ {itemTotal.toFixed(2)}
+                        </span>
+                      </div>
+                    );
+                  })}
                 </div>
-                <div className="flex justify-between text-sm">
+                
+                <hr className="my-3" />
+                
+                {/* Subtotal */}
+                <div className="flex items-center justify-between text-sm">
+                  <span className="text-gray-600">Subtotal ({totalItems} {totalItems === 1 ? 'item' : 'itens'})</span>
+                  <span className="font-medium">R$ {subtotal.toFixed(2)}</span>
+                </div>
+                
+                {/* Campo de cupom */}
+                <div className="py-2">
+                  <CouponInput />
+                </div>
+                
+                {/* Desconto aplicado */}
+                {appliedCoupon && discountAmount > 0 && (
+                  <div className="flex items-center justify-between text-sm">
+                    <span className="text-gray-600">Desconto ({appliedCoupon.coupon.code})</span>
+                    <span className="font-medium text-green-600">-R$ {discountAmount.toFixed(2)}</span>
+                  </div>
+                )}
+                
+                {/* Frete */}
+                <div className="flex items-center justify-between text-sm">
                   <span className="text-gray-600">Frete</span>
                   <span className="font-medium text-green-600">Grátis</span>
                 </div>
-                <div className="border-t border-gray-200 pt-4">
-                  <div className="flex justify-between">
-                    <span className="text-lg font-semibold text-gray-900">Total</span>
-                    <span className="text-xl font-bold text-gray-900">R$ {totalPrice.toFixed(2)}</span>
+                
+                <hr className="my-3" />
+                
+                {/* Total Final */}
+                <div className="flex items-center justify-between">
+                  <span className="text-lg font-semibold text-gray-900">Total</span>
+                  <span className="text-2xl font-bold text-green-600">R$ {finalTotal.toFixed(2)}</span>
+                </div>
+                
+                {/* Economia mostrada */}
+                {appliedCoupon && discountAmount > 0 && (
+                  <div className="text-center p-2 bg-green-50 rounded-lg">
+                    <p className="text-sm text-green-700">
+                      🎉 Você está economizando R$ {discountAmount.toFixed(2)}!
+                    </p>
                   </div>
+                )}
+              </div>
+            )}
+
+            {/* Informações de segurança */}
+            {!isEmpty && (
+              <div className="space-y-3 mb-6">
+                <div className="flex items-center gap-2 text-sm text-gray-600">
+                  <Shield className="w-4 h-4 text-green-500" />
+                  <span>Pagamento 100% seguro</span>
+                </div>
+                <div className="flex items-center gap-2 text-sm text-gray-600">
+                  <CreditCard className="w-4 h-4 text-blue-500" />
+                  <span>Processado pelo Mercado Pago</span>
                 </div>
               </div>
             )}
 
-            {/* Informações sobre pagamento */}
-            <div className="bg-blue-50 rounded-lg p-4 mb-6">
-              <div className="flex items-start gap-3">
-                <CreditCard className="w-5 h-5 text-blue-600 mt-0.5 flex-shrink-0" />
-                <div>
-                  <h3 className="text-sm font-semibold text-blue-800 mb-1">Pagamento via Mercado Pago</h3>
-                  <ul className="text-xs text-blue-700 space-y-1">
-                    <li>• Cartão de crédito ou débito</li>
-                    <li>• PIX (aprovação instantânea)</li>
-                    <li>• Boleto bancário</li>
-                    <li>• Até 12x sem juros</li>
-                  </ul>
-                </div>
-              </div>
-            </div>
-
-            {/* Segurança */}
-            <div className="bg-green-50 rounded-lg p-4 mb-6">
-              <div className="flex items-center gap-2 mb-2">
-                <Shield className="w-4 h-4 text-green-600" />
-                <span className="text-sm font-semibold text-green-800">Compra 100% Segura</span>
-              </div>
-              <p className="text-xs text-green-700">
-                Seus dados estão protegidos com criptografia SSL e são processados pelo Mercado Pago.
-              </p>
-            </div>
-
-            {/* Erro */}
+            {/* Mensagem de erro */}
             {error && (
-              <div className="bg-red-50 border border-red-200 rounded-lg p-4 mb-6">
-                <p className="text-sm text-red-800">{error}</p>
+              <div className="mb-4 p-3 bg-red-50 border border-red-200 rounded-lg">
+                <p className="text-sm text-red-600">{error}</p>
               </div>
             )}
 
@@ -152,8 +220,10 @@ const CheckoutPage: NextPage = () => {
                   <Loader2 className="w-5 h-5 animate-spin" />
                   Processando...
                 </span>
+              ) : isEmpty ? (
+                'Carrinho vazio'
               ) : (
-                `Finalizar Compra - R$ ${totalPrice.toFixed(2)}`
+                `Finalizar Compra - R$ ${finalTotal.toFixed(2)}`
               )}
             </ButtonPrimary>
 

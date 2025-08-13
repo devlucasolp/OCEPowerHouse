@@ -1,6 +1,7 @@
 import React from 'react';
 import Header from './Header';
 import Footer from './Footer';
+import SideCart from './SideCart';
 
 type PageLayoutProps = {
   children: React.ReactNode;
@@ -11,6 +12,7 @@ const PageLayout = ({ children }: PageLayoutProps) => (
     <Header />
     <main className="flex-1 w-full max-w-6xl mx-auto sm:px-4 pb-4 sm:pb-8 sm:pt-20">{children}</main>
     <Footer />
+    <SideCart />
   </div>
 );
 

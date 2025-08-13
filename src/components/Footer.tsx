@@ -137,7 +137,7 @@ const Footer = () => (
     </div>
 
     {/* Bottom Bar */}
-    <div className="border-t border-gray-800">
+    <div className="border-t border-black">
       <div className="max-w-6xl mx-auto px-4 py-4">
         <div className="flex flex-col md:flex-row justify-between items-center text-sm text-gray-400">
           <div>

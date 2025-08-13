@@ -21,9 +21,22 @@ export default {
           { title: 'Acessórios de Bike', value: 'bike_acessorios' }
         ]
       },
-      validation: Rule => Rule.required()
+      validation: (Rule: any) => Rule.required()
     },
     { name: 'description', title: 'Descrição', type: 'text' },
+    
+    // CAMPO DE CUPONS ANEXADOS AO PRODUTO
+    {
+      name: 'applicableCoupons',
+      title: 'Cupons Aplicáveis',
+      type: 'array',
+      of: [{ 
+        type: 'reference', 
+        to: [{ type: 'coupon' }] 
+      }],
+      description: 'Cupons que podem ser usados especificamente neste produto'
+    },
+    
     { 
       name: 'featured', 
       title: 'Produto em Destaque', 

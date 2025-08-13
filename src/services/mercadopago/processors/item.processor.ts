@@ -120,8 +120,13 @@ export class ItemProcessor {
    * Calcula o valor total dos itens
    */
   calculateTotal(items: MercadoPagoItem[]): number {
-    return items.reduce((total, item) => {
-      return total + (item.unit_price * item.quantity);
+    const total = items.reduce((total, item) => {
+      const itemPrice = Number(item.unit_price) || 0;
+      const itemQuantity = Math.max(0, Math.floor(Number(item.quantity) || 1));
+      return total + (itemPrice * itemQuantity);
     }, 0);
+    
+    // Arredondamento consistente para evitar problemas de precisão
+    return Math.round((total + Number.EPSILON) * 100) / 100;
   }
 } 

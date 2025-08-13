@@ -7,6 +7,7 @@ import Link from 'next/link';
 import { motion } from 'framer-motion';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
+import SideCart from '../components/SideCart';
 
 const cardVariants = {
   initial: { opacity: 0, y: 24 },
@@ -359,6 +360,7 @@ const Home: NextPage = () => {
         </motion.section>
         <Footer />
       </motion.main>
+      <SideCart />
     </div>
   );
 };

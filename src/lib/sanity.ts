@@ -1,63 +1,52 @@
 import { createClient } from '@sanity/client';
-import { projectId, dataset, apiVersion } from '../sanity/env';
+import type { Product } from '../types/product';
+import type { Coupon } from '../types/coupon';
+
+const projectId = process.env.NEXT_PUBLIC_SANITY_PROJECT_ID || "1sbzjovr";
+const dataset = process.env.NEXT_PUBLIC_SANITY_DATASET || "production";
 
 export const sanityClient = createClient({
   projectId,
   dataset,
-  apiVersion,
-  useCdn: false, // Desabilita CDN para development/debug
-  token: process.env.SANITY_TOKEN || process.env.SANITY_TOKEN2,
-  perspective: 'previewDrafts', // Inclui drafts para ver conteúdo não publicado
+  useCdn: false,
+  apiVersion: '2023-01-01',
 });
 
 export const getAllPosts = async () => {
   try {
     const posts = await sanityClient.fetch(
-      `*[_type == "post"] | order(publishedAt desc)[0...10] {
+      `*[_type == "post"] | order(publishedAt desc) {
         _id,
         _type,
         title,
         slug,
-        mainImage{
-          asset->{
-            _id,
-            url,
-            originalFilename,
-            extension,
-            size
-          },
-          alt,
-          crop,
-          hotspot
-        },
-        author->{
+        "excerpt": array::join(string::split((pt::text(body)), "")[0..255], "") + "...",
+        body,
+        publishedAt,
+        "author": author->{
           _id,
           name,
-          slug
+          image
         },
-        publishedAt,
-        body,
-        categories[]->{
+        "categories": categories[]->{
           _id,
           title
         },
-        _createdAt,
-        _updatedAt
+        mainImage
       }`
     );
-
-    console.log('Posts fetched from Sanity:', posts);
-    return posts;
+    return posts || [];
   } catch (error) {
-    console.error('Error fetching posts from Sanity:', error);
+    console.error('❌ Erro ao buscar posts do Sanity:', error);
+
     return [];
   }
 };
 
 export const getAllProducts = async () => {
   try {
-    return await sanityClient.fetch(
-      `*[_type == "product"] | order(_createdAt desc) {
+    const products = await sanityClient.fetch(
+      `*[_type == "product"] {
         _id,
         title,
         slug,
@@ -73,19 +62,38 @@ export const getAllProducts = async () => {
           image,
           priceModifier,
           inStock
+        },
+        "applicableCoupons": applicableCoupons[]->{
+          _id,
+          code,
+          title,
+          description,
+          discountType,
+          discountValue,
+          minPurchaseAmount,
+          maxDiscountAmount,
+          usageLimit,
+          usageCount,
+          startDate,
+          endDate,
+          isActive,
+          applicableCategories,
+          excludedProducts
         }
       }`
     );
+    
+    return products || [];
   } catch (error) {
-    console.error('Error fetching products from Sanity:', error);
+    console.error('❌ Erro ao buscar produtos do Sanity:', error);
     return [];
   }
 };
 
 export const getProductsByCategory = async (category: string) => {
   try {
-    return await sanityClient.fetch(
-      `*[_type == "product" && category == $category] | order(_createdAt desc) {
+    const products = await sanityClient.fetch(
+      `*[_type == "product" && category == $category] {
         _id,
         title,
         slug,
@@ -101,12 +109,32 @@ export const getProductsByCategory = async (category: string) => {
           image,
           priceModifier,
           inStock
+        },
+        "applicableCoupons": applicableCoupons[]->{
+          _id,
+          code,
+          title,
+          description,
+          discountType,
+          discountValue,
+          minPurchaseAmount,
+          maxDiscountAmount,
+          usageLimit,
+          usageCount,
+          startDate,
+          endDate,
+          isActive,
+          applicableCategories,
+          excludedProducts
         }
       }`,
       { category }
     );
+    
+    return products || [];
   } catch (error) {
-    console.error('Error fetching products by category from Sanity:', error);
+    console.error('❌ Erro ao buscar produtos por categoria:', error);
+
     return [];
   }
 };
@@ -130,6 +158,23 @@ export const getProductBySlug = async (slug: string) => {
           image,
           priceModifier,
           inStock
+        },
+        "applicableCoupons": applicableCoupons[]->{
+          _id,
+          code,
+          title,
+          description,
+          discountType,
+          discountValue,
+          minPurchaseAmount,
+          maxDiscountAmount,
+          usageLimit,
+          usageCount,
+          startDate,
+          endDate,
+          isActive,
+          applicableCategories,
+          excludedProducts
         }
       }`,
       { slug }
@@ -140,128 +185,168 @@ export const getProductBySlug = async (slug: string) => {
   }
 };
 
+// NOVAS FUNÇÕES PARA CUPONS
+
+export const getAllCoupons = async (): Promise<Coupon[]> => {
+  try {
+    const coupons = await sanityClient.fetch(
+      `*[_type == "coupon"] | order(_createdAt desc) {
+        _id,
+        code,
+        title,
+        description,
+        discountType,
+        discountValue,
+        minPurchaseAmount,
+        maxDiscountAmount,
+        usageLimit,
+        usageCount,
+        startDate,
+        endDate,
+        isActive,
+        applicableCategories,
+        "excludedProducts": excludedProducts[]->_id
+      }`
+    );
+    
+    return coupons || [];
+  } catch (error) {
+    console.error('❌ Erro ao buscar cupons do Sanity:', error);
+    return [];
+  }
+};
+
+export const getCouponByCode = async (code: string): Promise<Coupon | null> => {
+  try {
+    return await sanityClient.fetch(
+      `*[_type == "coupon" && code == $code][0] {
+        _id,
+        code,
+        title,
+        description,
+        discountType,
+        discountValue,
+        minPurchaseAmount,
+        maxDiscountAmount,
+        usageLimit,
+        usageCount,
+        startDate,
+        endDate,
+        isActive,
+        applicableCategories,
+        "excludedProducts": excludedProducts[]->_id
+      }`,
+      { code: code.toUpperCase() }
+    );
+  } catch (error) {
+    console.error('❌ Erro ao buscar cupom por código:', error);
+    return null;
+  }
+};
+
+export const getActiveCoupons = async (): Promise<Coupon[]> => {
+  try {
+    const now = new Date().toISOString();
+    const coupons = await sanityClient.fetch(
+      `*[_type == "coupon" && isActive == true && (startDate == null || startDate <= $now) && (endDate == null || endDate >= $now)] | order(_createdAt desc) {
+        _id,
+        code,
+        title,
+        description,
+        discountType,
+        discountValue,
+        minPurchaseAmount,
+        maxDiscountAmount,
+        usageLimit,
+        usageCount,
+        startDate,
+        endDate,
+        isActive,
+        applicableCategories,
+        "excludedProducts": excludedProducts[]->_id
+      }`,
+      { now }
+    );
+    
+    return coupons || [];
+  } catch (error) {
+    console.error('❌ Erro ao buscar cupons ativos:', error);
+    return [];
+  }
+};
+
 export const getPostBySlug = async (slug: string) => {
   try {
-    const post = await sanityClient.fetch(
+    return await sanityClient.fetch(
       `*[_type == "post" && slug.current == $slug][0] {
         _id,
         _type,
         title,
         slug,
-        mainImage{
-          asset->{
-            _id,
-            url,
-            originalFilename,
-            extension,
-            size
-          },
-          alt,
-          crop,
-          hotspot
-        },
-        author->{
+        body,
+        publishedAt,
+        "author": author->{
           _id,
           name,
-          slug
+          image
         },
-        publishedAt,
-        body,
-        categories[]->{
+        "categories": categories[]->{
           _id,
           title
         },
-        _createdAt,
-        _updatedAt
+        mainImage
       }`,
       { slug }
     );
-
-    console.log('Post fetched from Sanity:', post);
-    return post;
   } catch (error) {
     console.error('Error fetching post by slug:', error);
     return null;
   }
 };
 
-// Função para buscar apenas posts com imagens
-export const getPostsWithImages = async () => {
+export const getAllProductsAlternative = async () => {
   try {
-    const posts = await sanityClient.fetch(
-      `*[_type == "post" && defined(mainImage)] | order(publishedAt desc)[0...10] {
+    const products = await sanityClient.fetch(
+      `*[_type == "product"] {
         _id,
-        _type,
         title,
         slug,
-        mainImage{
-          asset->{
-            _id,
-            url,
-            originalFilename,
-            extension,
-            size
-          },
-          alt,
-          crop,
-          hotspot
-        },
-        author->{
-          _id,
+        image,
+        price,
+        category,
+        description,
+        featured,
+        inStock,
+        variants[]{
+          _key,
           name,
-          slug
+          image,
+          priceModifier,
+          inStock
         },
-        publishedAt,
-        body,
-        categories[]->{
+        "applicableCoupons": applicableCoupons[]->{
           _id,
-          title
-        },
-        _createdAt,
-        _updatedAt
+          code,
+          title,
+          description,
+          discountType,
+          discountValue,
+          minPurchaseAmount,
+          maxDiscountAmount,
+          usageLimit,
+          usageCount,
+          startDate,
+          endDate,
+          isActive,
+          applicableCategories,
+          excludedProducts
+        }
       }`
     );
-
-    console.log('Posts with images fetched from Sanity:', posts);
-    return posts;
+    
+    return products || [];
   } catch (error) {
-    console.error('Error fetching posts with images from Sanity:', error);
+    console.error('❌ Erro ao buscar produtos (alternativo):', error);
     return [];
-  }
-};
-
-// Função para atualizar um post com uma imagem (para teste)
-export const updatePostWithImage = async (postId: string, imageAssetRef: string) => {
-  try {
-    const result = await sanityClient
-      .patch(postId)
-      .set({
-        mainImage: {
-          _type: 'image',
-          asset: {
-            _type: 'reference',
-            _ref: imageAssetRef
-          }
-        }
-      })
-      .commit();
-
-    console.log('Post updated with image:', result);
-    return result;
-  } catch (error) {
-    console.error('Error updating post with image:', error);
-    return null;
-  }
-};
-
-// Função para testar a conexão com o Sanity
-export const testSanityConnection = async () => {
-  try {
-    const result = await sanityClient.fetch('*[_type == "post"][0...3]{_id, title}');
-    console.log('Sanity connection test successful:', result);
-    return result;
-  } catch (error) {
-    console.error('Sanity connection test failed:', error);
-    return null;
   }
 };

@@ -6,9 +6,10 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
   }
 
   try {
-    const { items } = req.body;
+    const { items, subtotal, appliedCoupon, total } = req.body;
     
     console.log('🚀 API Checkout - Iniciado com', items?.length, 'itens');
+    console.log('💰 Valores recebidos:', { subtotal, appliedCoupon, total });
 
     // Validações básicas
     if (!items || !Array.isArray(items)) {
@@ -26,33 +27,35 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
       return res.status(500).json({ error: 'Token do Mercado Pago não configurado' });
     }
 
-    // URL base
-    const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || req.headers.origin || 'http://localhost:3000';
+    // URL base - garantir que seja HTTPS em produção
+    let baseUrl = process.env.NEXT_PUBLIC_BASE_URL || req.headers.origin || 'http://localhost:3000';
     
-    // Garantir que baseUrl não termine com '/'
+    // Garantir que a URL seja válida
+    if (!baseUrl.startsWith('http://') && !baseUrl.startsWith('https://')) {
+      baseUrl = `https://${baseUrl}`;
+    }
+    
     const cleanBaseUrl = baseUrl.replace(/\/+$/, '');
     
     console.log('🔧 Configurações:', {
       baseUrl: cleanBaseUrl,
       itemsCount: items.length,
-      hasToken: !!accessToken
+      hasToken: !!accessToken,
+      hasCoupon: !!appliedCoupon
     });
 
     // Função para processar imagem do Sanity
     const processImageUrl = (image: any): string | undefined => {
       if (!image) return undefined;
       
-      // Se é string simples (produtos mock)
       if (typeof image === 'string') {
         return image.startsWith('http') ? image : `${cleanBaseUrl}${image}`;
       }
       
-      // Se é objeto do Sanity
       if (image._type === 'image' && image.asset?._ref) {
         const projectId = process.env.NEXT_PUBLIC_SANITY_PROJECT_ID || "1sbzjovr";
         const dataset = process.env.NEXT_PUBLIC_SANITY_DATASET || "production";
         
-        // Converte referência Sanity em URL
         const ref = image.asset._ref;
         if (ref.startsWith('image-')) {
           try {
@@ -71,22 +74,34 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
       return undefined;
     };
 
-    // Formata itens para Mercado Pago
-    const mercadoPagoItems = items.map((item: any) => {
+    // Formata itens para Mercado Pago com validação mais rigorosa
+    const mercadoPagoItems = items.map((item: any, index: number) => {
       const pictureUrl = processImageUrl(item.image);
       
+      // Validar dados do item
+      const price = parseFloat(Number(item.price || 0).toFixed(2));
+      const quantity = parseInt(item.quantity || 1);
+      
+      if (price <= 0) {
+        throw new Error(`Item ${index + 1}: Preço inválido (${price})`);
+      }
+      
+      if (quantity <= 0) {
+        throw new Error(`Item ${index + 1}: Quantidade inválida (${quantity})`);
+      }
+
       const formattedItem = {
-        id: String(item.id || item._id),
-        title: item.title || 'Produto PowerHouse',
-        description: item.description || item.title || 'Produto PowerHouse Brasil',
+        id: String(item.id || item._id || `item-${index + 1}`),
+        title: String(item.title || 'Produto PowerHouse').substring(0, 256),
+        description: String(item.description || item.title || 'Produto PowerHouse Brasil').substring(0, 600),
         picture_url: pictureUrl,
-        category_id: item.category || 'general',
-        quantity: parseInt(item.quantity) || 1,
+        category_id: String(item.category || 'general'),
+        quantity: quantity,
         currency_id: 'BRL' as const,
-        unit_price: parseFloat(Number(item.price).toFixed(2))
+        unit_price: price
       };
       
-      console.log(`📦 Item processado: ${formattedItem.title}`, {
+      console.log(`📦 Item ${index + 1} processado: ${formattedItem.title}`, {
         id: formattedItem.id,
         price: formattedItem.unit_price,
         quantity: formattedItem.quantity,
@@ -98,95 +113,151 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
 
     // Gera referência externa
     const externalReference = `powerhouse_${Date.now()}_${Math.random().toString(36).substr(2, 9)}`;
+    
+    // Calcular total dos itens
+    const itemsTotal = mercadoPagoItems.reduce((acc, item) => {
+      return acc + (item.unit_price * item.quantity);
+    }, 0);
+    
+    // Usar o total recebido (já com desconto aplicado) ou calcular dos itens
+    const finalTotal = total && total > 0 ? parseFloat(total.toFixed(2)) : parseFloat(itemsTotal.toFixed(2));
+    
+    console.log('💰 Totais calculados:', {
+      itemsTotal: itemsTotal.toFixed(2),
+      finalTotal: finalTotal.toFixed(2),
+      hasCouponDiscount: appliedCoupon && appliedCoupon.discountAmount > 0
+    });
 
-    // Cria preferência do Mercado Pago
-    const preference = {
-      items: mercadoPagoItems,
-      external_reference: externalReference,
-      back_urls: {
-        success: `${cleanBaseUrl}/checkout/success`,
-        failure: `${cleanBaseUrl}/checkout/failure`,
-        pending: `${cleanBaseUrl}/checkout/pending`
-      },
-      payment_methods: {
-        excluded_payment_methods: [],
-        excluded_payment_types: [],
-        installments: 12
-      },
-      shipments: {
-        cost: 0,
-        mode: 'not_specified'
-      },
-      payer: {
-        name: 'Cliente PowerHouse',
-        email: 'cliente@powerhouse.com.br'
-      },
-      statement_descriptor: 'POWERHOUSE BRASIL',
-      binary_mode: false,
-      expires: false,
-      notification_url: `${cleanBaseUrl}/api/webhooks/mercadopago`
+    // URLs de retorno - certificar que estão completas e válidas
+    const backUrls = {
+      success: `${cleanBaseUrl}/checkout/success`,
+      failure: `${cleanBaseUrl}/checkout/failure`,
+      pending: `${cleanBaseUrl}/checkout/pending`
     };
 
-    console.log('🔧 Preferência criada:', {
+    // Validar se as URLs são válidas
+    Object.entries(backUrls).forEach(([key, url]) => {
+      try {
+        new URL(url);
+      } catch (error) {
+        throw new Error(`URL inválida para ${key}: ${url}`);
+      }
+    });
+
+    console.log('🔗 URLs de retorno configuradas e validadas:', backUrls);
+
+    // Configuração da preferência - versão sem auto_return
+    const preferenceData: any = {
+      items: mercadoPagoItems,
+      back_urls: backUrls,
       external_reference: externalReference,
-      back_urls: preference.back_urls,
-      items_count: mercadoPagoItems.length,
-      clean_base_url: cleanBaseUrl
+      notification_url: `${cleanBaseUrl}/api/webhooks/mercadopago`,
+      statement_descriptor: 'POWERHOUSE BRASIL',
+      metadata: {
+        store_name: 'PowerHouse Brasil',
+        external_reference: externalReference,
+        coupon_applied: appliedCoupon ? appliedCoupon.code : null,
+        discount_amount: appliedCoupon ? appliedCoupon.discountAmount : 0,
+        original_total: subtotal || itemsTotal,
+        final_total: finalTotal
+      }
+    };
+
+    console.log('🔄 Criando preferência no Mercado Pago...', {
+      itemsCount: preferenceData.items.length,
+      total: finalTotal,
+      external_reference: externalReference,
+      coupon: appliedCoupon?.code || 'nenhum',
+      success_url: backUrls.success
     });
 
     // Log da preferência completa para debug
-    console.log('📋 Preferência completa enviada:', JSON.stringify(preference, null, 2));
+    console.log('📋 Dados enviados para MP:', JSON.stringify(preferenceData, null, 2));
 
-    // Envia para Mercado Pago
-    const response = await fetch('https://api.mercadopago.com/checkout/preferences', {
+    // Criar preferência no Mercado Pago
+    const mpResponse = await fetch('https://api.mercadopago.com/checkout/preferences', {
       method: 'POST',
       headers: {
-        'Content-Type': 'application/json',
         'Authorization': `Bearer ${accessToken}`,
+        'Content-Type': 'application/json',
         'X-Idempotency-Key': externalReference
       },
-      body: JSON.stringify(preference)
+      body: JSON.stringify(preferenceData),
     });
 
-    if (!response.ok) {
-      const errorData = await response.json();
+    const responseText = await mpResponse.text();
+    
+    if (!mpResponse.ok) {
       console.error('❌ Erro do Mercado Pago:', {
-        status: response.status,
-        statusText: response.statusText,
-        error: errorData
+        status: mpResponse.status,
+        statusText: mpResponse.statusText,
+        headers: Object.fromEntries(mpResponse.headers.entries()),
+        body: responseText
       });
       
+      let errorMessage = 'Erro ao criar preferência de pagamento';
+      
+      try {
+        const errorData = JSON.parse(responseText);
+        console.error('❌ Detalhes do erro MP:', errorData);
+        
+        if (errorData.message) {
+          errorMessage = errorData.message;
+        } else if (errorData.error) {
+          errorMessage = errorData.error;
+        } else if (errorData.cause && errorData.cause.length > 0) {
+          const cause = errorData.cause[0];
+          errorMessage = cause.description || cause.code || errorMessage;
+          console.error('❌ Causa específica:', cause);
+        }
+      } catch (e) {
+        console.error('❌ Erro ao fazer parse da resposta de erro:', e);
+      }
+      
       return res.status(500).json({ 
-        error: 'Erro ao criar preferência de pagamento',
-        details: process.env.NODE_ENV === 'development' ? errorData : undefined
+        error: errorMessage,
+        details: responseText,
+        status: mpResponse.status
       });
     }
 
-    const data = await response.json();
+    let preference;
+    try {
+      preference = JSON.parse(responseText);
+    } catch (e) {
+      console.error('❌ Erro ao fazer parse da resposta do MP:', responseText);
+      return res.status(500).json({ 
+        error: 'Resposta inválida do Mercado Pago',
+        details: responseText
+      });
+    }
     
-    console.log('✅ Preferência criada no Mercado Pago:', {
-      id: data.id,
-      external_reference: externalReference,
-      init_point: data.init_point ? 'presente' : 'ausente'
+    console.log('✅ Preferência criada com sucesso:', {
+      id: preference.id,
+      init_point: preference.init_point,
+      external_reference: preference.external_reference
     });
 
-    // Calcula total
-    const total = mercadoPagoItems.reduce((sum, item) => sum + (item.unit_price * item.quantity), 0);
-    
-    return res.status(200).json({ 
-      url: data.init_point,
-      id: data.id,
-      sandbox_init_point: data.sandbox_init_point,
+    return res.status(200).json({
+      url: preference.init_point,
+      preference_id: preference.id,
       external_reference: externalReference,
-      total,
-      is_test: accessToken.startsWith('TEST-')
+      total: finalTotal,
+      coupon_applied: appliedCoupon?.code || null,
+      discount_amount: appliedCoupon?.discountAmount || 0
     });
 
-  } catch (error: any) {
-    console.error('❌ Erro no checkout:', error);
+  } catch (error) {
+    console.error('❌ Erro geral no checkout:', error);
+    
+    let errorMessage = 'Erro interno do servidor';
+    if (error instanceof Error) {
+      errorMessage = error.message;
+    }
+    
     return res.status(500).json({ 
-      error: 'Erro interno do servidor',
-      details: process.env.NODE_ENV === 'development' ? error.message : undefined
+      error: errorMessage,
+      details: error instanceof Error ? error.stack : 'Erro desconhecido'
     });
   }
 } 

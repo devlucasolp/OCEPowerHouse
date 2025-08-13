@@ -115,8 +115,8 @@ const Planos = () => {
                   </li>
                 ))}
               </ul>
-              <div className="flex justify-center">
-                <motion.div whileHover={{ scale: 1.04 }} whileTap={{ scale: 0.98 }} className="w-full max-w-[200px]">
+              <div className="flex justify-center items-center p-5 mx-5">
+                <motion.div whileHover={{ scale: 1.04 }} whileTap={{ scale: 0.98 }} className="w-full  items-center max-w-[200px]">
                   <ButtonPrimary className="w-full text-base py-3 rounded-xl" href="https://docs.google.com/forms/d/e/1FAIpQLSeHZ6-v0sRqiRhzzMjAX9iO44u5ae_NpSJAXyaCwy_gdtRhVw/viewform" target="_blank">
                     Treine com a OCE
                   </ButtonPrimary>

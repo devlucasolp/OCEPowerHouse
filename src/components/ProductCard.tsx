@@ -1,17 +1,35 @@
 import Link from 'next/link';
 import Image from 'next/image';
+import { ShoppingCart } from 'lucide-react';
 import { getDescriptionText } from '../lib/textUtils';
+import { useCart } from '../lib/useCart';
+import { useState } from 'react';
+import type { Product } from '../types/product';
 
 interface ProductCardProps {
   title: string;
   image: string;
   price: number;
   slug: string;
-  description?: string | any;
+  description?: string;
+  product?: Product; // Produto completo para adicionar ao carrinho
 }
 
-const ProductCard = ({ title, image, price, slug, description }: ProductCardProps) => {
+const ProductCard = ({ title, image, price, slug, description, product }: ProductCardProps) => {
   const descriptionText = getDescriptionText(description);
+  const { addToCart } = useCart();
+  const [added, setAdded] = useState(false);
+
+  const handleAddToCart = (e: React.MouseEvent) => {
+    e.preventDefault(); // Impede a navegação do Link
+    e.stopPropagation();
+    
+    if (product) {
+      addToCart(product);
+      setAdded(true);
+      setTimeout(() => setAdded(false), 2000);
+    }
+  };
   
   return (
     <div className="bg-white rounded-2xl shadow-md overflow-hidden flex flex-col transition-all duration-200 hover:scale-105 focus-within:scale-105 border border-gray-100">
@@ -26,16 +44,44 @@ const ProductCard = ({ title, image, price, slug, description }: ProductCardProp
         />
       </div>
       <div className="p-5 flex-1 flex flex-col">
-        <h2 className="text-lg md:text-xl font-semibold text-[#1a1a1a] mb-2 line-clamp-2">{title}</h2>
+        <h3 className="font-semibold text-lg mb-2 line-clamp-2">{title}</h3>
+        
         {descriptionText && (
           <p className="text-gray-600 text-sm mb-3 line-clamp-3 leading-relaxed">
             {descriptionText}
           </p>
         )}
         <span className="text-xl font-bold text-green-500 mb-4 mt-auto">R$ {price.toFixed(2)}</span>
-        <Link href={`/shop/${slug}`} className="inline-block bg-black text-white px-4 py-2 rounded-lg hover:bg-black/90 transition-all duration-200 text-center font-semibold shadow focus:outline-none focus:ring-2 focus:ring-black focus:ring-offset-2" tabIndex={0} aria-label={`Ver produto ${title}`}>
-          Ver Produto
-        </Link>
+        
+        {/* Botões */}
+        <div className="flex gap-2">
+          <Link 
+            href={`/shop/${slug}`} 
+            className="flex-1 inline-block bg-black text-white px-4 py-2 rounded-lg hover:bg-black/90 transition-all duration-200 text-center font-semibold shadow focus:outline-none focus:ring-2 focus:ring-black focus:ring-offset-2" 
+            tabIndex={0} 
+            aria-label={`Ver produto ${title}`}
+          >
+            Ver Produto
+          </Link>
+          
+          {product && (
+            <button
+              onClick={handleAddToCart}
+              className="bg-yellow-400 hover:bg-yellow-500 text-black p-2 rounded-lg transition-all duration-200 shadow focus:outline-none focus:ring-2 focus:ring-yellow-400 focus:ring-offset-2"
+              aria-label={`Adicionar ${title} ao carrinho`}
+              disabled={product.inStock === false}
+            >
+              <ShoppingCart className="w-5 h-5" />
+            </button>
+          )}
+        </div>
+        
+        {/* Feedback de produto adicionado */}
+        {added && (
+          <div className="mt-2 text-green-600 font-semibold text-sm text-center transition-all">
+            Produto adicionado!
+          </div>
+        )}
       </div>
     </div>
   );
