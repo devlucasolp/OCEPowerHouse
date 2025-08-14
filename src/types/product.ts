@@ -8,6 +8,13 @@ export interface ProductVariant {
   inStock?: boolean;
 }
 
+export interface ShippingDimensions {
+  weight: number; // Peso em quilogramas (kg)
+  width: number;  // Largura em centímetros (cm)
+  height: number; // Altura em centímetros (cm)
+  length: number; // Comprimento em centímetros (cm)
+}
+
 export interface Product {
   _id: string;
   id?: string; // compatibilidade com produtos mockados
@@ -22,4 +29,5 @@ export interface Product {
   inStock?: boolean;
   variants?: ProductVariant[];
   applicableCoupons?: Coupon[]; // Cupons que podem ser aplicados a este produto
+  shippingDimensions?: ShippingDimensions; // Dimensões para cálculo de frete via Melhor Envio
 }

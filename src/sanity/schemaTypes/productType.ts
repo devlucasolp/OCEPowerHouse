@@ -31,6 +31,48 @@ export default {
     },
     { name: 'description', title: 'Descrição', type: 'text' },
     
+    // CAMPOS PARA CÁLCULO DE FRETE - MELHOR ENVIO
+    {
+      name: 'shippingDimensions',
+      title: 'Dimensões para Frete',
+      type: 'object',
+      description: 'Dimensões e peso do produto para cálculo de frete via Melhor Envio',
+      fields: [
+        {
+          name: 'weight',
+          title: 'Peso (kg)',
+          type: 'number',
+          description: 'Peso do produto em quilogramas (kg)',
+          validation: (Rule: any) => Rule.min(0.001).error('Peso deve ser maior que 0')
+        },
+        {
+          name: 'width',
+          title: 'Largura (cm)',
+          type: 'number',
+          description: 'Largura do produto em centímetros (cm)',
+          validation: (Rule: any) => Rule.min(1).error('Largura deve ser maior que 0')
+        },
+        {
+          name: 'height',
+          title: 'Altura (cm)',
+          type: 'number',
+          description: 'Altura do produto em centímetros (cm)',
+          validation: (Rule: any) => Rule.min(1).error('Altura deve ser maior que 0')
+        },
+        {
+          name: 'length',
+          title: 'Comprimento (cm)',
+          type: 'number',
+          description: 'Comprimento do produto em centímetros (cm)',
+          validation: (Rule: any) => Rule.min(1).error('Comprimento deve ser maior que 0')
+        }
+      ],
+      options: {
+        collapsible: true,
+        collapsed: false
+      }
+    },
+    
     // CAMPO DE CUPONS ANEXADOS AO PRODUTO
     {
       name: 'applicableCoupons',
