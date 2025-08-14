@@ -25,11 +25,11 @@ const BookSection = () => {
   };
 
   const floatingAnimation = {
-    y: [-5, 5, -5],
+    y: [-10, 10, -10],
     transition: {
       duration: 3,
       repeat: Infinity,
-      ease: "easeInOut"
+      ease: [0.4, 0, 0.6, 1] as const
     }
   };
 
