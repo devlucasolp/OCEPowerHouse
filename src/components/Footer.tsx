@@ -21,7 +21,7 @@ const Footer = () => (
               <span className="text-xl font-bold">Power House Brasil</span>
             </div>
             <p className="text-white text-sm max-w-sm">
-              Especialistas em ciclismo urbano com produtos de qualidade e conteúdo exclusivo.
+              Especialistas em performance com produtos de qualidade e conteúdo exclusivo.
             </p>
           </div>
 

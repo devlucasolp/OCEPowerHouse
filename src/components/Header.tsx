@@ -4,6 +4,7 @@ import { useCart } from '../lib/useCart';
 import { useRouter } from 'next/router';
 import React from 'react';
 import { Search, ShoppingCart, Menu, X, Home, Zap, CreditCard, BookOpen, Store, ChevronDown } from 'lucide-react';
+import SearchDropdown from './SearchDropdown';
 
 const navLinks = [
   { href: '/', label: 'Home', icon: Home, dropdown: [
@@ -21,6 +22,7 @@ const Header = () => {
   const [menuOpen, setMenuOpen] = React.useState(false);
   const [scrolled, setScrolled] = React.useState(false);
   const [homeDropdownOpen, setHomeDropdownOpen] = React.useState(false);
+  const [searchOpen, setSearchOpen] = React.useState(false);
 
   // Verifica se estamos na página principal
   const isHomePage = router.pathname === '/';
@@ -166,8 +168,9 @@ const Header = () => {
               );
             })}
             {/* Ícone de busca */}
-            <li>
+            <li className="relative">
               <button
+                onClick={() => setSearchOpen(!searchOpen)}
                 className={`flex items-center justify-center w-10 h-10 rounded focus:outline-none focus:ring-2 transition-colors ${getLinkClasses()}`}
                 aria-label="Buscar produtos"
                 tabIndex={0}
@@ -175,6 +178,12 @@ const Header = () => {
               >
                 <Search className="w-6 h-6" aria-hidden="true" />
               </button>
+              <SearchDropdown
+                isOpen={searchOpen}
+                onClose={() => setSearchOpen(false)}
+                iconColor={getIconColor()}
+                linkClasses={getLinkClasses()}
+              />
             </li>
             {/* Ícone do carrinho */}
             <li>
@@ -305,6 +314,10 @@ const Header = () => {
             <div className="absolute bottom-4 left-4 right-4 flex items-center justify-between p-4 bg-gray-50 rounded-lg">
               {/* Ícone de busca */}
               <button
+                onClick={() => {
+                  setSearchOpen(true);
+                  setMenuOpen(false);
+                }}
                 className="flex items-center justify-center w-12 h-12 rounded-full bg-yellow-400 text-black hover:bg-yellow-500 transition-colors"
                 aria-label="Buscar produtos"
                 tabIndex={0}

@@ -24,6 +24,15 @@ const BookSection = () => {
     }
   };
 
+  const floatingAnimation = {
+    y: [-5, 5, -5],
+    transition: {
+      duration: 3,
+      repeat: Infinity,
+      ease: "easeInOut"
+    }
+  };
+
   return (
     <motion.section
       className="py-24 px-6 bg-white overflow-hidden relative"
@@ -87,9 +96,10 @@ const BookSection = () => {
                 viewport={{ once: true }}
                 transition={{ delay: 0.5 }}
               >
-                Descubra as estratégias e metodologias que levaram nossos atletas 
-                ao topo do pódio mundial. Um guia completo para transformar sua 
-                performance e alcançar resultados extraordinários no ciclismo.
+              Descubra a superação e a profundidade por trás do método vencedor de Hugo Prado Neto.
+              O campeão mundial de MTB Marathon 
+              compartilha sua jornada de TDAH à conquista do pódio, combinando neurociência, 
+              psicologia, alimentação e gestão emocional no poderoso “Fator H”. 
               </motion.p>
 
               {/* Features do Livro */}
@@ -114,14 +124,6 @@ const BookSection = () => {
                 >
                   <Users className="w-5 h-5 text-yellow-600 flex-shrink-0" />
                   <span className="text-sm text-gray-700">Casos reais</span>
-                </motion.div>
-                
-                <motion.div
-                  className="flex items-center space-x-3 bg-gray-50 rounded-lg p-4"
-                  variants={cardVariants}
-                >
-                  <Download className="w-5 h-5 text-yellow-600 flex-shrink-0" />
-                  <span className="text-sm text-gray-700">Digital + Físico</span>
                 </motion.div>
               </motion.div>
 
@@ -171,6 +173,7 @@ const BookSection = () => {
               <div className="relative">
                 <motion.div
                   className="relative rounded-2xl"
+                  animate={floatingAnimation}
                   whileHover={{ rotateY: 5, scale: 1.05 }}
                   transition={{ duration: 0.3 }}
                   style={{ 
