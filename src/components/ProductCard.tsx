@@ -3,6 +3,7 @@ import Image from 'next/image';
 import { ShoppingCart } from 'lucide-react';
 import { getDescriptionText } from '../lib/textUtils';
 import { useCart } from '../lib/useCart';
+import { getShippingCost } from '../lib/productUtils';
 import { useState } from 'react';
 import type { Product } from '../types/product';
 
@@ -19,6 +20,7 @@ const ProductCard = ({ title, image, price, slug, description, product }: Produc
   const descriptionText = getDescriptionText(description);
   const { addToCart } = useCart();
   const [added, setAdded] = useState(false);
+  const shippingCost = product ? getShippingCost(product) : 25.00;
 
   const handleAddToCart = (e: React.MouseEvent) => {
     e.preventDefault(); // Impede a navegação do Link
@@ -51,7 +53,12 @@ const ProductCard = ({ title, image, price, slug, description, product }: Produc
             {descriptionText}
           </p>
         )}
-        <span className="text-xl font-bold text-green-500 mb-4 mt-auto">R$ {price.toFixed(2)}</span>
+        
+        {/* Preços */}
+        <div className="mt-auto mb-4">
+          <span className="text-xl font-bold text-green-500 block">R$ {price.toFixed(2)}</span>
+          <span className="text-sm text-gray-500">+ frete R$ {shippingCost.toFixed(2)}</span>
+        </div>
         
         {/* Botões */}
         <div className="flex gap-2">

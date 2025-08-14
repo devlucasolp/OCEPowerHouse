@@ -15,6 +15,7 @@ export interface Product {
   slug: string | { current: string };
   image?: any;
   price: number;
+  shippingCost?: number; // Valor do frete (padrão R$ 25,00)
   category: string;
   description: string | any;
   featured?: boolean;

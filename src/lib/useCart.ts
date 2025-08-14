@@ -4,6 +4,7 @@ import { subscribeWithSelector } from 'zustand/middleware';
 import type { Product } from '../types/product';
 import type { Coupon, CouponApplication } from '../types/coupon';
 import { applyCoupon } from './couponUtils';
+import { calculateCartShipping } from './productUtils';
 
 // Estendendo o tipo Product para incluir quantity
 export type CartProduct = Product & { quantity: number };
@@ -70,6 +71,7 @@ type CartState = {
   totalItems: number;
   appliedCoupon: CouponApplication | null;
   subtotal: number;
+  shippingCost: number;
   discountAmount: number;
   finalTotal: number;
   addToCart: (product: Product) => void;
@@ -92,6 +94,7 @@ export const useCart = create<CartState>()(
         totalItems: 0,
         appliedCoupon: null,
         subtotal: 0,
+        shippingCost: 0,
         discountAmount: 0,
         finalTotal: 0,
         
@@ -125,18 +128,19 @@ export const useCart = create<CartState>()(
             
             const subtotal = calculateCartTotal(newCartItems);
             const totalItems = calculateTotalItems(newCartItems);
+            const shippingCost = calculateCartShipping(newCartItems);
             
             // Recalcular cupom se aplicado
             let newAppliedCoupon = state.appliedCoupon;
             let discountAmount = 0;
-            let finalTotal = subtotal;
+            let finalTotal = subtotal + shippingCost;
             
             if (state.appliedCoupon) {
               const couponResult = applyCoupon(state.appliedCoupon.coupon, newCartItems, subtotal);
               if (couponResult) {
                 newAppliedCoupon = couponResult;
                 discountAmount = couponResult.discountAmount;
-                finalTotal = couponResult.finalPrice;
+                finalTotal = couponResult.finalPrice + shippingCost;
               } else {
                 newAppliedCoupon = null;
               }
@@ -148,6 +152,7 @@ export const useCart = create<CartState>()(
               totalPrice: subtotal,
               totalItems,
               subtotal,
+              shippingCost,
               discountAmount,
               finalTotal,
               appliedCoupon: newAppliedCoupon,
@@ -159,18 +164,19 @@ export const useCart = create<CartState>()(
             const newCartItems = state.cartItems.filter((item) => (item.id || item._id) !== productId);
             const subtotal = calculateCartTotal(newCartItems);
             const totalItems = calculateTotalItems(newCartItems);
+            const shippingCost = calculateCartShipping(newCartItems);
             
             // Recalcular cupom se aplicado
             let newAppliedCoupon = state.appliedCoupon;
             let discountAmount = 0;
-            let finalTotal = subtotal;
+            let finalTotal = subtotal + shippingCost;
             
             if (state.appliedCoupon) {
               const couponResult = applyCoupon(state.appliedCoupon.coupon, newCartItems, subtotal);
               if (couponResult) {
                 newAppliedCoupon = couponResult;
                 discountAmount = couponResult.discountAmount;
-                finalTotal = couponResult.finalPrice;
+                finalTotal = couponResult.finalPrice + shippingCost;
               } else {
                 newAppliedCoupon = null;
               }
@@ -181,6 +187,7 @@ export const useCart = create<CartState>()(
               totalPrice: subtotal,
               totalItems,
               subtotal,
+              shippingCost,
               discountAmount,
               finalTotal,
               appliedCoupon: newAppliedCoupon,
@@ -205,18 +212,19 @@ export const useCart = create<CartState>()(
             
             const subtotal = calculateCartTotal(newCartItems);
             const totalItems = calculateTotalItems(newCartItems);
+            const shippingCost = calculateCartShipping(newCartItems);
             
             // Recalcular cupom se aplicado
             let newAppliedCoupon = state.appliedCoupon;
             let discountAmount = 0;
-            let finalTotal = subtotal;
+            let finalTotal = subtotal + shippingCost;
             
             if (state.appliedCoupon) {
               const couponResult = applyCoupon(state.appliedCoupon.coupon, newCartItems, subtotal);
               if (couponResult) {
                 newAppliedCoupon = couponResult;
                 discountAmount = couponResult.discountAmount;
-                finalTotal = couponResult.finalPrice;
+                finalTotal = couponResult.finalPrice + shippingCost;
               } else {
                 newAppliedCoupon = null;
               }
@@ -227,6 +235,7 @@ export const useCart = create<CartState>()(
               totalPrice: subtotal,
               totalItems,
               subtotal,
+              shippingCost,
               discountAmount,
               finalTotal,
               appliedCoupon: newAppliedCoupon,
@@ -239,6 +248,7 @@ export const useCart = create<CartState>()(
           totalItems: 0,
           appliedCoupon: null,
           subtotal: 0,
+          shippingCost: 0,
           discountAmount: 0,
           finalTotal: 0,
         }),
@@ -273,7 +283,7 @@ export const useCart = create<CartState>()(
             set({
               appliedCoupon: couponResult,
               discountAmount: couponResult.discountAmount,
-              finalTotal: couponResult.finalPrice,
+              finalTotal: couponResult.finalPrice + state.shippingCost,
             });
             
             console.log('✅ DEBUG useCart: Cupom aplicado com sucesso!');
@@ -289,7 +299,7 @@ export const useCart = create<CartState>()(
           set({
             appliedCoupon: null,
             discountAmount: 0,
-            finalTotal: state.subtotal,
+            finalTotal: state.subtotal + state.shippingCost,
           });
         },
       }),
@@ -301,14 +311,16 @@ export const useCart = create<CartState>()(
           totalItems: state.totalItems || 0,
           appliedCoupon: state.appliedCoupon,
           subtotal: state.subtotal || 0,
+          shippingCost: state.shippingCost || 0,
           discountAmount: state.discountAmount || 0,
           finalTotal: state.finalTotal || 0,
         }),
-        version: 9, // Incrementei a versão para incluir cupons
+        version: 10, // Incrementei a versão para incluir frete
         merge: (persistedState, currentState) => {
           if (persistedState && typeof persistedState === 'object' && 'cartItems' in persistedState) {
             const cartItems = Array.isArray(persistedState.cartItems) ? persistedState.cartItems : [];
             const subtotal = calculateCartTotal(cartItems);
+            const shippingCost = calculateCartShipping(cartItems);
             
             return {
               ...currentState,
@@ -316,9 +328,10 @@ export const useCart = create<CartState>()(
               totalPrice: subtotal,
               totalItems: calculateTotalItems(cartItems),
               subtotal,
+              shippingCost,
               appliedCoupon: (persistedState as any).appliedCoupon || null,
               discountAmount: (persistedState as any).discountAmount || 0,
-              finalTotal: (persistedState as any).finalTotal || subtotal,
+              finalTotal: (persistedState as any).finalTotal || (subtotal + shippingCost),
             };
           }
           return currentState;

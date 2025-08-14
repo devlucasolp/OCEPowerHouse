@@ -13,7 +13,12 @@ const SideCart = () => {
     removeFromCart, 
     updateQuantity,
     totalPrice, 
-    totalItems 
+    totalItems,
+    subtotal,
+    shippingCost,
+    discountAmount,
+    finalTotal,
+    appliedCoupon
   } = useCart();
   const router = useRouter();
 
@@ -139,13 +144,21 @@ const SideCart = () => {
               {/* Subtotal */}
               <div className="flex items-center justify-between text-sm text-gray-600">
                 <span>Subtotal ({totalItems} {totalItems === 1 ? 'item' : 'itens'})</span>
-                <span className="font-medium">R$ {totalPrice.toFixed(2)}</span>
+                <span className="font-medium">R$ {subtotal.toFixed(2)}</span>
               </div>
+              
+              {/* Desconto aplicado */}
+              {appliedCoupon && discountAmount > 0 && (
+                <div className="flex items-center justify-between text-sm text-gray-600">
+                  <span>Desconto ({appliedCoupon.coupon.code})</span>
+                  <span className="font-medium text-green-600">-R$ {discountAmount.toFixed(2)}</span>
+                </div>
+              )}
               
               {/* Frete */}
               <div className="flex items-center justify-between text-sm text-gray-600">
                 <span>Frete</span>
-                <span className="font-medium text-green-600">Grátis</span>
+                <span className="font-medium">R$ {shippingCost.toFixed(2)}</span>
               </div>
             </div>
             
@@ -153,7 +166,7 @@ const SideCart = () => {
             <div className="flex items-center justify-between mb-4 pt-2 border-t">
               <span className="text-lg font-semibold text-gray-900">Total:</span>
               <span className="text-2xl font-bold text-green-600">
-                R$ {totalPrice.toFixed(2)}
+                R$ {finalTotal.toFixed(2)}
               </span>
             </div>
             
@@ -161,7 +174,7 @@ const SideCart = () => {
               onClick={handleCheckout}
               className="w-full py-3 text-lg font-semibold"
             >
-              Finalizar Compra ({totalItems} {totalItems === 1 ? 'item' : 'itens'})
+              Finalizar Compra - R$ {finalTotal.toFixed(2)}
             </ButtonPrimary>
           </div>
         )}

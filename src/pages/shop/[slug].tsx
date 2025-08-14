@@ -3,7 +3,7 @@ import Image from 'next/image';
 import { getAllProducts, getProductBySlug } from '../../lib/sanity';
 import { urlFor } from '../../lib/sanityImage';
 import { getDescriptionText, getTruncatedDescription } from '../../lib/textUtils';
-import { getProductImageUrl } from '../../lib/productUtils';
+import { getProductImageUrl, getShippingCost } from '../../lib/productUtils';
 import { useCart } from '../../lib/useCart';
 import Seo from '../../components/Seo';
 import ButtonPrimary from '../../components/ButtonPrimary';
@@ -46,6 +46,7 @@ const ProductPage = ({ product, related }: ProductPageProps) => {
   const basePrice = Number(product.price) || 0;
   const priceModifier = selectedVariant?.priceModifier ? Number(selectedVariant.priceModifier) : 0;
   const finalPrice = basePrice + priceModifier;
+  const shippingCost = getShippingCost(product);
 
   // Placeholder SVG como data URI
   const placeholderImage = "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='800' height='600' viewBox='0 0 800 600'%3E%3Crect width='800' height='600' fill='%23f3f4f6'/%3E%3Ctext x='50%25' y='50%25' dominant-baseline='middle' text-anchor='middle' font-family='Arial, sans-serif' font-size='24' fill='%236b7280'%3EProduto%3C/text%3E%3C/svg%3E";
@@ -183,7 +184,11 @@ const ProductPage = ({ product, related }: ProductPageProps) => {
             </div>
           )}
 
-          <span className="text-2xl text-green-600 font-semibold">R$ {finalPrice.toFixed(2)}</span>
+          {/* Preços */}
+          <div className="space-y-1">
+            <span className="text-2xl text-green-600 font-semibold block">R$ {finalPrice.toFixed(2)}</span>
+            <span className="text-sm text-gray-500">+ frete R$ {shippingCost.toFixed(2)}</span>
+          </div>
           {descriptionText && <p className="text-neutral-700 text-lg leading-relaxed">{descriptionText}</p>}
 
           <ButtonPrimary

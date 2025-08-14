@@ -8,7 +8,7 @@ const membros = [
   {
     nome: 'Hugo Prado Neto',
     cargo: 'Fundador & Coach World Class',
-    foto: '/img/team/hugo.jpeg',
+    foto: '/img/team/hugo.JPEG',
   },
   {
     nome: 'João Paulo Calado',

@@ -8,6 +8,13 @@ export default {
     { name: 'image', title: 'Imagem', type: 'image', options: { hotspot: true } },
     { name: 'price', title: 'Preço', type: 'number' },
     { 
+      name: 'shippingCost', 
+      title: 'Frete', 
+      type: 'number', 
+      initialValue: 30.00,
+      description: 'Valor do frete em reais (padrão: R$ 25,00)'
+    },
+    { 
       name: 'category', 
       title: 'Categoria', 
       type: 'string',
@@ -102,14 +109,16 @@ export default {
     select: {
       title: 'title',
       price: 'price',
+      shippingCost: 'shippingCost',
       media: 'image',
       inStock: 'inStock'
     },
     prepare(selection: any) {
-      const { title, price, inStock } = selection;
+      const { title, price, shippingCost, inStock } = selection;
+      const shipping = shippingCost || 25.00;
       return {
         title: title,
-        subtitle: `R$ ${price ? price.toFixed(2) : '0,00'} ${inStock === false ? '(Fora de estoque)' : ''}`
+        subtitle: `R$ ${price ? price.toFixed(2) : '0,00'} + frete R$ ${shipping.toFixed(2)} ${inStock === false ? '(Fora de estoque)' : ''}`
       };
     }
   }

@@ -8,6 +8,7 @@ import { motion } from 'framer-motion';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
 import SideCart from '../components/SideCart';
+import BookSection from '../components/BookSection';
 
 const cardVariants = {
   initial: { opacity: 0, y: 24 },
@@ -177,7 +178,7 @@ const Home: NextPage = () => {
 
         {/* Benefícios/Diferenciais */}
         <motion.section
-          className="py-24 px-6 bg-gray-50"
+          className="pt-24 px-6 bg-gray-50"
           variants={sectionFade}
           initial="initial"
           whileInView="animate"
@@ -248,6 +249,9 @@ const Home: NextPage = () => {
             </motion.div>
           </div>
         </motion.section>
+
+        {/* Seção do Livro */}
+        <BookSection />
 
         {/* História - Redesigned */}
         <motion.section

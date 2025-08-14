@@ -16,6 +16,7 @@ const CheckoutPage: NextPage = () => {
     clearCart, 
     totalItems,
     subtotal,
+    shippingCost,
     appliedCoupon,
     discountAmount,
     finalTotal
@@ -32,10 +33,11 @@ const CheckoutPage: NextPage = () => {
     try {
       console.log('🚀 Iniciando checkout com', cartItems.length, 'itens');
       
-      // Preparar dados para envio (usar finalTotal se houver cupom aplicado)
+      // Preparar dados para envio (inclui frete)
       const checkoutData = {
         items: cartItems,
         subtotal,
+        shippingCost,
         appliedCoupon: appliedCoupon ? {
           code: appliedCoupon.coupon.code,
           discountAmount: appliedCoupon.discountAmount
@@ -164,7 +166,7 @@ const CheckoutPage: NextPage = () => {
                 {/* Frete */}
                 <div className="flex items-center justify-between text-sm">
                   <span className="text-gray-600">Frete</span>
-                  <span className="font-medium text-green-600">Grátis</span>
+                  <span className="font-medium">R$ {shippingCost.toFixed(2)}</span>
                 </div>
                 
                 <hr className="my-3" />

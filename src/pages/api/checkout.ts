@@ -6,10 +6,10 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
   }
 
   try {
-    const { items, subtotal, appliedCoupon, total } = req.body;
+    const { items, subtotal, shippingCost, appliedCoupon, total } = req.body;
     
     console.log('🚀 API Checkout - Iniciado com', items?.length, 'itens');
-    console.log('💰 Valores recebidos:', { subtotal, appliedCoupon, total });
+    console.log('💰 Valores recebidos:', { subtotal, shippingCost, appliedCoupon, total });
 
     // Validações básicas
     if (!items || !Array.isArray(items)) {
@@ -126,6 +126,26 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
       return formattedItem;
     });
 
+    // Adicionar item de frete se há frete configurado
+    const finalShippingCost = shippingCost || 25.00;
+    if (finalShippingCost > 0) {
+      mercadoPagoItems.push({
+        id: 'shipping',
+        title: 'Frete',
+        description: 'Taxa de entrega',
+        picture_url: undefined,
+        category_id: 'shipping',
+        quantity: 1,
+        currency_id: 'BRL' as const,
+        unit_price: parseFloat(finalShippingCost.toFixed(2))
+      });
+      
+      console.log('📦 Item de frete adicionado:', {
+        id: 'shipping',
+        price: finalShippingCost.toFixed(2)
+      });
+    }
+
     // Gera referência externa
     const externalReference = `powerhouse_${Date.now()}_${Math.random().toString(36).substr(2, 9)}`;
     
@@ -141,7 +161,8 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
     
     console.log('💰 Totais calculados:', {
       originalSubtotal: subtotal || 0,
-      itemsTotalWithDiscount: itemsTotal.toFixed(2),
+      shippingCost: finalShippingCost.toFixed(2),
+      itemsTotalWithShipping: itemsTotal.toFixed(2),
       finalTotalSent: finalTotal.toFixed(2),
       hasCouponDiscount: appliedCoupon && appliedCoupon.discountAmount > 0,
       couponCode: appliedCoupon?.code || 'nenhum',
@@ -178,7 +199,8 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
         external_reference: externalReference,
         coupon_applied: appliedCoupon ? appliedCoupon.code : null,
         discount_amount: appliedCoupon ? appliedCoupon.discountAmount : 0,
-        original_total: subtotal || itemsTotal,
+        shipping_cost: finalShippingCost,
+        original_total: subtotal || (itemsTotal - finalShippingCost),
         final_total: finalTotal
       }
     };

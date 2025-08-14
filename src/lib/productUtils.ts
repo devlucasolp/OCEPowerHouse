@@ -13,6 +13,7 @@ export const normalizeProduct = (product: any): Product => {
     slug: product.slug || { current: product.slug?.current || 'produto' },
     image: product.image,
     price: Number(product.price) || 0,
+    shippingCost: Number(product.shippingCost) || 25.00, // Valor padrão do frete
     category: product.category || 'Geral',
     description: product.description || 'Produto PowerHouse',
     featured: Boolean(product.featured),
@@ -47,6 +48,22 @@ export const validateProductForCheckout = (product: Product): boolean => {
     product.price &&
     product.price > 0
   );
+};
+
+/**
+ * Obtém o valor do frete de um produto (padrão R$ 25,00)
+ */
+export const getShippingCost = (product: Product): number => {
+  return product.shippingCost || 30.00;
+};
+
+/**
+ * Calcula o frete total do carrinho
+ * Como temos frete fixo, retorna sempre R$ 25,00 independente da quantidade
+ */
+export const calculateCartShipping = (products: Product[]): number => {
+  // Frete fixo: se há produtos no carrinho, cobra o frete padrão
+  return products.length > 0 ? 30.00 : 0;
 };
 
 /**
