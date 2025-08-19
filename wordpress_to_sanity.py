@@ -45,6 +45,8 @@ class WordPressToSanity:
             'equipamento': 'equipamento',
             'bolsas': 'bolsas',
             'mochilas': 'bolsas',
+            'livro': 'livro',
+            'livros': 'livro',
         }
     
     def clean_html(self, text):
@@ -388,4 +390,4 @@ def main():
         logger.exception("Erro detalhado:")
 
 if __name__ == "__main__":
-    main() 
+    main()

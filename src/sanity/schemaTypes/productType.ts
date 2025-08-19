@@ -24,7 +24,8 @@ export default {
           { title: 'Suplemento', value: 'suplementos' },
           { title: 'Equipamento', value: 'equipamento' },
           { title: 'Bolsas', value: 'bolsas' },
-          { title: 'Bikes', value: 'bikes' }
+          { title: 'Bikes', value: 'bikes' },
+          { title: 'Livro', value: 'livro' }
         ]
       },
       validation: (Rule: any) => Rule.required()

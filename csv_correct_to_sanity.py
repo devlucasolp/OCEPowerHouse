@@ -26,7 +26,8 @@ class CorrectCSVToSanity:
             'bolsas': 'bolsas',
             'óculos': 'equipamento',
             'pneus': 'bikes',
-            'acessórios': 'equipamento'
+            'acessórios': 'equipamento',
+            'livro': 'livro'
         }
         
         self.products = []
@@ -278,4 +279,4 @@ def main():
         print(f'\n❌ Erro durante a conversão: {e}')
 
 if __name__ == "__main__":
-    main() 
+    main()

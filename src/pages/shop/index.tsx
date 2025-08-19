@@ -7,7 +7,7 @@ import { GetServerSideProps } from 'next';
 import { getAllProducts, getAllProductsAlternative } from '../../lib/sanity';
 import { urlFor } from '../../lib/sanityImage';
 import { useRouter } from 'next/router';
-import { Search, X } from 'lucide-react';
+import { Search, X, ArrowUpDown } from 'lucide-react';
 
 import type { Product } from '../../types/product';
 
@@ -19,6 +19,7 @@ const ShopIndex = ({ products }: ShopIndexProps) => {
   const router = useRouter();
   const [selectedCategory, setSelectedCategory] = React.useState<string | null>(null);
   const [searchTerm, setSearchTerm] = React.useState<string>('');
+  const [sortBy, setSortBy] = React.useState<string>('default');
 
   // Inicializar busca a partir da URL
   React.useEffect(() => {
@@ -36,6 +37,21 @@ const ShopIndex = ({ products }: ShopIndexProps) => {
       'equipamento',
       'bolsas',
       'bikes',
+      'livro',
+    ],
+    []
+  );
+
+  // Opções de ordenação
+  const sortOptions = React.useMemo(
+    () => [
+      { value: 'default', label: 'Padrão' },
+      { value: 'price-asc', label: 'Preço: Menor para Maior' },
+      { value: 'price-desc', label: 'Preço: Maior para Menor' },
+      { value: 'name-asc', label: 'Nome: A-Z' },
+      { value: 'name-desc', label: 'Nome: Z-A' },
+      { value: 'featured', label: 'Produtos em Destaque' },
+      { value: 'in-stock', label: 'Disponíveis Primeiro' },
     ],
     []
   );
@@ -55,6 +71,7 @@ const ShopIndex = ({ products }: ShopIndexProps) => {
       equipamento: 'equipamento',
       bolsas: 'bolsas',
       bikes: 'bikes',
+      livro: 'livro',
       
       // Mapeamento de categorias legadas (para compatibilidade)
       acessorios: 'equipamento',
@@ -74,7 +91,7 @@ const ShopIndex = ({ products }: ShopIndexProps) => {
     return map[base] || base;
   };
 
-  // Filtra produtos por categoria e busca
+  // Filtra e ordena produtos por categoria, busca e ordenação
   const filteredProducts = React.useMemo(() => {
     let filtered = products;
 
@@ -95,8 +112,37 @@ const ShopIndex = ({ products }: ShopIndexProps) => {
       );
     }
 
-    return filtered;
-  }, [products, selectedCategory, searchTerm]);
+    // Ordenar produtos
+    const sorted = [...filtered].sort((a, b) => {
+      switch (sortBy) {
+        case 'price-asc':
+          return a.price - b.price;
+        case 'price-desc':
+          return b.price - a.price;
+        case 'name-asc':
+          return a.title.localeCompare(b.title, 'pt-BR');
+        case 'name-desc':
+          return b.title.localeCompare(a.title, 'pt-BR');
+        case 'featured':
+          // Produtos em destaque primeiro, depois por nome
+          if (a.featured && !b.featured) return -1;
+          if (!a.featured && b.featured) return 1;
+          return a.title.localeCompare(b.title, 'pt-BR');
+        case 'in-stock':
+          // Produtos em estoque primeiro, depois por nome
+          if (a.inStock && !b.inStock) return -1;
+          if (!a.inStock && b.inStock) return 1;
+          return a.title.localeCompare(b.title, 'pt-BR');
+        default:
+          // Ordem padrão: produtos em destaque primeiro, depois por nome
+          if (a.featured && !b.featured) return -1;
+          if (!a.featured && b.featured) return 1;
+          return a.title.localeCompare(b.title, 'pt-BR');
+      }
+    });
+
+    return sorted;
+  }, [products, selectedCategory, searchTerm, sortBy]);
 
   // Função para limpar busca
   const clearSearch = () => {
@@ -109,15 +155,21 @@ const ShopIndex = ({ products }: ShopIndexProps) => {
     setSelectedCategory(null);
   };
 
+  // Função para limpar ordenação
+  const clearSort = () => {
+    setSortBy('default');
+  };
+
   return (
     <>
       <Seo title="Produtos - Power House Brasil" description="Vitrine de produtos para ciclismo urbano." />
       <div className="max-w-6xl mx-auto px-4 py-8 pt-20">
         <h1 className="text-3xl font-bold mb-8 text-black-900 font-roboto">Produtos</h1>
         
-        {/* Barra de busca */}
-        <div className="mb-6">
-          <div className="relative max-w-md">
+        {/* Barra de busca e ordenação */}
+        <div className="mb-6 flex flex-col sm:flex-row gap-4">
+          {/* Barra de busca */}
+          <div className="relative flex-1 max-w-md">
             <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 w-5 h-5" />
             <input
               type="text"
@@ -136,10 +188,33 @@ const ShopIndex = ({ products }: ShopIndexProps) => {
               </button>
             )}
           </div>
+          
+          {/* Dropdown de ordenação */}
+          <div className="relative min-w-[200px]">
+            <ArrowUpDown className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 w-5 h-5" />
+            <select
+              value={sortBy}
+              onChange={(e) => setSortBy(e.target.value)}
+              className="w-full pl-10 pr-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-yellow-400 focus:border-transparent text-gray-800 bg-white appearance-none cursor-pointer"
+              aria-label="Ordenar produtos"
+            >
+              {sortOptions.map((option) => (
+                <option key={option.value} value={option.value}>
+                  {option.label}
+                </option>
+              ))}
+            </select>
+            {/* Seta customizada para o select */}
+            <div className="absolute right-3 top-1/2 transform -translate-y-1/2 pointer-events-none">
+              <svg className="w-4 h-4 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+              </svg>
+            </div>
+          </div>
         </div>
 
         {/* Filtros ativos */}
-        {(selectedCategory || searchTerm) && (
+        {(selectedCategory || searchTerm || sortBy !== 'default') && (
           <div className="mb-6 flex flex-wrap gap-2">
             {searchTerm && (
               <div className="flex items-center bg-yellow-100 text-yellow-800 px-3 py-1 rounded-full text-sm">
@@ -166,10 +241,24 @@ const ShopIndex = ({ products }: ShopIndexProps) => {
                 </button>
               </div>
             )}
+            {sortBy !== 'default' && (
+              <div className="flex items-center bg-green-100 text-green-800 px-3 py-1 rounded-full text-sm">
+                <ArrowUpDown className="w-4 h-4 mr-1" />
+                Ordenação: {sortOptions.find(opt => opt.value === sortBy)?.label}
+                <button
+                  onClick={clearSort}
+                  className="ml-2 hover:text-green-900 transition-colors"
+                  aria-label="Remover filtro de ordenação"
+                >
+                  <X className="w-3 h-3" />
+                </button>
+              </div>
+            )}
             <button
               onClick={() => {
                 clearSearch();
                 clearCategory();
+                clearSort();
               }}
               className="text-gray-600 hover:text-gray-800 text-sm underline transition-colors"
             >

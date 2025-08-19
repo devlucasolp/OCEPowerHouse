@@ -8,7 +8,8 @@ const categoryMapping = {
   'suplementos': 'Suplemento',
   'equipamento': 'Equipamento',
   'bolsas': 'Bolsas',
-  'bikes': 'Bikes'
+  'bikes': 'Bikes',
+  'livro': 'Livro'
 };
 
 type SidebarFilterProps = {
@@ -28,7 +29,7 @@ const SidebarFilter: React.FC<SidebarFilterProps> = ({
   };
 
   return (
-    <aside className="w-full md:w-64 md:sticky md:top-20 z-30">
+    <aside className="w-full md:w-64 md:sticky md:top-20 md:self-start z-30 md:max-h-[calc(100vh-5rem)] md:overflow-y-auto">
       {/* Mobile: Disclosure */}
       <div className="block md:hidden mb-4">
         <Disclosure>

@@ -53,7 +53,9 @@ class WordPressHTMLExtractor:
             'oculos-scicon': 'equipamento',
             'mala-bike-scicon': 'bolsas',
             'luvas-supacaz': 'vestuario',
-            'scicon-gravtah': 'equipamento'
+            'scicon-gravtah': 'equipamento',
+            'livro': 'livro',
+            'livros': 'livro'
         }
         
         # Produtos do CSV para referência
@@ -540,4 +542,4 @@ def main():
         print(f"\n❌ Erro durante o processamento: {e}")
 
 if __name__ == "__main__":
-    main() 
+    main()
