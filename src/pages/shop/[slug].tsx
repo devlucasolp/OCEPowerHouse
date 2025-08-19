@@ -1,7 +1,7 @@
 import { GetStaticPaths, GetStaticProps } from 'next';
 import Image from 'next/image';
 import { getAllProducts, getProductBySlug } from '../../lib/sanity';
-import { urlFor } from '../../lib/sanityImage';
+import { urlFor, getImageUrl } from '../../lib/sanityImage';
 import { getDescriptionText, getTruncatedDescription } from '../../lib/textUtils';
 import { getProductImageUrl, getShippingCost } from '../../lib/productUtils';
 import { useCart } from '../../lib/useCart';
@@ -69,7 +69,7 @@ const ProductPage = ({ product, related }: ProductPageProps) => {
 
   const placeholderImage = '/img/static/placeholder.svg';
   const currentImage = allImages[selectedImageIndex] || selectedVariant?.image || product.image;
-  const displayImageUrl = getProductImageUrl(currentImage, placeholderImage);
+  const displayImageUrl = getImageUrl(currentImage) || placeholderImage;
 
   // Reset selectedImageIndex quando trocar de variante
   const resetImageIndex = () => {
@@ -168,7 +168,7 @@ const ProductPage = ({ product, related }: ProductPageProps) => {
           <div className="flex justify-center">
             <div className="flex gap-2 overflow-x-auto max-w-md">
               {allImages.map((image, index) => {
-                const thumbnailUrl = getProductImageUrl(image, placeholderImage);
+                const thumbnailUrl = getImageUrl(image) || placeholderImage;
                 const isSelected = index === selectedImageIndex;
                 
                 return (

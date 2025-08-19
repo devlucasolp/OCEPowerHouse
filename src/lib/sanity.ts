@@ -210,6 +210,7 @@ export const getProductBySlug = async (slug: string) => {
         description,
         featured,
         inStock,
+        stockQuantity,
         isOnSale,
         originalPrice,
         salePrice,
