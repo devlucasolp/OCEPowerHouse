@@ -234,6 +234,16 @@ const ProductPage = ({ product, related }: ProductPageProps) => {
             <span className="text-2xl text-green-600 font-semibold block">R$ {finalPrice.toFixed(2)}</span>
             <span className="text-sm text-gray-500">+ frete R$ {shippingCost.toFixed(2)}</span>
           </div>
+
+          {/* Quantidade em estoque */}
+          {typeof product.stockQuantity === 'number' && (
+            <div className="text-sm text-gray-600">
+              <span className="font-medium">Quantidade em estoque: </span>
+              <span className={product.stockQuantity > 0 ? 'text-green-600' : 'text-red-600'}>
+                {product.stockQuantity}
+              </span>
+            </div>
+          )}
           {descriptionText && <p className="text-neutral-700 text-lg leading-relaxed">{descriptionText}</p>}
 
           <ButtonPrimary

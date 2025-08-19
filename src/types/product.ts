@@ -28,6 +28,7 @@ export interface Product {
   description: string | any;
   featured?: boolean;
   inStock?: boolean;
+  stockQuantity?: number; // Quantidade disponível em estoque
   variants?: ProductVariant[];
   applicableCoupons?: Coupon[]; // Cupons que podem ser aplicados a este produto
   shippingDimensions?: ShippingDimensions; // Dimensões para cálculo de frete via Melhor Envio

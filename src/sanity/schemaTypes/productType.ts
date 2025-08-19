@@ -150,6 +150,14 @@ export default {
       description: 'Indicar se o produto está disponível para compra',
       initialValue: true
     },
+    { 
+      name: 'stockQuantity', 
+      title: 'Quantidade em Estoque', 
+      type: 'number',
+      description: 'Quantidade disponível em estoque',
+      initialValue: 0,
+      validation: (Rule: any) => Rule.min(0).error('Quantidade em estoque não pode ser negativa')
+    },
     {
       name: 'variants',
       title: 'Variantes do Produto',
