@@ -1,4 +1,4 @@
-import { Html, Head, Main, NextScript } from 'next/document'
+import { Html, Head, Main, NextScript } from 'next/document';
 
 export default function Document() {
   return (
@@ -7,11 +7,12 @@ export default function Document() {
         <meta charSet="utf-8" />
         <meta name="theme-color" content="#facc15" />
         <link rel="icon" href="/favicon.ico" />
+
       </Head>
       <body>
         <Main />
         <NextScript />
       </body>
     </Html>
-  )
-} 
+  );
+}

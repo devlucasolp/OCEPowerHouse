@@ -1,10 +1,17 @@
 import type { AppProps } from 'next/app';
 import { useRouter } from 'next/router';
+import { useEffect } from 'react';
 import PageLayout from '../components/PageLayout';
+import { initRecaptchaFix } from '@/utils/recaptchaFix';
 import '../styles/globals.css';
 
 const MyApp = ({ Component, pageProps }: AppProps) => {
   const router = useRouter();
+  
+  useEffect(() => {
+    // Inicializa o sistema de correção do reCAPTCHA
+    initRecaptchaFix();
+  }, []);
   
   // A página inicial tem sua própria estrutura
   if (router.pathname === '/') {
@@ -19,4 +26,4 @@ const MyApp = ({ Component, pageProps }: AppProps) => {
   );
 };
 
-export default MyApp; 
+export default MyApp;
