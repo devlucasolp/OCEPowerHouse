@@ -4,6 +4,7 @@ export interface ProductVariant {
   _key?: string;
   name?: string;
   image?: any;
+  additionalImages?: any[]; // Imagens adicionais do produto
   priceModifier?: number;
   inStock?: boolean;
 }
@@ -30,4 +31,10 @@ export interface Product {
   variants?: ProductVariant[];
   applicableCoupons?: Coupon[]; // Cupons que podem ser aplicados a este produto
   shippingDimensions?: ShippingDimensions; // Dimensões para cálculo de frete via Melhor Envio
+  
+  // Campos de promoção
+  isOnSale?: boolean; // Se o produto está em promoção
+  originalPrice?: number; // Preço original (usado quando em promoção)
+  salePrice?: number; // Preço promocional
+  saleEndDate?: string; // Data de fim da promoção
 }

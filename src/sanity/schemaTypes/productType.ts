@@ -6,7 +6,58 @@ export default {
     { name: 'title', title: 'Título', type: 'string' },
     { name: 'slug', title: 'Slug', type: 'slug', options: { source: 'title', maxLength: 96 } },
     { name: 'image', title: 'Imagem', type: 'image', options: { hotspot: true } },
+    {
+      name: 'additionalImages',
+      title: 'Imagens Adicionais',
+      type: 'array',
+      description: 'Imagens extras do produto que aparecerão como miniaturas clicáveis',
+      of: [{
+        type: 'image',
+        options: { hotspot: true }
+      }],
+      validation: (Rule: any) => Rule.max(6).warning('Recomendamos no máximo 6 imagens adicionais')
+    },
     { name: 'price', title: 'Preço', type: 'number' },
+    
+    // CAMPOS DE PROMOÇÃO
+    { 
+      name: 'isOnSale', 
+      title: 'Em Promoção', 
+      type: 'boolean',
+      description: 'Marcar se este produto está em promoção',
+      initialValue: false
+    },
+    { 
+      name: 'originalPrice', 
+      title: 'Preço Original', 
+      type: 'number',
+      description: 'Preço original do produto (usado quando em promoção)',
+      hidden: ({ document }: any) => !document?.isOnSale
+    },
+    { 
+      name: 'salePrice', 
+      title: 'Preço Promocional', 
+      type: 'number',
+      description: 'Preço com desconto aplicado',
+      hidden: ({ document }: any) => !document?.isOnSale,
+      validation: (Rule: any) => Rule.custom((salePrice: number, context: any) => {
+        const { document } = context;
+        if (document?.isOnSale && !salePrice) {
+          return 'Preço promocional é obrigatório quando o produto está em promoção';
+        }
+        if (document?.isOnSale && document?.originalPrice && salePrice >= document.originalPrice) {
+          return 'Preço promocional deve ser menor que o preço original';
+        }
+        return true;
+      })
+    },
+    { 
+      name: 'saleEndDate', 
+      title: 'Data de Fim da Promoção', 
+      type: 'datetime',
+      description: 'Data e hora em que a promoção expira (opcional)',
+      hidden: ({ document }: any) => !document?.isOnSale
+    },
     { 
       name: 'shippingCost', 
       title: 'Frete', 

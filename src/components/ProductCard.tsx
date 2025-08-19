@@ -1,6 +1,6 @@
 import Link from 'next/link';
 import Image from 'next/image';
-import { ShoppingCart } from 'lucide-react';
+import { ShoppingCart, Star } from 'lucide-react';
 import { getDescriptionText } from '../lib/textUtils';
 import { useCart } from '../lib/useCart';
 import { getShippingCost } from '../lib/productUtils';
@@ -16,11 +16,22 @@ interface ProductCardProps {
   product?: Product; // Produto completo para adicionar ao carrinho
 }
 
+// Função para verificar se a promoção ainda é válida
+const isPromotionValid = (saleEndDate?: string): boolean => {
+  if (!saleEndDate) return true; // Se não há data de fim, a promoção é válida
+  return new Date(saleEndDate) > new Date();
+};
+
 const ProductCard = ({ title, image, price, slug, description, product }: ProductCardProps) => {
   const descriptionText = getDescriptionText(description);
   const { addToCart } = useCart();
   const [added, setAdded] = useState(false);
   const shippingCost = product ? getShippingCost(product) : 25.00;
+  
+  // Lógica de promoção
+  const isOnSale = product?.isOnSale && isPromotionValid(product?.saleEndDate);
+  const displayPrice = isOnSale ? product?.salePrice || price : price;
+  const originalPrice = isOnSale ? (product?.originalPrice || price) : null;
 
   const handleAddToCart = (e: React.MouseEvent) => {
     e.preventDefault(); // Impede a navegação do Link
@@ -44,6 +55,13 @@ const ProductCard = ({ title, image, price, slug, description, product }: Produc
           sizes="(max-width: 768px) 100vw, 33vw"
           priority={false}
         />
+        {/* Indicador de promoção */}
+        {isOnSale && (
+          <div className="absolute top-2 right-2 bg-red-500 text-white px-2 py-1 rounded-full flex items-center gap-1 text-xs font-semibold shadow-lg">
+            <Star className="w-3 h-3 fill-current" />
+            PROMOÇÃO
+          </div>
+        )}
       </div>
       <div className="p-5 flex-1 flex flex-col">
         <h3 className="font-semibold text-lg mb-2 line-clamp-2">{title}</h3>
@@ -56,7 +74,28 @@ const ProductCard = ({ title, image, price, slug, description, product }: Produc
         
         {/* Preços */}
         <div className="mt-auto mb-4">
-          <span className="text-xl font-bold text-green-500 block">R$ {price.toFixed(2)}</span>
+          {isOnSale ? (
+            <div className="space-y-1">
+              {/* Preço original riscado */}
+              <span className="text-sm text-gray-400 line-through block">
+                De: R$ {originalPrice?.toFixed(2)}
+              </span>
+              {/* Preço promocional */}
+              <span className="text-xl font-bold text-red-500 block">
+                Por: R$ {displayPrice?.toFixed(2)}
+              </span>
+              {/* Economia */}
+              {originalPrice && displayPrice && (
+                <span className="text-xs text-green-600 font-semibold block">
+                  Economize R$ {(originalPrice - displayPrice).toFixed(2)}
+                </span>
+              )}
+            </div>
+          ) : (
+            <span className="text-xl font-bold text-green-500 block">
+              R$ {displayPrice?.toFixed(2)}
+            </span>
+          )}
           <span className="text-sm text-gray-500">+ frete R$ {shippingCost.toFixed(2)}</span>
         </div>
         
@@ -94,4 +133,4 @@ const ProductCard = ({ title, image, price, slug, description, product }: Produc
   );
 };
 
-export default ProductCard; 
+export default ProductCard;

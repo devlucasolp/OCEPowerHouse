@@ -136,10 +136,10 @@ const BookSection = () => {
                 transition={{ delay: 0.7 }}
               >
                 <div className="flex items-baseline space-x-4">
-                  <span className="text-3xl font-bold text-green-600">R$ 89,90</span>
+                  <span className="text-3xl font-bold text-green-600">R$ 80,00</span>
                   <span className="text-lg text-gray-500 line-through">R$ 149,90</span>
                   <span className="bg-yellow-600 text-white text-xs px-2 py-1 rounded-full font-medium">
-                    40% OFF
+                    47% OFF
                   </span>
                 </div>
                 

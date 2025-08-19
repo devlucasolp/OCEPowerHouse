@@ -20,6 +20,7 @@ interface ProductPageProps {
 const ProductPage = ({ product, related }: ProductPageProps) => {
   const { addToCart } = useCart();
   const [added, setAdded] = useState(false);
+  const [selectedImageIndex, setSelectedImageIndex] = useState(0);
 
   const hasVariants = Array.isArray(product.variants) && product.variants.length > 0;
 
@@ -37,6 +38,24 @@ const ProductPage = ({ product, related }: ProductPageProps) => {
     return product.variants!.find((v) => v._key === selectedVariantKey);
   }, [hasVariants, product.variants, selectedVariantKey]);
 
+  // Array com todas as imagens disponíveis (principal + adicionais)
+  const allImages = useMemo(() => {
+    const images = [];
+    
+    // Imagem principal (da variante selecionada ou do produto)
+    const mainImage = selectedVariant?.image || product.image;
+    if (mainImage) {
+      images.push(mainImage);
+    }
+    
+    // Imagens adicionais do produto
+    if (product.additionalImages && Array.isArray(product.additionalImages)) {
+      images.push(...product.additionalImages);
+    }
+    
+    return images;
+  }, [product.image, product.additionalImages, selectedVariant?.image]);
+
   if (!product) return <div className="text-center py-16">Produto não encontrado.</div>;
 
   const descriptionText = getDescriptionText(product.description);
@@ -48,29 +67,21 @@ const ProductPage = ({ product, related }: ProductPageProps) => {
   const finalPrice = basePrice + priceModifier;
   const shippingCost = getShippingCost(product);
 
-  // Placeholder SVG como data URI
-  const placeholderImage = "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='800' height='600' viewBox='0 0 800 600'%3E%3Crect width='800' height='600' fill='%23f3f4f6'/%3E%3Ctext x='50%25' y='50%25' dominant-baseline='middle' text-anchor='middle' font-family='Arial, sans-serif' font-size='24' fill='%236b7280'%3EProduto%3C/text%3E%3C/svg%3E";
+  const placeholderImage = '/img/static/placeholder.svg';
+  const currentImage = allImages[selectedImageIndex] || selectedVariant?.image || product.image;
+  const displayImageUrl = getProductImageUrl(currentImage, placeholderImage);
 
-  // Escolher imagem de exibição: variante selecionada > imagem do produto
-  let displayImageUrl = '';
+  // Reset selectedImageIndex quando trocar de variante
+  const resetImageIndex = () => {
+    if (selectedImageIndex >= allImages.length) {
+      setSelectedImageIndex(0);
+    }
+  };
   
-  try {
-    if (selectedVariant?.image) {
-      displayImageUrl = getProductImageUrl({ ...product, image: selectedVariant.image } as Product, 800, 600) || '';
-    } else {
-      displayImageUrl = getProductImageUrl(product, 800, 600) || '';
-    }
-    
-    // Se ainda não temos URL, usar placeholder
-    if (!displayImageUrl) {
-      displayImageUrl = placeholderImage;
-    }
-    
-    console.log('🖼️ URL da imagem final:', displayImageUrl);
-  } catch (error) {
-    console.error('Erro ao processar imagem:', error);
-    displayImageUrl = placeholderImage;
-  }
+  // Efeito para resetar índice quando mudar variante
+  useMemo(() => {
+    resetImageIndex();
+  }, [selectedVariantKey, allImages.length]);
 
   const handleAddToCart = () => {
     // Monta um produto com identificação única por variante para o carrinho
@@ -94,40 +105,42 @@ const ProductPage = ({ product, related }: ProductPageProps) => {
     <>
       <Seo title={product.title} description={description} image={displayImageUrl} url={url} />
       <div className="max-w-5xl mx-auto px-4 py-10 grid grid-cols-1 md:grid-cols-2 gap-12 items-start">
-        {/* Imagem do produto (ou da variante selecionada) */}
-        <div className="w-full flex justify-center">
-          <div className="absolute w-full aspect-square max-w-md rounded-xl overflow-hidden">
-            {displayImageUrl && displayImageUrl !== placeholderImage ? (
-               <>
-                {/* Teste com img tag normal */}
-                <img
-                  src={displayImageUrl}
-                  alt={selectedVariant?.name ? `${product.title} - ${selectedVariant.name}` : product.title}
-                  className="w-full h-full object-cover object-center"
-                  onLoad={() => {
-                    console.log('✅ Imagem carregada com sucesso (img tag):', displayImageUrl);
-                  }}
-                  onError={(e) => {
-                    console.error('❌ Erro ao carregar imagem (img tag):', displayImageUrl);
-                    // Fallback para Image do Next.js se img falhar
-                    const imgElement = e.target as HTMLImageElement;
-                    imgElement.style.display = 'none';
-                    const nextImageContainer = imgElement.parentElement?.querySelector('.next-image-fallback');
-                    if (nextImageContainer) {
-                      (nextImageContainer as HTMLElement).style.display = 'block';
-                    }
-                  }}
-                />
-                
-                {/* Fallback com Next.js Image (inicialmente escondido) */}
-                <div className="next-image-fallback absolute inset-0" style={{ display: 'none' }}>
-                  <Image
+        {/* Galeria de imagens do produto */}
+        <div className="w-full flex flex-col gap-4">
+          {/* Imagem principal */}
+          <div className="w-full flex justify-center">
+            <div className="relative w-full aspect-square max-w-md rounded-xl overflow-hidden">
+              {displayImageUrl && displayImageUrl !== placeholderImage ? (
+                 <>
+                  {/* Teste com img tag normal */}
+                  <img
                     src={displayImageUrl}
                     alt={selectedVariant?.name ? `${product.title} - ${selectedVariant.name}` : product.title}
-                    fill
-                    className="object-cover object-center"
-                    sizes="(max-width: 768px) 100vw, 50vw"
-                    unoptimized
+                    className="w-full h-full object-cover object-center"
+                    onLoad={() => {
+                      console.log('✅ Imagem carregada com sucesso (img tag):', displayImageUrl);
+                    }}
+                    onError={(e) => {
+                      console.error('❌ Erro ao carregar imagem (img tag):', displayImageUrl);
+                      // Fallback para Image do Next.js se img falhar
+                      const imgElement = e.target as HTMLImageElement;
+                      imgElement.style.display = 'none';
+                      const nextImageContainer = imgElement.parentElement?.querySelector('.next-image-fallback');
+                      if (nextImageContainer) {
+                        (nextImageContainer as HTMLElement).style.display = 'block';
+                      }
+                    }}
+                  />
+                  
+                  {/* Fallback com Next.js Image (inicialmente escondido) */}
+                  <div className="next-image-fallback absolute inset-0" style={{ display: 'none' }}>
+                    <Image
+                      src={displayImageUrl}
+                      alt={selectedVariant?.name ? `${product.title} - ${selectedVariant.name}` : product.title}
+                      fill
+                      className="object-cover object-center"
+                      sizes="(max-width: 768px) 100vw, 50vw"
+                      unoptimized
                     onLoad={() => {
                       console.log('✅ Imagem carregada com sucesso (Next.js Image):', displayImageUrl);
                     }}
@@ -149,6 +162,38 @@ const ProductPage = ({ product, related }: ProductPageProps) => {
             )}
           </div>
         </div>
+        
+        {/* Miniaturas das imagens (se houver mais de uma imagem) */}
+        {allImages.length > 1 && (
+          <div className="flex justify-center">
+            <div className="flex gap-2 overflow-x-auto max-w-md">
+              {allImages.map((image, index) => {
+                const thumbnailUrl = getProductImageUrl(image, placeholderImage);
+                const isSelected = index === selectedImageIndex;
+                
+                return (
+                  <button
+                    key={index}
+                    onClick={() => setSelectedImageIndex(index)}
+                    className={`flex-shrink-0 w-16 h-16 rounded-lg overflow-hidden border-2 transition-all ${
+                      isSelected ? 'border-black' : 'border-gray-300 hover:border-gray-400'
+                    }`}
+                  >
+                    <img
+                      src={thumbnailUrl}
+                      alt={`${product.title} - Imagem ${index + 1}`}
+                      className="w-full h-full object-cover object-center"
+                      onError={(e) => {
+                        (e.target as HTMLImageElement).src = placeholderImage;
+                      }}
+                    />
+                  </button>
+                );
+              })}
+            </div>
+          </div>
+        )}
+      </div>
 
         {/* Detalhes do produto */}
         <div className="flex flex-col gap-6">

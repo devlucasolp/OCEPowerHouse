@@ -7,6 +7,18 @@ import Image from 'next/image';
 
 const planos = [
   {
+    nome: 'Pacote sem análise',
+    valor: 'R$ 249/mês',
+    coach: 'Treinamento Customizado com coach OCE',
+    beneficios: [
+      { icon: <Bike className="w-5 h-5 mr-2 text-yellow-500" />, text: 'Treinamento Customizado com coach OCE' },
+      { icon: <ShieldCheck className="w-5 h-5 mr-2 text-yellow-500" />, text: 'Ajustes mensais do treinamento' },
+      { icon: <Users className="w-5 h-5 mr-2 text-yellow-500" />, text: 'Acesso à comunidade OCE no Whatsapp' },
+      { icon: <MessageCircle className="w-5 h-5 mr-2 text-yellow-500" />, text: 'Comunicação mensal por whatsapp, telefone ou vídeo chamada' },
+      { icon: <Heart className="w-5 h-5 mr-2 text-yellow-500" />, text: 'Direito a todos os descontos e benefícios do nosso KOM de vantagens. (Descontos exclusivos nos PowerCamps, nas principais provas e produtos)' },
+    ],
+  },
+  {
     nome: 'Plano Premium',
     valor: 'R$ 399/mês',
     coach: 'Guilherme Bittencourt',
@@ -80,12 +92,12 @@ const Planos = () => {
           Escolha o plano ideal para sua jornada no ciclismo. Todos os planos incluem acesso à comunidade OCE.
         </motion.p>
         <motion.div 
-          className="flex flex-col md:flex-row gap-8 justify-center" 
+          className="grid grid-cols-1 md:grid-cols-2 gap-8 justify-center max-w-4xl mx-auto" 
           variants={containerVariants}
           transition={{ duration: 0.7, ease: [0.25, 0.46, 0.45, 0.94], when: 'beforeChildren', staggerChildren: 0.12 }}
         >
           {planos.map((plano) => (
-            <motion.div key={plano.nome} className="bg-white rounded-xl shadow-md p-0 flex-1 flex flex-col items-start border border-yellow-100 min-w-[260px] max-w-md mx-auto" variants={cardVariants} whileHover={{ scale: 1.04, boxShadow: '0 8px 32px rgba(0,0,0,0.10)' }} whileFocus={{ scale: 1.04, boxShadow: '0 8px 32px rgba(0,0,0,0.10)' }} tabIndex={0} aria-label={`Card do plano ${plano.nome}`}>
+            <motion.div key={plano.nome} className="bg-white rounded-xl shadow-md p-0 flex flex-col items-start border border-yellow-100 w-full max-w-md mx-auto" variants={cardVariants} whileHover={{ scale: 1.04, boxShadow: '0 8px 32px rgba(0,0,0,0.10)' }} whileFocus={{ scale: 1.04, boxShadow: '0 8px 32px rgba(0,0,0,0.10)' }} tabIndex={0} aria-label={`Card do plano ${plano.nome}`}>
               <div className="w-full">
                 <div className="text-center p-2">
                   <h3 className="text-lg font-semibold">Coach</h3>
@@ -99,7 +111,7 @@ const Planos = () => {
               </div>
               <div className="flex justify-center mb-4">
                 <Image 
-                  src="/img/static/headerplanos.png" 
+                  src={plano.nome === 'Pacote sem análise' ? "/img/static/Trainingpeaks.png" : "/img/static/headerplanos.png"} 
                   alt="Header do plano" 
                   width={280}
                   height={80}

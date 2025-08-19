@@ -321,7 +321,61 @@ const Home: NextPage = () => {
               O que nossos <span className="font-bold">atletas</span> dizem
             </h3>
             
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+              <motion.div
+                className="text-left"
+                variants={cardVariants}
+              >
+                <blockquote className="text-lg text-gray-700 mb-6 leading-relaxed italic">
+                  "Um treinamento individualizado que em menos de um ano fez toda diferença no meu desempenho como atleta amador."
+                </blockquote>
+                <div className="flex items-center">
+                  <div className="w-12 h-12 bg-yellow-400 rounded-full flex items-center justify-center mr-4">
+                    <span className="text-lg font-bold text-black">A</span>
+                  </div>
+                  <div>
+                    <h4 className="font-semibold text-gray-900">André Costa</h4>
+                    <p className="text-sm text-gray-600">Atleta Amador</p>
+                  </div>
+                </div>
+              </motion.div>
+
+              <motion.div
+                className="text-left"
+                variants={cardVariants}
+              >
+                <blockquote className="text-lg text-gray-700 mb-6 leading-relaxed italic">
+                  "Toda a vivência de um treinador/atleta de alta performance aplicada aos meus objetivos individuais."
+                </blockquote>
+                <div className="flex items-center">
+                  <div className="w-12 h-12 bg-yellow-400 rounded-full flex items-center justify-center mr-4">
+                    <span className="text-lg font-bold text-black">L</span>
+                  </div>
+                  <div>
+                    <h4 className="font-semibold text-gray-900">Luciana Ferreira</h4>
+                    <p className="text-sm text-gray-600">Ciclista Competitiva</p>
+                  </div>
+                </div>
+              </motion.div>
+
+              <motion.div
+                className="text-left"
+                variants={cardVariants}
+              >
+                <blockquote className="text-lg text-gray-700 mb-6 leading-relaxed italic">
+                  "Na OCE encontrei um treinamento individualizado e eficaz, além de acesso a produtos exclusivos, descontos em inscrições, equipamentos e suplementos."
+                </blockquote>
+                <div className="flex items-center">
+                  <div className="w-12 h-12 bg-yellow-400 rounded-full flex items-center justify-center mr-4">
+                    <span className="text-lg font-bold text-black">C</span>
+                  </div>
+                  <div>
+                    <h4 className="font-semibold text-gray-900">Carlos Mendes</h4>
+                    <p className="text-sm text-gray-600">Triatleta</p>
+                  </div>
+                </div>
+              </motion.div>
+              
               <motion.div
                 className="text-left"
                 variants={cardVariants}
