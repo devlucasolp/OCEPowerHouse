@@ -12,6 +12,12 @@ import Link from 'next/link';
 import { useMemo, useState } from 'react';
 import type { Product, ProductVariant } from '../../types/product';
 
+// Função para verificar se a promoção ainda é válida
+const isPromotionValid = (saleEndDate?: string): boolean => {
+  if (!saleEndDate) return true; // Se não há data de fim, a promoção é válida
+  return new Date(saleEndDate) > new Date();
+};
+
 interface ProductPageProps {
   product: Product;
   related: Product[];
@@ -67,6 +73,11 @@ const ProductPage = ({ product, related }: ProductPageProps) => {
   const finalPrice = basePrice + priceModifier;
   const shippingCost = getShippingCost(product);
 
+  // Lógica de promoção
+  const isOnSale = product?.isOnSale && isPromotionValid(product?.saleEndDate);
+  const displayPrice = isOnSale ? (product?.salePrice || 0) + priceModifier : finalPrice;
+  const originalPrice = isOnSale ? finalPrice : null;
+
   const placeholderImage = '/img/static/placeholder.svg';
   const currentImage = allImages[selectedImageIndex] || selectedVariant?.image || product.image;
   const displayImageUrl = getImageUrl(currentImage) || placeholderImage;
@@ -90,7 +101,7 @@ const ProductPage = ({ product, related }: ProductPageProps) => {
       ...product,
       id: `${(product.id || product._id) ?? 'prod'}${variantSuffix}`,
       title: selectedVariant?.name ? `${product.title} - ${selectedVariant.name}` : product.title,
-      price: finalPrice,
+      price: displayPrice, // Usa o preço promocional se aplicável
       image: selectedVariant?.image || product.image,
       // Anexa metadados úteis (não quebram o checkout)
       selectedVariant: selectedVariant ? { _key: selectedVariant._key, name: selectedVariant.name } : undefined,
@@ -110,6 +121,14 @@ const ProductPage = ({ product, related }: ProductPageProps) => {
           {/* Imagem principal */}
           <div className="w-full flex justify-center">
             <div className="relative w-full aspect-square max-w-md rounded-xl overflow-hidden">
+              {/* Badge de promoção */}
+              {isOnSale && (
+                <div className="absolute top-2 left-2 z-10">
+                  <span className="bg-red-500 text-white text-xs font-bold px-2 py-1 rounded">
+                    PROMOÇÃO
+                  </span>
+                </div>
+              )}
               {displayImageUrl && displayImageUrl !== placeholderImage ? (
                  <>
                   {/* Teste com img tag normal */}
@@ -231,7 +250,26 @@ const ProductPage = ({ product, related }: ProductPageProps) => {
 
           {/* Preços */}
           <div className="space-y-1">
-            <span className="text-2xl text-green-600 font-semibold block">R$ {finalPrice.toFixed(2)}</span>
+            {isOnSale ? (
+              <div className="space-y-1">
+                {/* Preço original riscado */}
+                <span className="text-lg text-gray-400 line-through block">
+                  De: R$ {originalPrice?.toFixed(2)}
+                </span>
+                {/* Preço promocional */}
+                <span className="text-2xl font-bold text-red-500 block">
+                  Por: R$ {displayPrice?.toFixed(2)}
+                </span>
+                {/* Economia */}
+                {originalPrice && displayPrice && (
+                  <span className="text-sm text-green-600 font-semibold block">
+                    Economize R$ {(originalPrice - displayPrice).toFixed(2)}
+                  </span>
+                )}
+              </div>
+            ) : (
+              <span className="text-2xl text-green-600 font-semibold block">R$ {displayPrice.toFixed(2)}</span>
+            )}
             <span className="text-sm text-gray-500">+ frete R$ {shippingCost.toFixed(2)}</span>
           </div>
 
