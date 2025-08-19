@@ -187,13 +187,16 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
 
     console.log('🔗 URLs de retorno configuradas e validadas:', backUrls);
 
-    // Configuração da preferência - versão sem auto_return
+    // Configuração da preferência com todos os métodos de pagamento disponíveis
     const preferenceData: any = {
       items: mercadoPagoItems,
       back_urls: backUrls,
       external_reference: externalReference,
       notification_url: `${cleanBaseUrl}/api/webhooks/mercadopago`,
       statement_descriptor: 'POWERHOUSE BRASIL',
+      payment_methods: {
+        installments: 12
+      },
       metadata: {
         store_name: 'PowerHouse Brasil',
         external_reference: externalReference,
@@ -302,4 +305,4 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
       details: error instanceof Error ? error.stack : 'Erro desconhecido'
     });
   }
-} 
+}

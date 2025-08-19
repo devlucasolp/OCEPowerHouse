@@ -19,8 +19,6 @@ export class MercadoPagoConfig {
       },
       auto_return: 'approved' as const,
       payment_methods: {
-        excluded_payment_methods: [],
-        excluded_payment_types: [],
         installments: 12
       },
       shipments: {
@@ -60,4 +58,4 @@ export class MercadoPagoConfig {
   isValidBaseUrl(url: string): boolean {
     return !!(url && (url.startsWith('http://') || url.startsWith('https://')));
   }
-} 
+}

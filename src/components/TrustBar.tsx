@@ -12,7 +12,7 @@ const trustItems = [
   },
   {
     icon: <CreditCard className="w-5 h-5 mr-2" aria-hidden="true" />,
-    text: 'Aceitamos Pix, boleto e cartões',
+    text: 'Aceitamos Pix, cartão de crédito e parcelamento',
   },
 ];
 
@@ -33,4 +33,4 @@ const TrustBar: React.FC = () => {
   );
 };
 
-export default TrustBar; 
+export default TrustBar;
