@@ -12,11 +12,7 @@ export class MercadoPagoConfig {
    */
   getDefaultPreferenceConfig(baseUrl: string) {
     return {
-      back_urls: {
-        success: `${baseUrl}/checkout/success`,
-        failure: `${baseUrl}/checkout/failure`,
-        pending: `${baseUrl}/checkout/pending`
-      },
+      // back_urls removidas
       auto_return: 'approved' as const,
       payment_methods: {
         excluded_payment_methods: [],
@@ -60,4 +56,4 @@ export class MercadoPagoConfig {
   isValidBaseUrl(url: string): boolean {
     return !!(url && (url.startsWith('http://') || url.startsWith('https://')));
   }
-} 
+}

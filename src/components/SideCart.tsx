@@ -4,6 +4,7 @@ import { useCart, calculateItemTotal } from '../lib/useCart';
 import CartItem from './CartItem';
 import ButtonPrimary from './ButtonPrimary';
 import { useRouter } from 'next/router';
+import { ShippingCalculator } from './ShippingCalculator';
 
 const SideCart = () => {
   const { 
@@ -64,8 +65,8 @@ const SideCart = () => {
       
       {/* Cart Sidebar */}
       <div className="fixed right-0 top-0 h-full w-full max-w-md bg-white shadow-xl z-50 transform transition-transform duration-300 ease-in-out flex flex-col">
-        {/* Header */}
-        <div className="flex items-center justify-between p-6 border-b">
+        {/* Header - Fixed */}
+        <div className="flex items-center justify-between p-6 border-b flex-shrink-0">
           <div className="flex items-center gap-2">
             <ShoppingBag className="w-6 h-6 text-gray-600" />
             <h2 className="text-xl font-semibold text-gray-900">Seu Carrinho</h2>
@@ -84,8 +85,8 @@ const SideCart = () => {
           </button>
         </div>
 
-        {/* Cart Items */}
-        <div className="flex-1 overflow-y-auto">
+        {/* Cart Items - Scrollable */}
+        <div className="flex-1 overflow-y-auto min-h-0">
           {cartItems.length === 0 ? (
             <div className="flex flex-col items-center justify-center h-full text-center p-6">
               <ShoppingBag className="w-16 h-16 text-gray-300 mb-4" />
@@ -102,7 +103,7 @@ const SideCart = () => {
               </ButtonPrimary>
             </div>
           ) : (
-            <div>
+            <div className="p-4 space-y-4">
               {cartItems.map((item) => (
                 <CartItem
                   key={item.id || item._id}
@@ -115,9 +116,14 @@ const SideCart = () => {
           )}
         </div>
 
-        {/* Footer */}
+        {/* Footer - Fixed */}
         {cartItems.length > 0 && (
-          <div className="border-t p-6 bg-gray-50">
+          <div className="border-t p-6 bg-gray-50 flex-shrink-0">
+            {/* Calculadora de Frete */}
+            <div className="mb-6">
+              <ShippingCalculator />
+            </div>
+            
             {/* Resumo detalhado */}
             <div className="space-y-3 mb-4">
               {/* Lista resumida dos itens (só se tiver poucos itens) */}
@@ -183,4 +189,4 @@ const SideCart = () => {
   );
 };
 
-export default SideCart; 
+export default SideCart;

@@ -39,20 +39,12 @@ export class PreferenceBuilder {
     const defaultConfig = this.config.getDefaultPreferenceConfig(baseUrl);
     
     console.log('🔧 Configurações padrão geradas:', {
-      back_urls: defaultConfig.back_urls,
       auto_return: defaultConfig.auto_return,
       baseUrl
     });
 
-    // Valida se back_urls estão corretas
-    if (!defaultConfig.back_urls || !defaultConfig.back_urls.success) {
-      console.error('❌ back_urls.success não definida:', defaultConfig.back_urls);
-      throw new Error('Configuração de back_urls inválida');
-    }
-
-    // Monta preferência final com back_urls PRIMEIRO
+    // Monta preferência final sem back_urls
     const preference = {
-      back_urls: defaultConfig.back_urls,
       auto_return: defaultConfig.auto_return,
       items,
       external_reference: externalReference,
@@ -77,8 +69,7 @@ export class PreferenceBuilder {
       items_count: items.length,
       external_reference: externalReference,
       is_test: isTest,
-      base_url: baseUrl,
-      back_urls_success: preference.back_urls.success
+      base_url: baseUrl
     });
 
     console.log('🔧 Preferência completa:', JSON.stringify(preference, null, 2));
@@ -109,10 +100,6 @@ export class PreferenceBuilder {
       Array.isArray(preference.items) &&
       preference.items.length > 0 &&
       preference.external_reference &&
-      preference.back_urls &&
-      preference.back_urls.success &&
-      preference.back_urls.failure &&
-      preference.back_urls.pending &&
       preference.auto_return
     );
 
@@ -122,14 +109,10 @@ export class PreferenceBuilder {
         items_is_array: Array.isArray(preference.items),
         items_length: preference.items?.length,
         has_external_reference: !!preference.external_reference,
-        has_back_urls: !!preference.back_urls,
-        has_success_url: !!preference.back_urls?.success,
-        has_failure_url: !!preference.back_urls?.failure,
-        has_pending_url: !!preference.back_urls?.pending,
         has_auto_return: !!preference.auto_return
       });
     }
 
     return isValid;
   }
-} 
+}

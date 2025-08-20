@@ -59,11 +59,14 @@ export const getShippingCost = (product: Product): number => {
 
 /**
  * Calcula o frete total do carrinho
- * Como temos frete fixo, retorna sempre R$ 25,00 independente da quantidade
+ * Como temos frete fixo, retorna sempre R$ 30,00 independente da quantidade
  */
 export const calculateCartShipping = (products: Product[]): number => {
-  // Frete fixo: se há produtos no carrinho, cobra o frete padrão
-  return products.length > 0 ? 30.00 : 0;
+  // Se não há produtos, frete é zero
+  if (products.length === 0) return 0;
+  
+  // Retorna frete fixo de R$ 30,00
+  return 30.00;
 };
 
 /**

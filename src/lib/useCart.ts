@@ -82,6 +82,7 @@ type CartState = {
   closeCart: () => void;
   applyCouponToCart: (coupon: Coupon) => boolean;
   removeCoupon: () => void;
+  updateShippingCost: (cost: number) => void; // Nova função
 };
 
 export const useCart = create<CartState>()(
@@ -300,6 +301,20 @@ export const useCart = create<CartState>()(
             appliedCoupon: null,
             discountAmount: 0,
             finalTotal: state.subtotal + state.shippingCost,
+          });
+        },
+        updateShippingCost: (cost: number) => {
+          set((state) => {
+            const newShippingCost = toSafeNumber(cost);
+            const newFinalTotal = roundToTwoDecimals(
+              state.subtotal + newShippingCost - state.discountAmount
+            );
+            
+            return {
+              ...state,
+              shippingCost: newShippingCost,
+              finalTotal: newFinalTotal
+            };
           });
         },
       }),
