@@ -34,9 +34,8 @@ const PendingPage: NextPage = () => {
             <h3 className="font-semibold text-yellow-800 mb-2">Tempos de processamento:</h3>
             <ul className="text-sm text-yellow-700 space-y-1">
               <li>• PIX: Aprovação em até 2 horas</li>
-              <li>• Boleto: 1-3 dias úteis</li>
-              <li>• Cartão: Geralmente instantâneo</li>
-              <li>• Débito: Geralmente instantâneo</li>
+                <li>• Cartão de crédito: Geralmente instantâneo</li>
+                <li>• Parcelamento: Aprovação imediata</li>
             </ul>
           </div>
 
@@ -87,4 +86,4 @@ const PendingPage: NextPage = () => {
   );
 };
 
-export default PendingPage; 
+export default PendingPage;
