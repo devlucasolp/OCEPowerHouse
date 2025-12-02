@@ -1,0 +1,614 @@
+[
+  {
+    "_createdAt": "2025-08-13T05:30:11.767144Z",
+    "_id": "fe3f51e7-aeab-4c34-b292-b15d99094d87",
+    "_rev": "6cfbc6ec-f694-5e98-68ec-ca0cd4ade7cc",
+    "_type": "product",
+    "_updatedAt": "2025-08-13T05:30:11.767144Z",
+    "title": "Óculos Scicon Vertec Cristal Lente Vermelha",
+    "slug": {
+      "_type": "slug",
+      "current": "oculos-scicon-vertec-cristal-lente-vermelha"
+    },
+    "price": 796.0,
+    "category": "general",
+    "inStock": true,
+    "featured": false,
+    "brand": "SCICON"
+  },
+  {
+    "_createdAt": "2025-08-13T05:30:11.767144Z",
+    "_id": "86090c51-64c0-408f-aafa-10aa898c586d",
+    "_rev": "b7874099-370d-1d15-055c-dbea3979c770",
+    "_type": "product",
+    "_updatedAt": "2025-08-13T05:30:11.767144Z",
+    "title": "ÓCULOS SCICON AEROSHADE KUNKEN CRISTAL LENTE MONOGRAMA PRATA",
+    "slug": {
+      "_type": "slug",
+      "current": "oculos-scicon-aeroshade-kunken-cristal-lente-monograma-prata"
+    },
+    "price": 0.0,
+    "category": "general",
+    "inStock": true,
+    "featured": false,
+    "brand": "SCICON"
+  },
+  {
+    "_createdAt": "2025-08-13T05:30:11.767144Z",
+    "_id": "e90b828d-788f-4bbb-b179-32c3596483b8",
+    "_rev": "fd68499c-bb6b-b50a-882d-148a2332e564",
+    "_type": "product",
+    "_updatedAt": "2025-08-13T05:30:11.767144Z",
+    "title": "Óculos Scicon Aeroshade Kunken Cristal Lente Monograma Vermelho",
+    "slug": {
+      "_type": "slug",
+      "current": "oculos-scicon-aeroshade-kunken-cristal-lente-monograma-vermelho"
+    },
+    "price": 0.0,
+    "category": "general",
+    "inStock": true,
+    "featured": false,
+    "brand": "SCICON"
+  },
+  {
+    "_createdAt": "2025-08-13T05:30:11.767144Z",
+    "_id": "8a946b00-d328-476f-9524-b54f26ceb5fa",
+    "_rev": "510fe43e-1344-3127-6b6d-aa5434b69132",
+    "_type": "product",
+    "_updatedAt": "2025-08-13T05:30:11.767144Z",
+    "title": "Óculos Scicon Aeroshade Kunken Branco Lente Monograma Prata",
+    "slug": {
+      "_type": "slug",
+      "current": "oculos-scicon-aeroshade-kunken-branco-lente-monograma-prata"
+    },
+    "price": 0.0,
+    "category": "general",
+    "inStock": true,
+    "featured": false,
+    "brand": "SCICON"
+  },
+  {
+    "_createdAt": "2025-08-13T05:30:11.767144Z",
+    "_id": "6f155963-ead7-4e4f-8416-ae8c646d1ec1",
+    "_rev": "544a0dca-6dc9-f4ef-71f2-d4ae392e28cb",
+    "_type": "product",
+    "_updatedAt": "2025-08-13T05:30:11.767144Z",
+    "title": "Óculos Scicon Aeroscope Preto Lente Vermelho",
+    "slug": {
+      "_type": "slug",
+      "current": "oculos-scicon-aeroscope-preto-lente-vermelho"
+    },
+    "price": 0.0,
+    "category": "general",
+    "inStock": true,
+    "featured": false,
+    "brand": "SCICON"
+  },
+  {
+    "_createdAt": "2025-08-13T05:30:11.767144Z",
+    "_id": "3ced7493-d481-40df-a0db-93fb06bbb141",
+    "_rev": "7dbbc46f-291a-faaa-74b7-2d53a69ab271",
+    "_type": "product",
+    "_updatedAt": "2025-08-13T05:30:11.767144Z",
+    "title": "Óculos Scicon Aeroscope Preto Lente Rosa e Lente Reserva Verde Trail",
+    "slug": {
+      "_type": "slug",
+      "current": "oculos-scicon-aeroscope-preto-lente-rosa-e-lente-reserva-verde-trail"
+    },
+    "price": 0.0,
+    "category": "general",
+    "inStock": true,
+    "featured": false,
+    "brand": "SCICON"
+  },
+  {
+    "_createdAt": "2025-08-13T05:30:11.767144Z",
+    "_id": "a66f5fd6-5b71-40a7-9aef-a705eed9a10d",
+    "_rev": "9d7fffe1-e179-5492-dd09-643069ff0e34",
+    "_type": "product",
+    "_updatedAt": "2025-08-13T05:30:11.767144Z",
+    "title": "Óculos Scicon Aeroscope Preto Lente Prata",
+    "slug": {
+      "_type": "slug",
+      "current": "oculos-scicon-aeroscope-preto-lente-prata"
+    },
+    "price": 0.0,
+    "category": "general",
+    "inStock": true,
+    "featured": false,
+    "brand": "SCICON"
+  },
+  {
+    "_createdAt": "2025-08-13T05:30:11.767144Z",
+    "_id": "a4fc5e9f-f00b-4330-ab73-5a7706730d77",
+    "_rev": "08380b28-aabb-3ad4-84cb-9126292fc165",
+    "_type": "product",
+    "_updatedAt": "2025-08-13T05:30:11.767144Z",
+    "title": "Óculos Scicon Aeroscope Preto Lente Bronze",
+    "slug": {
+      "_type": "slug",
+      "current": "oculos-scicon-aeroscope-preto-lente-bronze"
+    },
+    "price": 0.0,
+    "category": "general",
+    "inStock": true,
+    "featured": false,
+    "brand": "SCICON"
+  },
+  {
+    "_createdAt": "2025-08-13T05:30:11.767144Z",
+    "_id": "d9bd62de-3ff4-4a46-90c1-64de814dc766",
+    "_rev": "74c4d0f5-1744-40e6-49c2-b81b746d636c",
+    "_type": "product",
+    "_updatedAt": "2025-08-13T05:30:11.767144Z",
+    "title": "Óculos Scicon Aeroscope Preto Lente Azul",
+    "slug": {
+      "_type": "slug",
+      "current": "oculos-scicon-aeroscope-preto-lente-azul"
+    },
+    "price": 0.0,
+    "category": "general",
+    "inStock": true,
+    "featured": false,
+    "brand": "SCICON"
+  },
+  {
+    "_createdAt": "2025-08-13T05:30:11.767144Z",
+    "_id": "3569afac-8931-4815-b32c-512de31552ff",
+    "_rev": "a5bffbba-ec2d-35e9-371d-d1aa6bed1794",
+    "_type": "product",
+    "_updatedAt": "2025-08-13T05:30:11.767144Z",
+    "title": "Óculos Scicon Aeroscope Cristal Lente Prata",
+    "slug": {
+      "_type": "slug",
+      "current": "oculos-scicon-aeroscope-cristal-lente-prata"
+    },
+    "price": 0.0,
+    "category": "general",
+    "inStock": true,
+    "featured": false,
+    "brand": "SCICON"
+  },
+  {
+    "_createdAt": "2025-08-13T05:30:11.767144Z",
+    "_id": "b325a297-550d-4763-a7e4-21f7288a7ff2",
+    "_rev": "77f9f555-e742-7107-5bc1-a4d9663b73a4",
+    "_type": "product",
+    "_updatedAt": "2025-08-13T05:30:11.767144Z",
+    "title": "Óculos Scicon Aeroscope Cinza Lente Vermelho",
+    "slug": {
+      "_type": "slug",
+      "current": "oculos-scicon-aeroscope-cinza-lente-vermelho"
+    },
+    "price": 0.0,
+    "category": "general",
+    "inStock": true,
+    "featured": false,
+    "brand": "SCICON"
+  },
+  {
+    "_createdAt": "2025-08-13T05:30:11.767144Z",
+    "_id": "e80dc0fd-28b2-4f92-a089-65d215210ab1",
+    "_rev": "68d345a0-99fb-975f-d02d-e8f9cfdbf4af",
+    "_type": "product",
+    "_updatedAt": "2025-08-13T05:30:11.767144Z",
+    "title": "Óculos Scicon Aeroscope Cinza Lente Rosa e Lente Reserva Verde Trail",
+    "slug": {
+      "_type": "slug",
+      "current": "oculos-scicon-aeroscope-cinza-lente-rosa-e-lente-reserva-verde-trail"
+    },
+    "price": 0.0,
+    "category": "general",
+    "inStock": true,
+    "featured": false,
+    "brand": "SCICON"
+  },
+  {
+    "_createdAt": "2025-08-13T05:30:11.767144Z",
+    "_id": "64eb482c-461f-4402-b6a6-104d6c340986",
+    "_rev": "f8f726b4-e11a-8859-ee6b-6fbb712723d4",
+    "_type": "product",
+    "_updatedAt": "2025-08-13T05:30:11.767144Z",
+    "title": "Mala Bike Pocket Preta",
+    "slug": {
+      "_type": "slug",
+      "current": "mala-bike-pocket-preta"
+    },
+    "price": 380.0,
+    "category": "general",
+    "inStock": true,
+    "featured": false,
+    "brand": "SCICON"
+  },
+  {
+    "_createdAt": "2025-08-13T05:30:11.767144Z",
+    "_id": "34cac80c-cf24-4111-8aeb-3759182bd930",
+    "_rev": "34e7d771-7f5c-d317-fc8a-622bca0fe418",
+    "_type": "product",
+    "_updatedAt": "2025-08-13T05:30:11.767144Z",
+    "title": "Mala Roda Scicon Dupla Preta",
+    "slug": {
+      "_type": "slug",
+      "current": "mala-roda-scicon-dupla-preta"
+    },
+    "price": 600.0,
+    "category": "general",
+    "inStock": true,
+    "featured": false,
+    "brand": "SCICON"
+  },
+  {
+    "_createdAt": "2025-08-13T05:30:11.767144Z",
+    "_id": "8a47173d-a38f-4a88-9b6b-9ac1509b07d5",
+    "_rev": "dc279969-6548-1896-ab3a-072c32967b9c",
+    "_type": "product",
+    "_updatedAt": "2025-08-13T05:30:11.767144Z",
+    "title": "Mala Roda Scicon Dupla Acolchoada Preta",
+    "slug": {
+      "_type": "slug",
+      "current": "mala-roda-scicon-dupla-acolchoada-preta"
+    },
+    "price": 0.0,
+    "category": "general",
+    "inStock": true,
+    "featured": false,
+    "brand": "SCICON"
+  },
+  {
+    "_createdAt": "2025-08-13T05:30:11.767144Z",
+    "_id": "9631953e-2d78-46fc-9913-084f56badd28",
+    "_rev": "99955180-fd6c-7445-a1f0-0c3c570cc63f",
+    "_type": "product",
+    "_updatedAt": "2025-08-13T05:30:11.767144Z",
+    "title": "SCICON TRAVEL PLUS MTB",
+    "slug": {
+      "_type": "slug",
+      "current": "scicon-travel-plus-mtb"
+    },
+    "price": 0.0,
+    "category": "general",
+    "inStock": true,
+    "featured": false,
+    "brand": "SCICON"
+  },
+  {
+    "_createdAt": "2025-08-13T05:30:11.767144Z",
+    "_id": "c83dc7f5-6f12-41c2-bcf9-1016f8f3825b",
+    "_rev": "61bc96bd-812c-9526-ec62-9c201227e877",
+    "_type": "product",
+    "_updatedAt": "2025-08-13T05:30:11.767144Z",
+    "title": "TRAVEL PLUS TRIATHLON",
+    "slug": {
+      "_type": "slug",
+      "current": "travel-plus-triathlon"
+    },
+    "price": 0.0,
+    "category": "general",
+    "inStock": true,
+    "featured": false,
+    "brand": "SCICON"
+  },
+  {
+    "_createdAt": "2025-08-13T05:30:11.767144Z",
+    "_id": "70becb35-e627-4762-865b-c2d45d5c4372",
+    "_rev": "d5eaf6c4-9973-a0b3-bff8-f61e9704fa74",
+    "_type": "product",
+    "_updatedAt": "2025-08-13T05:30:11.767144Z",
+    "title": "TRAVEL PLUS RACING",
+    "slug": {
+      "_type": "slug",
+      "current": "travel-plus-racing"
+    },
+    "price": 0.0,
+    "category": "general",
+    "inStock": true,
+    "featured": false,
+    "brand": "SCICON"
+  },
+  {
+    "_createdAt": "2025-08-13T05:30:11.767144Z",
+    "_id": "2877b912-0683-40b6-b8ba-f1cb704d116b",
+    "_rev": "4a1bb566-7029-5bd3-18e5-96c4ed70fac8",
+    "_type": "product",
+    "_updatedAt": "2025-08-13T05:30:11.767144Z",
+    "title": "Aerocomfort Road 3.0 TSA Triathlon",
+    "slug": {
+      "_type": "slug",
+      "current": "aerocomfort-road-30-tsa-triathlon"
+    },
+    "price": 0.0,
+    "category": "general",
+    "inStock": true,
+    "featured": false,
+    "brand": "SCICON"
+  },
+  {
+    "_createdAt": "2025-08-13T05:30:11.767144Z",
+    "_id": "b6251217-dbef-4caf-90cf-8f5361390aac",
+    "_rev": "927ecdd6-d33b-45ac-aeec-a2cfc97e0c09",
+    "_type": "product",
+    "_updatedAt": "2025-08-13T05:30:11.767144Z",
+    "title": "AEROCOMFORT 3.0 TSA ROAD",
+    "slug": {
+      "_type": "slug",
+      "current": "aerocomfort-30-tsa-road"
+    },
+    "price": 0.0,
+    "category": "general",
+    "inStock": true,
+    "featured": false,
+    "brand": "SCICON"
+  },
+  {
+    "_createdAt": "2025-08-13T05:30:11.767144Z",
+    "_id": "484094fa-2cd2-4918-84d4-cde49f8e94b1",
+    "_rev": "1c36e182-8ef2-f63f-8710-16fd1ca9ad0d",
+    "_type": "product",
+    "_updatedAt": "2025-08-13T05:30:11.767144Z",
+    "title": "AEROTECH EVOLUTION X TSA",
+    "slug": {
+      "_type": "slug",
+      "current": "aerotech-evolution-x-tsa"
+    },
+    "price": 0.0,
+    "category": "general",
+    "inStock": true,
+    "featured": false,
+    "brand": "SCICON"
+  },
+  {
+    "_createdAt": "2025-08-13T05:30:11.767144Z",
+    "_id": "409be86c-1ea5-4a22-8e34-8e720858c45c",
+    "_rev": "8bc62534-ac7d-a8d2-3d48-c1f811755e72",
+    "_type": "product",
+    "_updatedAt": "2025-08-13T05:30:11.767144Z",
+    "title": "LOOK TACO GRIP",
+    "slug": {
+      "_type": "slug",
+      "current": "look-taco-grip"
+    },
+    "price": 199.0,
+    "category": "general",
+    "inStock": true,
+    "featured": false,
+    "brand": "LOOK"
+  },
+  {
+    "_createdAt": "2025-08-13T05:30:11.767144Z",
+    "_id": "09b12760-2896-41dd-80ce-b05fb903554a",
+    "_rev": "c581f2eb-443a-66f4-6b27-b5e7491bda0c",
+    "_type": "product",
+    "_updatedAt": "2025-08-13T05:30:11.767144Z",
+    "title": "LOOK TACOS",
+    "slug": {
+      "_type": "slug",
+      "current": "look-tacos"
+    },
+    "price": 149.0,
+    "category": "general",
+    "inStock": true,
+    "featured": false,
+    "brand": "LOOK"
+  },
+  {
+    "_createdAt": "2025-08-13T05:30:11.767144Z",
+    "_id": "414c182e-7d8e-40d0-a34d-fc9676f1feb4",
+    "_rev": "afdc6352-a2ab-c7e7-735c-2eef08775caf",
+    "_type": "product",
+    "_updatedAt": "2025-08-13T05:30:11.767144Z",
+    "title": "LOOK BLADE CARBON CERAMIC",
+    "slug": {
+      "_type": "slug",
+      "current": "look-blade-carbon-ceramic"
+    },
+    "price": 0.0,
+    "category": "general",
+    "inStock": true,
+    "featured": false,
+    "brand": "LOOK"
+  },
+  {
+    "_createdAt": "2025-08-13T05:30:11.767144Z",
+    "_id": "41a4a49d-2689-49df-965e-3f3df872a2ee",
+    "_rev": "8059504c-10b6-f9e6-1779-f6fa195f6994",
+    "_type": "product",
+    "_updatedAt": "2025-08-13T05:30:11.767144Z",
+    "title": "LOOK KEO BLADE CARBON",
+    "slug": {
+      "_type": "slug",
+      "current": "look-keo-blade-carbon"
+    },
+    "price": 0.0,
+    "category": "general",
+    "inStock": true,
+    "featured": false,
+    "brand": "LOOK"
+  },
+  {
+    "_createdAt": "2025-08-13T05:30:11.767144Z",
+    "_id": "410fd1cf-fd5b-4a83-a15f-2dd33f023766",
+    "_rev": "e4579122-a2f0-7c8f-acb3-0ca59ded5361",
+    "_type": "product",
+    "_updatedAt": "2025-08-13T05:30:11.767144Z",
+    "title": "LOOK KEO 2 MAX CARBON",
+    "slug": {
+      "_type": "slug",
+      "current": "look-keo-2-max-carbon"
+    },
+    "price": 0.0,
+    "category": "general",
+    "inStock": true,
+    "featured": false,
+    "brand": "LOOK"
+  },
+  {
+    "_createdAt": "2025-08-13T05:30:11.767144Z",
+    "_id": "8697c61a-45a7-45b1-a492-58f7b7c78993",
+    "_rev": "f995c837-c020-c780-e29a-04fb7dff2eb3",
+    "_type": "product",
+    "_updatedAt": "2025-08-13T05:30:11.767144Z",
+    "title": "LOOK KEO 2 MAX",
+    "slug": {
+      "_type": "slug",
+      "current": "look-keo-2-max"
+    },
+    "price": 0.0,
+    "category": "general",
+    "inStock": true,
+    "featured": false,
+    "brand": "LOOK"
+  },
+  {
+    "_createdAt": "2025-08-13T05:30:11.767144Z",
+    "_id": "0011aaf1-4d01-4eb6-8f50-250c0675a879",
+    "_rev": "ace49d59-9bae-c67a-43c1-e98f8159d2a9",
+    "_type": "product",
+    "_updatedAt": "2025-08-13T05:30:11.767144Z",
+    "title": "LOOK KEO CLASSIC 3 PLUS+",
+    "slug": {
+      "_type": "slug",
+      "current": "look-keo-classic-3-plus"
+    },
+    "price": 843.5,
+    "category": "general",
+    "inStock": true,
+    "featured": false,
+    "brand": "LOOK"
+  },
+  {
+    "_createdAt": "2025-08-13T05:30:11.767144Z",
+    "_id": "0b9361df-da01-4275-8293-653a7f51a681",
+    "_rev": "700c5140-86a6-7b82-87f1-a92cab334ccd",
+    "_type": "product",
+    "_updatedAt": "2025-08-13T05:30:11.767144Z",
+    "title": "LOOK KEO CLASSIC 3",
+    "slug": {
+      "_type": "slug",
+      "current": "look-keo-classic-3"
+    },
+    "price": 612.5,
+    "category": "general",
+    "inStock": true,
+    "featured": false,
+    "brand": "LOOK"
+  },
+  {
+    "_createdAt": "2025-08-13T05:30:11.767144Z",
+    "_id": "fab99c56-bdf9-403f-8587-7f2c232c2d95",
+    "_rev": "4bfe4021-ffb4-a163-6747-063ecf21f571",
+    "_type": "product",
+    "_updatedAt": "2025-08-13T05:30:11.767144Z",
+    "title": "Luvas Esportivas de Ciclismo Oil Slick",
+    "slug": {
+      "_type": "slug",
+      "current": "luvas-esportivas-de-ciclismo-oil-slick"
+    },
+    "price": 299.0,
+    "category": "general",
+    "inStock": true,
+    "featured": false,
+    "brand": "SUPACAZ"
+  },
+  {
+    "_createdAt": "2025-08-13T05:30:11.767144Z",
+    "_id": "2b8994a4-c82d-4b3e-a589-634c83d6bbe1",
+    "_rev": "cd57642f-47a4-2de8-bccf-2819edd4d312",
+    "_type": "product",
+    "_updatedAt": "2025-08-13T05:30:11.767144Z",
+    "title": "Capa para sapatilha Velotoze – Silicone",
+    "slug": {
+      "_type": "slug",
+      "current": "capa-para-sapatilha-velotoze-silicone"
+    },
+    "price": 290.0,
+    "category": "general",
+    "inStock": true,
+    "featured": false,
+    "brand": "VELOTOZE"
+  },
+  {
+    "_createdAt": "2025-08-13T05:30:11.767144Z",
+    "_id": "35b4aa34-6060-4639-92d4-293d5378a8bf",
+    "_rev": "974b905b-6563-94de-d6ad-0189cbb0969b",
+    "_type": "product",
+    "_updatedAt": "2025-08-13T05:30:11.767144Z",
+    "title": "Capa Sapatilha Latex MTB Cano Alto Preta Tam. P",
+    "slug": {
+      "_type": "slug",
+      "current": "capa-sapatilha-latex-mtb-cano-alto-preta-tam-p"
+    },
+    "price": 250.0,
+    "category": "general",
+    "inStock": true,
+    "featured": false,
+    "brand": "SCICON"
+  },
+  {
+    "_createdAt": "2025-08-13T05:30:11.767144Z",
+    "_id": "3e7badb2-4189-4cdf-b833-2bdda93e7c34",
+    "_rev": "3058d5c2-2bed-cad2-75fd-33a421f7f052",
+    "_type": "product",
+    "_updatedAt": "2025-08-13T05:30:11.767144Z",
+    "title": "Pneu Hutchinson Touareg Tlr Hardskin Tan 700mmx40 – Pv529751",
+    "slug": {
+      "_type": "slug",
+      "current": "pneu-hutchinson-touareg-tlr-hardskin-tan-700mmx40-pv529751"
+    },
+    "price": 551.0,
+    "category": "general",
+    "inStock": true,
+    "featured": false,
+    "brand": "HUTCHINSON"
+  },
+  {
+    "_createdAt": "2025-08-13T05:30:11.767144Z",
+    "_id": "8bf32320-0e2c-4e77-9a64-bfa88d7ec25e",
+    "_rev": "a41528f9-4c18-9c33-baf8-bcc8182612c5",
+    "_type": "product",
+    "_updatedAt": "2025-08-13T05:30:11.767144Z",
+    "title": "Pneu Hutchinson Touareg Tlr Hardskin Tan 700mmx45 – Pv529231",
+    "slug": {
+      "_type": "slug",
+      "current": "pneu-hutchinson-touareg-tlr-hardskin-tan-700mmx45-pv529231"
+    },
+    "price": 551.0,
+    "category": "general",
+    "inStock": true,
+    "featured": false,
+    "brand": "HUTCHINSON"
+  },
+  {
+    "_createdAt": "2025-08-13T05:30:11.767144Z",
+    "_id": "9f86288f-1872-498e-be26-d5ed2fbcac40",
+    "_rev": "9bbab7ef-d663-c6a1-3610-02d063c130c2",
+    "_type": "product",
+    "_updatedAt": "2025-08-13T05:30:11.767144Z",
+    "title": "Hutchinson Skeleton 2.3",
+    "slug": {
+      "_type": "slug",
+      "current": "hutchinson-skeleton-23"
+    },
+    "price": 680.0,
+    "category": "general",
+    "inStock": true,
+    "featured": false,
+    "brand": "HUTCHINSON"
+  },
+  {
+    "_createdAt": "2025-08-13T05:30:11.767144Z",
+    "_id": "e8c430d3-05f3-41eb-b402-cb546658f6ca",
+    "_rev": "fd1f3de8-4211-99f8-1de8-51a725bcc327",
+    "_type": "product",
+    "_updatedAt": "2025-08-13T05:30:11.767144Z",
+    "title": "Pneu Python 2 Tlr 127 29×2,25",
+    "slug": {
+      "_type": "slug",
+      "current": "pneu-python-2-tlr-127-29225"
+    },
+    "price": 558.25,
+    "category": "general",
+    "inStock": true,
+    "featured": false,
+    "brand": "HUTCHINSON"
+  }
+]

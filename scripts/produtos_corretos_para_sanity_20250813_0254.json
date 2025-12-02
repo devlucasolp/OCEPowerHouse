@@ -1,0 +1,1190 @@
+[
+  {
+    "_createdAt": "2025-08-13T05:54:14.789026Z",
+    "_id": "1ef471db-f0aa-4b65-873c-cdca5b031a8e",
+    "_rev": "89a3cdbd-d851-47eb-8f39-13183d926d98",
+    "_type": "product",
+    "_updatedAt": "2025-08-13T05:54:14.789410Z",
+    "title": "Óculos Scicon Vertec Cristal Lente Vermelha",
+    "slug": {
+      "_type": "slug",
+      "current": "óculos-scicon-vertec-cristal-lente-vermelha"
+    },
+    "price": 796.0,
+    "category": "equipamento",
+    "inStock": true,
+    "featured": false,
+    "description": "Produto Power House Brasil: Óculos Scicon Vertec Cristal Lente Vermelha",
+    "brand": "SCICON",
+    "image": {
+      "_type": "image",
+      "alt": "Óculos Scicon Vertec Cristal Lente Vermelha",
+      "asset": {
+        "_ref": "image-wp-wp-óculos-scicon-aeroshade-kunken-branco-lente-mon-800x600-jpg",
+        "_type": "reference"
+      }
+    },
+    "_csv_data": {
+      "sku": "",
+      "original_category": "Equipamento",
+      "subcategory": "Óculos",
+      "external_ref": "https://powerhousebrasil.com.br/categoria-produto/scicon-gravtah/oculos-scicon/",
+      "status": "draft"
+    }
+  },
+  {
+    "_createdAt": "2025-08-13T05:54:14.791669Z",
+    "_id": "b4f3e17a-c951-4504-aff8-1da14b709a01",
+    "_rev": "1ecf1bd8-8d38-4290-98e8-2adae06ef100",
+    "_type": "product",
+    "_updatedAt": "2025-08-13T05:54:14.791686Z",
+    "title": "ÓCULOS SCICON AEROSHADE KUNKEN CRISTAL LENTE MONOGRAMA PRATA",
+    "slug": {
+      "_type": "slug",
+      "current": "óculos-scicon-aeroshade-kunken-cristal-lente-monograma-prata"
+    },
+    "price": 1890.0,
+    "category": "equipamento",
+    "inStock": true,
+    "featured": false,
+    "description": "Produto Power House Brasil: ÓCULOS SCICON AEROSHADE KUNKEN CRISTAL LENTE MONOGRAMA PRATA",
+    "brand": "SCICON",
+    "image": {
+      "_type": "image",
+      "alt": "ÓCULOS SCICON AEROSHADE KUNKEN CRISTAL LENTE MONOGRAMA PRATA",
+      "asset": {
+        "_ref": "image-wp-wp-óculos-scicon-aeroshade-kunken-branco-lente-mon-800x600-jpg",
+        "_type": "reference"
+      }
+    },
+    "_csv_data": {
+      "sku": "",
+      "original_category": "Equipamento",
+      "subcategory": "Óculos",
+      "external_ref": "https://powerhousebrasil.com.br/categoria-produto/scicon-gravtah/oculos-scicon/",
+      "status": "draft"
+    }
+  },
+  {
+    "_createdAt": "2025-08-13T05:54:14.794221Z",
+    "_id": "c855d663-05d3-4308-bc1d-caadd3b65963",
+    "_rev": "d2660abd-8e78-4f8a-b9d7-deb214cd633d",
+    "_type": "product",
+    "_updatedAt": "2025-08-13T05:54:14.794256Z",
+    "title": "Óculos Scicon Aeroshade Kunken Cristal Lente Monograma Vermelho",
+    "slug": {
+      "_type": "slug",
+      "current": "óculos-scicon-aeroshade-kunken-cristal-lente-monograma-vermelho"
+    },
+    "price": 1890.0,
+    "category": "equipamento",
+    "inStock": true,
+    "featured": false,
+    "description": "Produto Power House Brasil: Óculos Scicon Aeroshade Kunken Cristal Lente Monograma Vermelho",
+    "brand": "SCICON",
+    "image": {
+      "_type": "image",
+      "alt": "Óculos Scicon Aeroshade Kunken Cristal Lente Monograma Vermelho",
+      "asset": {
+        "_ref": "image-wp-wp-óculos-scicon-aeroshade-kunken-branco-lente-mon-800x600-jpg",
+        "_type": "reference"
+      }
+    },
+    "_csv_data": {
+      "sku": "",
+      "original_category": "Equipamento",
+      "subcategory": "Óculos",
+      "external_ref": "https://powerhousebrasil.com.br/categoria-produto/scicon-gravtah/oculos-scicon/",
+      "status": "draft"
+    }
+  },
+  {
+    "_createdAt": "2025-08-13T05:54:14.796799Z",
+    "_id": "b4bcd049-d991-495a-a7ad-4db2d5ca3f48",
+    "_rev": "ead71dd8-4d42-4548-b141-e6c7c7e08cbb",
+    "_type": "product",
+    "_updatedAt": "2025-08-13T05:54:14.796832Z",
+    "title": "Óculos Scicon Aeroshade Kunken Branco Lente Monograma Prata",
+    "slug": {
+      "_type": "slug",
+      "current": "óculos-scicon-aeroshade-kunken-branco-lente-monograma-prata"
+    },
+    "price": 1890.0,
+    "category": "equipamento",
+    "inStock": true,
+    "featured": false,
+    "description": "Produto Power House Brasil: Óculos Scicon Aeroshade Kunken Branco Lente Monograma Prata",
+    "brand": "SCICON",
+    "image": {
+      "_type": "image",
+      "alt": "Óculos Scicon Aeroshade Kunken Branco Lente Monograma Prata",
+      "asset": {
+        "_ref": "image-wp-wp-óculos-scicon-aeroshade-kunken-branco-lente-mon-800x600-jpg",
+        "_type": "reference"
+      }
+    },
+    "_csv_data": {
+      "sku": "",
+      "original_category": "Equipamento",
+      "subcategory": "Óculos",
+      "external_ref": "https://powerhousebrasil.com.br/categoria-produto/scicon-gravtah/oculos-scicon/",
+      "status": "draft"
+    }
+  },
+  {
+    "_createdAt": "2025-08-13T05:54:14.799401Z",
+    "_id": "1d9de9f5-175c-4714-a1b7-6b2c93e5e978",
+    "_rev": "9699e679-a719-44ad-b432-cabebfdbe1e8",
+    "_type": "product",
+    "_updatedAt": "2025-08-13T05:54:14.799419Z",
+    "title": "Óculos Scicon Aeroscope Preto Lente Vermelho",
+    "slug": {
+      "_type": "slug",
+      "current": "óculos-scicon-aeroscope-preto-lente-vermelho"
+    },
+    "price": 1890.0,
+    "category": "equipamento",
+    "inStock": true,
+    "featured": false,
+    "description": "Produto Power House Brasil: Óculos Scicon Aeroscope Preto Lente Vermelho",
+    "brand": "SCICON",
+    "image": {
+      "_type": "image",
+      "alt": "Óculos Scicon Aeroscope Preto Lente Vermelho",
+      "asset": {
+        "_ref": "image-wp-wp-óculos-scicon-aeroshade-kunken-branco-lente-mon-800x600-jpg",
+        "_type": "reference"
+      }
+    },
+    "_csv_data": {
+      "sku": "",
+      "original_category": "Equipamento",
+      "subcategory": "Óculos",
+      "external_ref": "https://powerhousebrasil.com.br/categoria-produto/scicon-gravtah/oculos-scicon/",
+      "status": "draft"
+    }
+  },
+  {
+    "_createdAt": "2025-08-13T05:54:14.801675Z",
+    "_id": "6fb6bba9-e0db-4686-bc0c-a0315d0d0be8",
+    "_rev": "26a59520-3335-4de5-819c-ebc4af805494",
+    "_type": "product",
+    "_updatedAt": "2025-08-13T05:54:14.801691Z",
+    "title": "Óculos Scicon Aeroscope Preto Lente Rosa e Lente Reserva Verde Trail",
+    "slug": {
+      "_type": "slug",
+      "current": "óculos-scicon-aeroscope-preto-lente-rosa-e-lente-reserva-verde-trail"
+    },
+    "price": 1890.0,
+    "category": "equipamento",
+    "inStock": true,
+    "featured": false,
+    "description": "Produto Power House Brasil: Óculos Scicon Aeroscope Preto Lente Rosa e Lente Reserva Verde Trail",
+    "brand": "SCICON",
+    "image": {
+      "_type": "image",
+      "alt": "Óculos Scicon Aeroscope Preto Lente Rosa e Lente Reserva Verde Trail",
+      "asset": {
+        "_ref": "image-wp-wp-óculos-scicon-aeroshade-kunken-branco-lente-mon-800x600-jpg",
+        "_type": "reference"
+      }
+    },
+    "_csv_data": {
+      "sku": "",
+      "original_category": "Equipamento",
+      "subcategory": "Óculos",
+      "external_ref": "https://powerhousebrasil.com.br/categoria-produto/scicon-gravtah/oculos-scicon/",
+      "status": "draft"
+    }
+  },
+  {
+    "_createdAt": "2025-08-13T05:54:14.804065Z",
+    "_id": "9f458ecd-6568-4dc2-a7a3-2fe2714e15ed",
+    "_rev": "8cfd54c8-0caa-47e4-9ea1-46366c86e41e",
+    "_type": "product",
+    "_updatedAt": "2025-08-13T05:54:14.804084Z",
+    "title": "Óculos Scicon Aeroscope Preto Lente Prata",
+    "slug": {
+      "_type": "slug",
+      "current": "óculos-scicon-aeroscope-preto-lente-prata"
+    },
+    "price": 1890.0,
+    "category": "equipamento",
+    "inStock": true,
+    "featured": false,
+    "description": "Produto Power House Brasil: Óculos Scicon Aeroscope Preto Lente Prata",
+    "brand": "SCICON",
+    "image": {
+      "_type": "image",
+      "alt": "Óculos Scicon Aeroscope Preto Lente Prata",
+      "asset": {
+        "_ref": "image-wp-wp-óculos-scicon-aeroshade-kunken-branco-lente-mon-800x600-jpg",
+        "_type": "reference"
+      }
+    },
+    "_csv_data": {
+      "sku": "",
+      "original_category": "Equipamento",
+      "subcategory": "Óculos",
+      "external_ref": "https://powerhousebrasil.com.br/categoria-produto/scicon-gravtah/oculos-scicon/",
+      "status": "draft"
+    }
+  },
+  {
+    "_createdAt": "2025-08-13T05:54:14.806567Z",
+    "_id": "8415c733-72b1-45ee-8859-506bd469ffc4",
+    "_rev": "b600f640-9f20-4c80-8045-cd7fa6bc8c1f",
+    "_type": "product",
+    "_updatedAt": "2025-08-13T05:54:14.806589Z",
+    "title": "Óculos Scicon Aeroscope Preto Lente Bronze",
+    "slug": {
+      "_type": "slug",
+      "current": "óculos-scicon-aeroscope-preto-lente-bronze"
+    },
+    "price": 1890.0,
+    "category": "equipamento",
+    "inStock": true,
+    "featured": false,
+    "description": "Produto Power House Brasil: Óculos Scicon Aeroscope Preto Lente Bronze",
+    "brand": "SCICON",
+    "image": {
+      "_type": "image",
+      "alt": "Óculos Scicon Aeroscope Preto Lente Bronze",
+      "asset": {
+        "_ref": "image-wp-wp-óculos-scicon-aeroshade-kunken-branco-lente-mon-800x600-jpg",
+        "_type": "reference"
+      }
+    },
+    "_csv_data": {
+      "sku": "",
+      "original_category": "Equipamento",
+      "subcategory": "Óculos",
+      "external_ref": "https://powerhousebrasil.com.br/categoria-produto/scicon-gravtah/oculos-scicon/",
+      "status": "draft"
+    }
+  },
+  {
+    "_createdAt": "2025-08-13T05:54:14.809003Z",
+    "_id": "2ca7ad00-d7ba-4fc3-b43d-fad2d8b1cccb",
+    "_rev": "c93d99f5-2ceb-4144-9fa1-b7d5ad40e9bf",
+    "_type": "product",
+    "_updatedAt": "2025-08-13T05:54:14.809023Z",
+    "title": "Óculos Scicon Aeroscope Preto Lente Azul",
+    "slug": {
+      "_type": "slug",
+      "current": "óculos-scicon-aeroscope-preto-lente-azul"
+    },
+    "price": 1890.0,
+    "category": "equipamento",
+    "inStock": true,
+    "featured": false,
+    "description": "Produto Power House Brasil: Óculos Scicon Aeroscope Preto Lente Azul",
+    "brand": "SCICON",
+    "image": {
+      "_type": "image",
+      "alt": "Óculos Scicon Aeroscope Preto Lente Azul",
+      "asset": {
+        "_ref": "image-wp-wp-óculos-scicon-aeroshade-kunken-branco-lente-mon-800x600-jpg",
+        "_type": "reference"
+      }
+    },
+    "_csv_data": {
+      "sku": "",
+      "original_category": "Equipamento",
+      "subcategory": "Óculos",
+      "external_ref": "https://powerhousebrasil.com.br/categoria-produto/scicon-gravtah/oculos-scicon/",
+      "status": "draft"
+    }
+  },
+  {
+    "_createdAt": "2025-08-13T05:54:14.811426Z",
+    "_id": "e37cb6df-0dd0-42f5-8ed9-4d7755b2bb11",
+    "_rev": "33d5e8d3-d812-4a61-a725-2027124c529a",
+    "_type": "product",
+    "_updatedAt": "2025-08-13T05:54:14.811445Z",
+    "title": "Óculos Scicon Aeroscope Cristal Lente Prata",
+    "slug": {
+      "_type": "slug",
+      "current": "óculos-scicon-aeroscope-cristal-lente-prata"
+    },
+    "price": 1890.0,
+    "category": "equipamento",
+    "inStock": true,
+    "featured": false,
+    "description": "Produto Power House Brasil: Óculos Scicon Aeroscope Cristal Lente Prata",
+    "brand": "SCICON",
+    "image": {
+      "_type": "image",
+      "alt": "Óculos Scicon Aeroscope Cristal Lente Prata",
+      "asset": {
+        "_ref": "image-wp-wp-óculos-scicon-aeroshade-kunken-branco-lente-mon-800x600-jpg",
+        "_type": "reference"
+      }
+    },
+    "_csv_data": {
+      "sku": "",
+      "original_category": "Equipamento",
+      "subcategory": "Óculos",
+      "external_ref": "https://powerhousebrasil.com.br/categoria-produto/scicon-gravtah/oculos-scicon/",
+      "status": "draft"
+    }
+  },
+  {
+    "_createdAt": "2025-08-13T05:54:14.814891Z",
+    "_id": "7039b3f4-abd8-4821-a21c-402a4a5c7a08",
+    "_rev": "40b6bed2-f1a2-434c-ab91-1aa75826eb1d",
+    "_type": "product",
+    "_updatedAt": "2025-08-13T05:54:14.814927Z",
+    "title": "Óculos Scicon Aeroscope Cinza Lente Vermelho",
+    "slug": {
+      "_type": "slug",
+      "current": "óculos-scicon-aeroscope-cinza-lente-vermelho"
+    },
+    "price": 1890.0,
+    "category": "equipamento",
+    "inStock": true,
+    "featured": false,
+    "description": "Produto Power House Brasil: Óculos Scicon Aeroscope Cinza Lente Vermelho",
+    "brand": "SCICON",
+    "image": {
+      "_type": "image",
+      "alt": "Óculos Scicon Aeroscope Cinza Lente Vermelho",
+      "asset": {
+        "_ref": "image-wp-wp-óculos-scicon-aeroshade-kunken-branco-lente-mon-800x600-jpg",
+        "_type": "reference"
+      }
+    },
+    "_csv_data": {
+      "sku": "",
+      "original_category": "Equipamento",
+      "subcategory": "Óculos",
+      "external_ref": "https://powerhousebrasil.com.br/categoria-produto/scicon-gravtah/oculos-scicon/",
+      "status": "draft"
+    }
+  },
+  {
+    "_createdAt": "2025-08-13T05:54:14.817493Z",
+    "_id": "c0f2aa91-2881-4249-a9d4-b69bb3947ddd",
+    "_rev": "3b7a88eb-4eed-44a2-8433-0fdbb0caa67d",
+    "_type": "product",
+    "_updatedAt": "2025-08-13T05:54:14.817522Z",
+    "title": "Óculos Scicon Aeroscope Cinza Lente Rosa e Lente Reserva Verde Trail",
+    "slug": {
+      "_type": "slug",
+      "current": "óculos-scicon-aeroscope-cinza-lente-rosa-e-lente-reserva-verde-trail"
+    },
+    "price": 1890.0,
+    "category": "equipamento",
+    "inStock": true,
+    "featured": false,
+    "description": "Produto Power House Brasil: Óculos Scicon Aeroscope Cinza Lente Rosa e Lente Reserva Verde Trail",
+    "brand": "SCICON",
+    "image": {
+      "_type": "image",
+      "alt": "Óculos Scicon Aeroscope Cinza Lente Rosa e Lente Reserva Verde Trail",
+      "asset": {
+        "_ref": "image-wp-wp-óculos-scicon-aeroshade-kunken-branco-lente-mon-800x600-jpg",
+        "_type": "reference"
+      }
+    },
+    "_csv_data": {
+      "sku": "",
+      "original_category": "Equipamento",
+      "subcategory": "Óculos",
+      "external_ref": "https://powerhousebrasil.com.br/categoria-produto/scicon-gravtah/oculos-scicon/",
+      "status": "draft"
+    }
+  },
+  {
+    "_createdAt": "2025-08-13T05:54:14.818317Z",
+    "_id": "5c3eb847-30b1-4ecb-a6f5-7974b2be0c51",
+    "_rev": "75a7317b-f822-4e69-b0a7-516a7a5e3122",
+    "_type": "product",
+    "_updatedAt": "2025-08-13T05:54:14.818355Z",
+    "title": "Mala Bike Pocket Preta",
+    "slug": {
+      "_type": "slug",
+      "current": "mala-bike-pocket-preta"
+    },
+    "price": 380.0,
+    "category": "bolsas",
+    "inStock": true,
+    "featured": false,
+    "description": "Produto Power House Brasil: Mala Bike Pocket Preta",
+    "brand": "SCICON",
+    "image": {
+      "_type": "image",
+      "alt": "Mala Bike Pocket Preta",
+      "asset": {
+        "_ref": "image-wp-wp-mala-bike-pocket-preta-jpg-800x600-jpg",
+        "_type": "reference"
+      }
+    },
+    "_csv_data": {
+      "sku": "",
+      "original_category": "Bolsas",
+      "subcategory": "",
+      "external_ref": "https://powerhousebrasil.com.br/categoria-produto/scicon-gravtah/mala-bike-scicon/",
+      "status": "draft"
+    }
+  },
+  {
+    "_createdAt": "2025-08-13T05:54:14.818833Z",
+    "_id": "d93c6a02-0e39-43e4-899a-296d2f19986c",
+    "_rev": "1ceffdfe-db24-422b-b501-c5557ad0252b",
+    "_type": "product",
+    "_updatedAt": "2025-08-13T05:54:14.818849Z",
+    "title": "Mala Roda Scicon Dupla Preta",
+    "slug": {
+      "_type": "slug",
+      "current": "mala-roda-scicon-dupla-preta"
+    },
+    "price": 600.0,
+    "category": "bolsas",
+    "inStock": true,
+    "featured": false,
+    "description": "Produto Power House Brasil: Mala Roda Scicon Dupla Preta",
+    "brand": "SCICON",
+    "image": {
+      "_type": "image",
+      "alt": "Mala Roda Scicon Dupla Preta",
+      "asset": {
+        "_ref": "image-wp-wp-mala-bike-pocket-preta-jpg-800x600-jpg",
+        "_type": "reference"
+      }
+    },
+    "_csv_data": {
+      "sku": "",
+      "original_category": "Bolsas",
+      "subcategory": "",
+      "external_ref": "https://powerhousebrasil.com.br/categoria-produto/scicon-gravtah/mala-bike-scicon/",
+      "status": "draft"
+    }
+  },
+  {
+    "_createdAt": "2025-08-13T05:54:14.819294Z",
+    "_id": "321d4042-39f1-4c25-b855-a2a73ba127c8",
+    "_rev": "e09c5f4e-c82f-4ec3-8058-1a4376ccd3f1",
+    "_type": "product",
+    "_updatedAt": "2025-08-13T05:54:14.819309Z",
+    "title": "Mala Roda Scicon Dupla Acolchoada Preta",
+    "slug": {
+      "_type": "slug",
+      "current": "mala-roda-scicon-dupla-acolchoada-preta"
+    },
+    "price": 1090.0,
+    "category": "bolsas",
+    "inStock": true,
+    "featured": false,
+    "description": "Produto Power House Brasil: Mala Roda Scicon Dupla Acolchoada Preta",
+    "brand": "SCICON",
+    "image": {
+      "_type": "image",
+      "alt": "Mala Roda Scicon Dupla Acolchoada Preta",
+      "asset": {
+        "_ref": "image-wp-wp-mala-bike-pocket-preta-jpg-800x600-jpg",
+        "_type": "reference"
+      }
+    },
+    "_csv_data": {
+      "sku": "",
+      "original_category": "Bolsas",
+      "subcategory": "",
+      "external_ref": "https://powerhousebrasil.com.br/categoria-produto/scicon-gravtah/mala-bike-scicon/",
+      "status": "draft"
+    }
+  },
+  {
+    "_createdAt": "2025-08-13T05:54:14.819942Z",
+    "_id": "6133eddd-a581-4f79-9682-e7787cfbd39c",
+    "_rev": "901744c1-43ea-4330-9f07-71b11589f5ac",
+    "_type": "product",
+    "_updatedAt": "2025-08-13T05:54:14.819957Z",
+    "title": "SCICON TRAVEL PLUS MTB",
+    "slug": {
+      "_type": "slug",
+      "current": "scicon-travel-plus-mtb"
+    },
+    "price": 1790.0,
+    "category": "bolsas",
+    "inStock": true,
+    "featured": false,
+    "description": "Produto Power House Brasil: SCICON TRAVEL PLUS MTB",
+    "brand": "SCICON",
+    "image": {
+      "_type": "image",
+      "alt": "SCICON TRAVEL PLUS MTB",
+      "asset": {
+        "_ref": "image-wp-wp-mala-bike-pocket-preta-jpg-800x600-jpg",
+        "_type": "reference"
+      }
+    },
+    "_csv_data": {
+      "sku": "",
+      "original_category": "Bolsas",
+      "subcategory": "",
+      "external_ref": "https://powerhousebrasil.com.br/categoria-produto/scicon-gravtah/mala-bike-scicon/",
+      "status": "draft"
+    }
+  },
+  {
+    "_createdAt": "2025-08-13T05:54:14.820708Z",
+    "_id": "2d452b8a-7355-4fc5-99a4-d9e9a00c00b4",
+    "_rev": "57ce0f77-4248-4401-ac22-7254456928cb",
+    "_type": "product",
+    "_updatedAt": "2025-08-13T05:54:14.820725Z",
+    "title": "TRAVEL PLUS TRIATHLON",
+    "slug": {
+      "_type": "slug",
+      "current": "travel-plus-triathlon"
+    },
+    "price": 1790.0,
+    "category": "bolsas",
+    "inStock": true,
+    "featured": false,
+    "description": "Produto Power House Brasil: TRAVEL PLUS TRIATHLON",
+    "brand": "SCICON",
+    "image": {
+      "_type": "image",
+      "alt": "TRAVEL PLUS TRIATHLON",
+      "asset": {
+        "_ref": "image-wp-wp-mala-bike-pocket-preta-jpg-800x600-jpg",
+        "_type": "reference"
+      }
+    },
+    "_csv_data": {
+      "sku": "",
+      "original_category": "Bolsas",
+      "subcategory": "",
+      "external_ref": "https://powerhousebrasil.com.br/categoria-produto/scicon-gravtah/mala-bike-scicon/",
+      "status": "draft"
+    }
+  },
+  {
+    "_createdAt": "2025-08-13T05:54:14.821351Z",
+    "_id": "f1cef30c-b0d9-4cf1-b3ea-ba2db688a1c5",
+    "_rev": "54813597-b44c-4561-ae1f-506619d1ab32",
+    "_type": "product",
+    "_updatedAt": "2025-08-13T05:54:14.821367Z",
+    "title": "TRAVEL PLUS RACING",
+    "slug": {
+      "_type": "slug",
+      "current": "travel-plus-racing"
+    },
+    "price": 1790.0,
+    "category": "bolsas",
+    "inStock": true,
+    "featured": false,
+    "description": "Produto Power House Brasil: TRAVEL PLUS RACING",
+    "brand": "SCICON",
+    "image": {
+      "_type": "image",
+      "alt": "TRAVEL PLUS RACING",
+      "asset": {
+        "_ref": "image-wp-wp-mala-bike-pocket-preta-jpg-800x600-jpg",
+        "_type": "reference"
+      }
+    },
+    "_csv_data": {
+      "sku": "",
+      "original_category": "Bolsas",
+      "subcategory": "",
+      "external_ref": "https://powerhousebrasil.com.br/categoria-produto/scicon-gravtah/mala-bike-scicon/",
+      "status": "draft"
+    }
+  },
+  {
+    "_createdAt": "2025-08-13T05:54:14.822003Z",
+    "_id": "781cc4bd-29b3-43d4-9349-251324a7b900",
+    "_rev": "2aec492a-0aeb-43da-8c6d-937093db3df2",
+    "_type": "product",
+    "_updatedAt": "2025-08-13T05:54:14.822018Z",
+    "title": "Aerocomfort Road 3.0 TSA Triathlon",
+    "slug": {
+      "_type": "slug",
+      "current": "aerocomfort-road-30-tsa-triathlon"
+    },
+    "price": 8790.0,
+    "category": "bolsas",
+    "inStock": true,
+    "featured": false,
+    "description": "Produto Power House Brasil: Aerocomfort Road 3.0 TSA Triathlon",
+    "brand": "SCICON",
+    "image": {
+      "_type": "image",
+      "alt": "Aerocomfort Road 3.0 TSA Triathlon",
+      "asset": {
+        "_ref": "image-wp-wp-mala-bike-pocket-preta-jpg-800x600-jpg",
+        "_type": "reference"
+      }
+    },
+    "_csv_data": {
+      "sku": "",
+      "original_category": "Bolsas",
+      "subcategory": "",
+      "external_ref": "https://powerhousebrasil.com.br/categoria-produto/scicon-gravtah/mala-bike-scicon/",
+      "status": "draft"
+    }
+  },
+  {
+    "_createdAt": "2025-08-13T05:54:14.822758Z",
+    "_id": "0150040d-74e1-4388-906c-75c32bacfe5c",
+    "_rev": "f9b7005f-8a8c-4af6-866c-7cbdd02220e7",
+    "_type": "product",
+    "_updatedAt": "2025-08-13T05:54:14.822772Z",
+    "title": "AEROCOMFORT 3.0 TSA ROAD",
+    "slug": {
+      "_type": "slug",
+      "current": "aerocomfort-30-tsa-road"
+    },
+    "price": 8790.0,
+    "category": "bolsas",
+    "inStock": true,
+    "featured": false,
+    "description": "Produto Power House Brasil: AEROCOMFORT 3.0 TSA ROAD",
+    "brand": "SCICON",
+    "image": {
+      "_type": "image",
+      "alt": "AEROCOMFORT 3.0 TSA ROAD",
+      "asset": {
+        "_ref": "image-wp-wp-mala-bike-pocket-preta-jpg-800x600-jpg",
+        "_type": "reference"
+      }
+    },
+    "_csv_data": {
+      "sku": "",
+      "original_category": "Bolsas",
+      "subcategory": "",
+      "external_ref": "https://powerhousebrasil.com.br/categoria-produto/scicon-gravtah/mala-bike-scicon/",
+      "status": "draft"
+    }
+  },
+  {
+    "_createdAt": "2025-08-13T05:54:14.823419Z",
+    "_id": "1bdaac44-277e-4516-8901-34a6e6c0115e",
+    "_rev": "bb48b8ad-c59c-4acb-9035-c691d451dac8",
+    "_type": "product",
+    "_updatedAt": "2025-08-13T05:54:14.823436Z",
+    "title": "AEROTECH EVOLUTION X TSA",
+    "slug": {
+      "_type": "slug",
+      "current": "aerotech-evolution-x-tsa"
+    },
+    "price": 0.0,
+    "category": "bolsas",
+    "inStock": true,
+    "featured": false,
+    "description": "Produto Power House Brasil: AEROTECH EVOLUTION X TSA",
+    "brand": "SCICON",
+    "image": {
+      "_type": "image",
+      "alt": "AEROTECH EVOLUTION X TSA",
+      "asset": {
+        "_ref": "image-wp-wp-mala-bike-pocket-preta-jpg-800x600-jpg",
+        "_type": "reference"
+      }
+    },
+    "_csv_data": {
+      "sku": "",
+      "original_category": "Bolsas",
+      "subcategory": "",
+      "external_ref": "https://powerhousebrasil.com.br/produto/aerotech-evolution-x-tsa/",
+      "status": "draft"
+    }
+  },
+  {
+    "_createdAt": "2025-08-13T05:54:14.826252Z",
+    "_id": "e19c7d54-63fb-4839-b1f5-36a2aeeee22e",
+    "_rev": "43ccf154-0a57-497b-9f96-1c326e9b12b1",
+    "_type": "product",
+    "_updatedAt": "2025-08-13T05:54:14.826268Z",
+    "title": "LOOK TACO GRIP",
+    "slug": {
+      "_type": "slug",
+      "current": "look-taco-grip"
+    },
+    "price": 199.0,
+    "category": "equipamento",
+    "inStock": true,
+    "featured": false,
+    "description": "Produto Power House Brasil: LOOK TACO GRIP",
+    "brand": "LOOK",
+    "image": {
+      "_type": "image",
+      "alt": "LOOK TACO GRIP",
+      "asset": {
+        "_ref": "image-wp-wp-camara-de-ar-700x48mm-20-à-25-png-800x600-jpg",
+        "_type": "reference"
+      }
+    },
+    "_csv_data": {
+      "sku": "",
+      "original_category": "Equipamento",
+      "subcategory": "",
+      "external_ref": "https://powerhousebrasil.com.br/categoria-produto/scicon-gravtah/pedais-look/",
+      "status": "draft"
+    }
+  },
+  {
+    "_createdAt": "2025-08-13T05:54:14.829295Z",
+    "_id": "a5ba8fbf-fbb3-46bf-a7e3-224f58aa5680",
+    "_rev": "7c1650ad-bdc3-48e8-8ca3-a056cd18beb8",
+    "_type": "product",
+    "_updatedAt": "2025-08-13T05:54:14.829325Z",
+    "title": "LOOK TACOS",
+    "slug": {
+      "_type": "slug",
+      "current": "look-tacos"
+    },
+    "price": 149.0,
+    "category": "equipamento",
+    "inStock": true,
+    "featured": false,
+    "description": "Produto Power House Brasil: LOOK TACOS",
+    "brand": "LOOK",
+    "image": {
+      "_type": "image",
+      "alt": "LOOK TACOS",
+      "asset": {
+        "_ref": "image-wp-wp-camara-de-ar-700x48mm-20-à-25-png-800x600-jpg",
+        "_type": "reference"
+      }
+    },
+    "_csv_data": {
+      "sku": "",
+      "original_category": "Equipamento",
+      "subcategory": "",
+      "external_ref": "https://powerhousebrasil.com.br/categoria-produto/scicon-gravtah/pedais-look/",
+      "status": "draft"
+    }
+  },
+  {
+    "_createdAt": "2025-08-13T05:54:14.832461Z",
+    "_id": "355421d5-f1e9-466c-b55d-26f63cec6b47",
+    "_rev": "df9a8af3-c61d-4eea-8b1e-7a78099e73ed",
+    "_type": "product",
+    "_updatedAt": "2025-08-13T05:54:14.832479Z",
+    "title": "LOOK BLADE CARBON CERAMIC",
+    "slug": {
+      "_type": "slug",
+      "current": "look-blade-carbon-ceramic"
+    },
+    "price": 2590.0,
+    "category": "equipamento",
+    "inStock": true,
+    "featured": false,
+    "description": "Produto Power House Brasil: LOOK BLADE CARBON CERAMIC",
+    "brand": "LOOK",
+    "image": {
+      "_type": "image",
+      "alt": "LOOK BLADE CARBON CERAMIC",
+      "asset": {
+        "_ref": "image-wp-wp-camara-de-ar-700x48mm-20-à-25-png-800x600-jpg",
+        "_type": "reference"
+      }
+    },
+    "_csv_data": {
+      "sku": "",
+      "original_category": "Equipamento",
+      "subcategory": "",
+      "external_ref": "https://powerhousebrasil.com.br/categoria-produto/scicon-gravtah/pedais-look/",
+      "status": "draft"
+    }
+  },
+  {
+    "_createdAt": "2025-08-13T05:54:14.835474Z",
+    "_id": "aae7e7ac-f3fd-49a3-9327-548bd848f89b",
+    "_rev": "ab7c04e7-cc90-406d-ac5f-75c616bc3310",
+    "_type": "product",
+    "_updatedAt": "2025-08-13T05:54:14.835500Z",
+    "title": "LOOK KEO BLADE CARBON",
+    "slug": {
+      "_type": "slug",
+      "current": "look-keo-blade-carbon"
+    },
+    "price": 1829.0,
+    "category": "equipamento",
+    "inStock": true,
+    "featured": false,
+    "description": "Produto Power House Brasil: LOOK KEO BLADE CARBON",
+    "brand": "LOOK",
+    "image": {
+      "_type": "image",
+      "alt": "LOOK KEO BLADE CARBON",
+      "asset": {
+        "_ref": "image-wp-wp-camara-de-ar-700x48mm-20-à-25-png-800x600-jpg",
+        "_type": "reference"
+      }
+    },
+    "_csv_data": {
+      "sku": "",
+      "original_category": "Equipamento",
+      "subcategory": "",
+      "external_ref": "https://powerhousebrasil.com.br/categoria-produto/scicon-gravtah/pedais-look/",
+      "status": "draft"
+    }
+  },
+  {
+    "_createdAt": "2025-08-13T05:54:14.838253Z",
+    "_id": "0d7ed1e0-6662-4258-b0ac-532e7db93dd3",
+    "_rev": "5020d90d-d612-4983-a5c6-7a417896a36a",
+    "_type": "product",
+    "_updatedAt": "2025-08-13T05:54:14.838276Z",
+    "title": "LOOK KEO 2 MAX CARBON",
+    "slug": {
+      "_type": "slug",
+      "current": "look-keo-2-max-carbon"
+    },
+    "price": 1449.0,
+    "category": "equipamento",
+    "inStock": true,
+    "featured": false,
+    "description": "Produto Power House Brasil: LOOK KEO 2 MAX CARBON",
+    "brand": "LOOK",
+    "image": {
+      "_type": "image",
+      "alt": "LOOK KEO 2 MAX CARBON",
+      "asset": {
+        "_ref": "image-wp-wp-camara-de-ar-700x48mm-20-à-25-png-800x600-jpg",
+        "_type": "reference"
+      }
+    },
+    "_csv_data": {
+      "sku": "",
+      "original_category": "Equipamento",
+      "subcategory": "",
+      "external_ref": "https://powerhousebrasil.com.br/categoria-produto/scicon-gravtah/pedais-look/",
+      "status": "draft"
+    }
+  },
+  {
+    "_createdAt": "2025-08-13T05:54:14.841110Z",
+    "_id": "d795a37c-6393-4fa8-a635-d6e3500c05d1",
+    "_rev": "a6f6a841-9ade-4024-8658-0f97d1812463",
+    "_type": "product",
+    "_updatedAt": "2025-08-13T05:54:14.841127Z",
+    "title": "LOOK KEO 2 MAX",
+    "slug": {
+      "_type": "slug",
+      "current": "look-keo-2-max"
+    },
+    "price": 1190.0,
+    "category": "equipamento",
+    "inStock": true,
+    "featured": false,
+    "description": "Produto Power House Brasil: LOOK KEO 2 MAX",
+    "brand": "LOOK",
+    "image": {
+      "_type": "image",
+      "alt": "LOOK KEO 2 MAX",
+      "asset": {
+        "_ref": "image-wp-wp-camara-de-ar-700x48mm-20-à-25-png-800x600-jpg",
+        "_type": "reference"
+      }
+    },
+    "_csv_data": {
+      "sku": "",
+      "original_category": "Equipamento",
+      "subcategory": "",
+      "external_ref": "https://powerhousebrasil.com.br/categoria-produto/scicon-gravtah/pedais-look/",
+      "status": "draft"
+    }
+  },
+  {
+    "_createdAt": "2025-08-13T05:54:14.843823Z",
+    "_id": "a314e95f-4fc6-4511-a6d1-55bd7f5e06b0",
+    "_rev": "b9163c02-032f-46e6-96b7-63da752fc9a7",
+    "_type": "product",
+    "_updatedAt": "2025-08-13T05:54:14.843840Z",
+    "title": "LOOK KEO CLASSIC 3 PLUS+",
+    "slug": {
+      "_type": "slug",
+      "current": "look-keo-classic-3-plus"
+    },
+    "price": 843.5,
+    "category": "equipamento",
+    "inStock": true,
+    "featured": false,
+    "description": "Produto Power House Brasil: LOOK KEO CLASSIC 3 PLUS+",
+    "brand": "LOOK",
+    "image": {
+      "_type": "image",
+      "alt": "LOOK KEO CLASSIC 3 PLUS+",
+      "asset": {
+        "_ref": "image-wp-wp-camara-de-ar-700x48mm-20-à-25-png-800x600-jpg",
+        "_type": "reference"
+      }
+    },
+    "_csv_data": {
+      "sku": "",
+      "original_category": "Equipamento",
+      "subcategory": "",
+      "external_ref": "https://powerhousebrasil.com.br/categoria-produto/scicon-gravtah/pedais-look/",
+      "status": "draft"
+    }
+  },
+  {
+    "_createdAt": "2025-08-13T05:54:14.847138Z",
+    "_id": "b18f505b-f1e3-47f9-a3ce-e2a5c65631bb",
+    "_rev": "1f783ef4-ba83-4ba3-b8a1-08b739431ebd",
+    "_type": "product",
+    "_updatedAt": "2025-08-13T05:54:14.847167Z",
+    "title": "LOOK KEO CLASSIC 3",
+    "slug": {
+      "_type": "slug",
+      "current": "look-keo-classic-3"
+    },
+    "price": 612.5,
+    "category": "equipamento",
+    "inStock": true,
+    "featured": false,
+    "description": "Produto Power House Brasil: LOOK KEO CLASSIC 3",
+    "brand": "LOOK",
+    "image": {
+      "_type": "image",
+      "alt": "LOOK KEO CLASSIC 3",
+      "asset": {
+        "_ref": "image-wp-wp-camara-de-ar-700x48mm-20-à-25-png-800x600-jpg",
+        "_type": "reference"
+      }
+    },
+    "_csv_data": {
+      "sku": "",
+      "original_category": "Equipamento",
+      "subcategory": "",
+      "external_ref": "https://powerhousebrasil.com.br/categoria-produto/scicon-gravtah/pedais-look/",
+      "status": "draft"
+    }
+  },
+  {
+    "_createdAt": "2025-08-13T05:54:14.848569Z",
+    "_id": "939ca5c7-e27e-446f-ae5e-5fd12a2c1208",
+    "_rev": "f2f4513f-4ea2-476b-be5a-a3c21d103ac9",
+    "_type": "product",
+    "_updatedAt": "2025-08-13T05:54:14.848594Z",
+    "title": "Luvas Esportivas de Ciclismo Oil Slick",
+    "slug": {
+      "_type": "slug",
+      "current": "luvas-esportivas-de-ciclismo-oil-slick"
+    },
+    "price": 299.0,
+    "category": "equipamento",
+    "inStock": true,
+    "featured": false,
+    "description": "Produto Power House Brasil: Luvas Esportivas de Ciclismo Oil Slick",
+    "brand": "SUPACAZ",
+    "image": {
+      "_type": "image",
+      "alt": "Luvas Esportivas de Ciclismo Oil Slick",
+      "asset": {
+        "_ref": "image-wp-wp-luva-fechada-de-ciclismo-jpg-800x600-jpg",
+        "_type": "reference"
+      }
+    },
+    "_csv_data": {
+      "sku": "",
+      "original_category": "Equipamento",
+      "subcategory": "Luva",
+      "external_ref": "https://powerhousebrasil.com.br/categoria-produto/scicon-gravtah/luvas-supacaz/",
+      "status": "draft"
+    }
+  },
+  {
+    "_createdAt": "2025-08-13T05:54:14.849616Z",
+    "_id": "646cc418-82bf-43b0-9114-cbaf9a38b445",
+    "_rev": "5d9b142f-5387-40cc-87b4-3a3770091805",
+    "_type": "product",
+    "_updatedAt": "2025-08-13T05:54:14.849643Z",
+    "title": "Capa para sapatilha Velotoze – Silicone",
+    "slug": {
+      "_type": "slug",
+      "current": "capa-para-sapatilha-velotoze-silicone"
+    },
+    "price": 290.0,
+    "category": "equipamento",
+    "inStock": true,
+    "featured": false,
+    "description": "Produto Power House Brasil: Capa para sapatilha Velotoze – Silicone",
+    "brand": "VELOTOZE",
+    "image": {
+      "_type": "image",
+      "alt": "Capa para sapatilha Velotoze – Silicone",
+      "asset": {
+        "_ref": "image-wp-wp-capa-para-sapatilha-velotoze-silicone-jpg-800x600-jpg",
+        "_type": "reference"
+      }
+    },
+    "_csv_data": {
+      "sku": "",
+      "original_category": "Equipamento",
+      "subcategory": "Botinha",
+      "external_ref": "https://powerhousebrasil.com.br/categoria-produto/scicon-gravtah/",
+      "status": "draft"
+    }
+  },
+  {
+    "_createdAt": "2025-08-13T05:54:14.850531Z",
+    "_id": "0c6fc25e-22a1-42e9-a779-864f89708229",
+    "_rev": "07c0e209-b26c-4f38-817b-69ea24ffea81",
+    "_type": "product",
+    "_updatedAt": "2025-08-13T05:54:14.850548Z",
+    "title": "Capa Sapatilha Latex MTB Cano Alto Preta Tam. P",
+    "slug": {
+      "_type": "slug",
+      "current": "capa-sapatilha-latex-mtb-cano-alto-preta-tam-p"
+    },
+    "price": 250.0,
+    "category": "equipamento",
+    "inStock": true,
+    "featured": false,
+    "description": "Produto Power House Brasil: Capa Sapatilha Latex MTB Cano Alto Preta Tam. P",
+    "brand": "SCICON",
+    "image": {
+      "_type": "image",
+      "alt": "Capa Sapatilha Latex MTB Cano Alto Preta Tam. P",
+      "asset": {
+        "_ref": "image-wp-wp-capa-para-sapatilha-velotoze-silicone-jpg-800x600-jpg",
+        "_type": "reference"
+      }
+    },
+    "_csv_data": {
+      "sku": "",
+      "original_category": "Equipamento",
+      "subcategory": "Botinha",
+      "external_ref": "https://powerhousebrasil.com.br/categoria-produto/scicon-gravtah/capa-para-sapatilha/",
+      "status": "draft"
+    }
+  },
+  {
+    "_createdAt": "2025-08-13T05:54:14.852265Z",
+    "_id": "a82e99da-dfc3-4abc-9f90-608d7e772f44",
+    "_rev": "b7acdc84-9fd2-476a-84cd-5572e63d6481",
+    "_type": "product",
+    "_updatedAt": "2025-08-13T05:54:14.852284Z",
+    "title": "Pneu Hutchinson Touareg Tlr Hardskin Tan 700mmx40 – Pv529751",
+    "slug": {
+      "_type": "slug",
+      "current": "pneu-hutchinson-touareg-tlr-hardskin-tan-700mmx40-pv529751"
+    },
+    "price": 551.0,
+    "category": "equipamento",
+    "inStock": true,
+    "featured": false,
+    "description": "Produto Power House Brasil: Pneu Hutchinson Touareg Tlr Hardskin Tan 700mmx40 – Pv529751",
+    "brand": "HUTCHINSON",
+    "image": {
+      "_type": "image",
+      "alt": "Pneu Hutchinson Touareg Tlr Hardskin Tan 700mmx40 – Pv529751",
+      "asset": {
+        "_ref": "image-wp-wp-pneu-fusion-5-performance-tlr-700mmx28-png-800x600-jpg",
+        "_type": "reference"
+      }
+    },
+    "_csv_data": {
+      "sku": "",
+      "original_category": "Equipamento",
+      "subcategory": "",
+      "external_ref": "https://powerhousebrasil.com.br/categoria-produto/scicon-gravtah/",
+      "status": "draft"
+    }
+  },
+  {
+    "_createdAt": "2025-08-13T05:54:14.853926Z",
+    "_id": "63c054f3-c9f7-4bab-b0cd-30778844fdfe",
+    "_rev": "d7524515-78f8-4541-939c-d83831816062",
+    "_type": "product",
+    "_updatedAt": "2025-08-13T05:54:14.853941Z",
+    "title": "Pneu Hutchinson Touareg Tlr Hardskin Tan 700mmx45 – Pv529231",
+    "slug": {
+      "_type": "slug",
+      "current": "pneu-hutchinson-touareg-tlr-hardskin-tan-700mmx45-pv529231"
+    },
+    "price": 551.0,
+    "category": "equipamento",
+    "inStock": true,
+    "featured": false,
+    "description": "Produto Power House Brasil: Pneu Hutchinson Touareg Tlr Hardskin Tan 700mmx45 – Pv529231",
+    "brand": "HUTCHINSON",
+    "image": {
+      "_type": "image",
+      "alt": "Pneu Hutchinson Touareg Tlr Hardskin Tan 700mmx45 – Pv529231",
+      "asset": {
+        "_ref": "image-wp-wp-pneu-fusion-5-performance-tlr-700mmx28-png-800x600-jpg",
+        "_type": "reference"
+      }
+    },
+    "_csv_data": {
+      "sku": "",
+      "original_category": "Equipamento",
+      "subcategory": "",
+      "external_ref": "https://powerhousebrasil.com.br/categoria-produto/scicon-gravtah/",
+      "status": "draft"
+    }
+  },
+  {
+    "_createdAt": "2025-08-13T05:54:14.854903Z",
+    "_id": "afd0ddc8-a14a-4cc0-a0b7-a5100efaa960",
+    "_rev": "079062df-912e-4b24-8fad-df5f129e869e",
+    "_type": "product",
+    "_updatedAt": "2025-08-13T05:54:14.854920Z",
+    "title": "Hutchinson Skeleton 2.3",
+    "slug": {
+      "_type": "slug",
+      "current": "hutchinson-skeleton-23"
+    },
+    "price": 680.0,
+    "category": "equipamento",
+    "inStock": true,
+    "featured": false,
+    "description": "Produto Power House Brasil: Hutchinson Skeleton 2.3",
+    "brand": "HUTCHINSON",
+    "image": {
+      "_type": "image",
+      "alt": "Hutchinson Skeleton 2.3",
+      "asset": {
+        "_ref": "image-wp-wp-hutchinson-skeleton-23-png-800x600-jpg",
+        "_type": "reference"
+      }
+    },
+    "_csv_data": {
+      "sku": "",
+      "original_category": "Equipamento",
+      "subcategory": "",
+      "external_ref": "https://powerhousebrasil.com.br/categoria-produto/scicon-gravtah/",
+      "status": "draft"
+    }
+  },
+  {
+    "_createdAt": "2025-08-13T05:54:14.856571Z",
+    "_id": "d1b45d9b-f06f-475d-a80a-588fb91e1b4a",
+    "_rev": "3e1b51ac-1c82-4686-b27e-7a1fb13283ad",
+    "_type": "product",
+    "_updatedAt": "2025-08-13T05:54:14.856592Z",
+    "title": "Pneu Python 2 Tlr 127 29×2,25",
+    "slug": {
+      "_type": "slug",
+      "current": "pneu-python-2-tlr-127-29225"
+    },
+    "price": 558.25,
+    "category": "equipamento",
+    "inStock": true,
+    "featured": false,
+    "description": "Produto Power House Brasil: Pneu Python 2 Tlr 127 29×2,25",
+    "brand": "HUTCHINSON",
+    "image": {
+      "_type": "image",
+      "alt": "Pneu Python 2 Tlr 127 29×2,25",
+      "asset": {
+        "_ref": "image-wp-wp-pneu-fusion-5-performance-tlr-700mmx28-png-800x600-jpg",
+        "_type": "reference"
+      }
+    },
+    "_csv_data": {
+      "sku": "",
+      "original_category": "Equipamento",
+      "subcategory": "",
+      "external_ref": "https://powerhousebrasil.com.br/categoria-produto/scicon-gravtah/pneus-mtb/",
+      "status": "draft"
+    }
+  }
+]

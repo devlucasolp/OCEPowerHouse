@@ -1,0 +1,7 @@
+<svg width="60" height="60" viewBox="0 0 60 60" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="60" height="60" rx="8" fill="#F3F4F6"/>
+  <path d="M20 25H40V35H20V25Z" stroke="#9CA3AF" stroke-width="2" fill="none"/>
+  <circle cx="25" cy="29" r="2" fill="#9CA3AF"/>
+  <path d="M35 33L32 30L28 34L26 32L20 38H40L35 33Z" fill="#9CA3AF"/>
+  <text x="30" y="45" text-anchor="middle" fill="#6B7280" font-family="Arial, sans-serif" font-size="8">Produto</text>
+</svg>

@@ -1,0 +1,15 @@
+import { type SchemaTypeDefinition } from 'sanity'
+
+import {blockContentType} from './blockContentType'
+import {categoryType} from './categoryType'
+import {postType} from './postType'
+import {authorType} from './authorType'
+import {planType} from './planType'
+import {coachType} from './coachType'
+import productType from './productType'
+import powercampType from './powercampType'
+import couponType from './couponType'
+
+export const schema: { types: SchemaTypeDefinition[] } = {
+  types: [blockContentType, categoryType, postType, authorType, planType, coachType, productType, powercampType, couponType],
+}

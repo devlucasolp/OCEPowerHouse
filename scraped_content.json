@@ -1,0 +1,107 @@
+{
+  "coaches": [
+    {
+      "name": "Hugo Prado Neto",
+      "role": "Fundador e coach World Class da OCE há 25 anos. Atual Campeão Mundial Masters de Maratona MTB, atleta com 3 décadas de experiência e vasta bagagem competitiva. Compete em Mountain Bike, Ciclismo de Estrada e, em breve, Gravel, sempre buscando novos desafios e superação de limites. Treino favorito: longos de 4 horas, onde a aptidão física e mental sobressai, desenvolvendo resistência e força mental. Especialista em periodização de treinos para atletas de alto rendimento, com metodologia própria desenvolvida ao longo de décadas de experiência. Atualmente focado em provas longas como Brasil Ride 2024 e Cape Epic 2025, compartilhando sua paixão e conhecimento com atletas que buscam excelência no ciclismo de resistência.",
+      "bio": "Fundador e coach World Class da OCE há 25 anos. Atual Campeão Mundial Masters de Maratona MTB, atleta com 3 décadas de experiência e vasta bagagem competitiva. Compete em Mountain Bike, Ciclismo de Estrada e, em breve, Gravel, sempre buscando novos desafios e superação de limites. Treino favorito: longos de 4 horas, onde a aptidão física e mental sobressai, desenvolvendo resistência e força mental. Especialista em periodização de treinos para atletas de alto rendimento, com metodologia própria desenvolvida ao longo de décadas de experiência. Atualmente focado em provas longas como Brasil Ride 2024 e Cape Epic 2025, compartilhando sua paixão e conhecimento com atletas que buscam excelência no ciclismo de resistência.",
+      "imageUrl": "https://powerhousebrasil.com.br/_next/image?url=%2Fimg%2Fteam%2Fhugo_perfil.jpg&w=3840&q=75",
+      "imageAlt": "Hugo Prado Neto"
+    },
+    {
+      "name": "João Paulo Calado",
+      "role": "Formado em Educação Física pela PUC Minas, é coach World Class na OCE desde 2014, acumulando uma década de experiência no desenvolvimento de atletas de alto nível. Iniciou sua trajetória no mountain bike em 2002, com destaque na modalidade XCO e participação em provas nacionais e Pan-Americanos, construindo uma sólida base competitiva. Atualmente, também dedica-se ao ciclismo de estrada, maratonas e ultramaratonas, diversificando sua expertise em diferentes modalidades do ciclismo. Especialista em análise biomecânica e otimização de performance, sempre com foco holístico nos esportes, na vida profissional e pessoal dos seus atletas. Com metodologia científica e abordagem personalizada, está pronto para ajudar atletas a superarem seus limites, alcançarem seus objetivos e descobrirem seu verdadeiro potencial no ciclismo de resistência.",
+      "bio": "Formado em Educação Física pela PUC Minas, é coach World Class na OCE desde 2014, acumulando uma década de experiência no desenvolvimento de atletas de alto nível. Iniciou sua trajetória no mountain bike em 2002, com destaque na modalidade XCO e participação em provas nacionais e Pan-Americanos, construindo uma sólida base competitiva. Atualmente, também dedica-se ao ciclismo de estrada, maratonas e ultramaratonas, diversificando sua expertise em diferentes modalidades do ciclismo. Especialista em análise biomecânica e otimização de performance, sempre com foco holístico nos esportes, na vida profissional e pessoal dos seus atletas. Com metodologia científica e abordagem personalizada, está pronto para ajudar atletas a superarem seus limites, alcançarem seus objetivos e descobrirem seu verdadeiro potencial no ciclismo de resistência.",
+      "imageUrl": "https://powerhousebrasil.com.br/_next/image?url=%2Fimg%2Fteam%2Fjoao_perfil.jpg&w=3840&q=75",
+      "imageAlt": "João Paulo Calado"
+    },
+    {
+      "name": "Guilherme Bitencourt",
+      "role": "Coach Master OCE é Bacharel e Licenciado em Educação Física, com duas pós-graduações: Biomecânica aplicada ao exercício físico e Endurance do baixo ao alto rendimento. Especialista em Recovery manual e instrumental, ventosaterapia e apaixonado por otimizar performance e recuperação. Atua como Personal Trainer, com ampla experiência em prescrição de treinos individualizados. Conheceu a bike aos 15 anos e, desde então, compete em maratonas XCM e em ultramaratonas pelo país, como a Brasil Ride, entre outras grandes provas. Apaixonado pela profissão, está em constante busca de conhecimento para entregar sempre o melhor.",
+      "bio": "Coach Master OCE é Bacharel e Licenciado em Educação Física, com duas pós-graduações: Biomecânica aplicada ao exercício físico e Endurance do baixo ao alto rendimento. Especialista em Recovery manual e instrumental, ventosaterapia e apaixonado por otimizar performance e recuperação. Atua como Personal Trainer, com ampla experiência em prescrição de treinos individualizados. Conheceu a bike aos 15 anos e, desde então, compete em maratonas XCM e em ultramaratonas pelo país, como a Brasil Ride, entre outras grandes provas. Apaixonado pela profissão, está em constante busca de conhecimento para entregar sempre o melhor.",
+      "imageUrl": "https://powerhousebrasil.com.br/_next/image?url=%2Fimg%2Fteam%2Fguilherme_perfil.jpg&w=3840&q=75",
+      "imageAlt": "Guilherme Bitencourt"
+    },
+    {
+      "name": "Power House Brasil",
+      "role": "Especialistas em performance com produtos de qualidade e conteúdo exclusivo.",
+      "bio": "Nova Lima – MG – CEP: 34006-069",
+      "imageUrl": "https://powerhousebrasil.com.br/_next/image?url=%2Fimg%2Fstatic%2Flogo.png&w=96&q=75",
+      "imageAlt": "Power House Brasil"
+    },
+    {
+      "name": "Menu",
+      "role": "",
+      "bio": "HomeLojaPowerCampsCoachesBlogPlanosSuporteCentral de AjudaFAQPolítica de PrivacidadeTermos de UsoRedes Sociais",
+      "imageUrl": "",
+      "imageAlt": ""
+    }
+  ],
+  "planos": [
+    {
+      "nome": "Coach",
+      "valor": "",
+      "valorNumerico": 0,
+      "coach": "",
+      "descricao": "Hugo Prado Neto",
+      "beneficios": [
+        "Treinamento Customizado com Hugo Prado Neto",
+        "Ajustes ilimitados do treinamento",
+        "Acesso à comunidade OCE no Whatsapp",
+        "Análise semanal dos treinos pelo Training Peaks e WKO5",
+        "Comunicação ilimitada por whatsapp, telefone ou vídeo chamada",
+        "Comunicação ilimitada por e-mail",
+        "Direito a todos os descontos e benefícios do nosso KOM de vantagens. (Descontos exclusivos nos PowerCamps, nas principais provas e produtos)",
+        "Treino de força personalizado incluso caso necessite"
+      ]
+    },
+    {
+      "nome": "Coach",
+      "valor": "R$ 589",
+      "valorNumerico": 589,
+      "coach": "",
+      "descricao": "João Paulo Calado",
+      "beneficios": [
+        "Treinamento Customizado com João Paulo Calado",
+        "Ajustes ilimitados do treinamento",
+        "Acesso à comunidade OCE no Whatsapp",
+        "Análise semanal dos treinos pelo Training Peaks e WKO5",
+        "Comunicação ilimitada por whatsapp, telefone ou vídeo chamada",
+        "Comunicação ilimitada por e-mail",
+        "Direito a todos os descontos e benefícios do nosso KOM de vantagens. (Descontos exclusivos nos PowerCamps, nas principais provas e produtos)",
+        "Treino de força personalizado incluso caso necessite"
+      ]
+    },
+    {
+      "nome": "Coach",
+      "valor": "R$ 399",
+      "valorNumerico": 399,
+      "coach": "",
+      "descricao": "Guilherme Bittencourt",
+      "beneficios": [
+        "Treinamento Customizado com Guilherme Bittencourt",
+        "Ajustes ilimitados do treinamento",
+        "Acesso à comunidade OCE no Whatsapp",
+        "Análise semanal dos treinos pelo Training Peaks e WKO5",
+        "Comunicação ilimitada por whatsapp, telefone ou vídeo chamada",
+        "Comunicação ilimitada por e-mail",
+        "Direito a todos os descontos e benefícios do nosso KOM de vantagens. (Descontos exclusivos nos PowerCamps, nas principais provas e produtos)",
+        "Treino de força personalizado incluso caso necessite"
+      ]
+    },
+    {
+      "nome": "Treinamento Customizado com coach OCE",
+      "valor": "R$ 249",
+      "valorNumerico": 249,
+      "coach": "",
+      "descricao": "Treinamento Customizado com coach OCE",
+      "beneficios": [
+        "Treinamento Customizado com coach OCE",
+        "Ajustes mensais do treinamento",
+        "Acesso à comunidade OCE no Whatsapp",
+        "Comunicação mensal por whatsapp, telefone ou vídeo chamada",
+        "Direito a todos os descontos e benefícios do nosso KOM de vantagens. (Descontos exclusivos nos PowerCamps, nas principais provas e produtos)"
+      ]
+    }
+  ],
+  "scrapedAt": "2025-09-04T12:10:53.211Z"
+}

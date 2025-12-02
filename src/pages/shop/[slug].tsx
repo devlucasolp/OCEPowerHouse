@@ -1,0 +1,478 @@
+import { GetStaticPaths, GetStaticProps } from 'next';
+import Image from 'next/image';
+import { getAllProducts, getProductBySlug } from '../../lib/sanity';
+import { urlFor, getImageUrl } from '../../lib/sanityImage';
+import { getDescriptionText, getTruncatedDescription } from '../../lib/textUtils';
+import { getProductImageUrl, getShippingCost } from '../../lib/productUtils';
+import { useCart } from '../../lib/useCart';
+import Seo from '../../components/Seo';
+import ButtonPrimary from '../../components/ButtonPrimary';
+import ProductCard from '../../components/ProductCard';
+import Link from 'next/link';
+import { useMemo, useState } from 'react';
+import { Plus, Minus } from 'lucide-react';
+import type { Product, ProductVariant } from '../../types/product';
+
+// Função para verificar se a promoção ainda é válida
+const isPromotionValid = (saleEndDate?: string): boolean => {
+  if (!saleEndDate) return false;
+  return new Date(saleEndDate) > new Date();
+};
+
+interface ProductPageProps {
+  product: Product;
+  related: Product[];
+}
+
+const ProductPage = ({ product, related }: ProductPageProps) => {
+  const { addToCart } = useCart();
+  const [added, setAdded] = useState(false);
+  const [selectedImageIndex, setSelectedImageIndex] = useState(0);
+  const [quantity, setQuantity] = useState(1); // Estado para quantidade
+
+  const hasVariants = Array.isArray(product.variants) && product.variants.length > 0;
+
+  // Selecionar primeira variante em estoque como padrão (se existir)
+  const defaultVariantKey = useMemo(() => {
+    if (!hasVariants) return null as string | null;
+    const firstInStock = product.variants!.find((v) => v?.inStock !== false);
+    return (firstInStock?._key as string | undefined) || (product.variants![0]?._key as string | undefined) || null;
+  }, [hasVariants, product.variants]);
+
+  const [selectedVariantKey, setSelectedVariantKey] = useState<string | null>(defaultVariantKey);
+
+  const selectedVariant: ProductVariant | undefined = useMemo(() => {
+    if (!hasVariants || !selectedVariantKey) return undefined;
+    return product.variants!.find((v) => v._key === selectedVariantKey);
+  }, [hasVariants, product.variants, selectedVariantKey]);
+
+  // Array com todas as imagens disponíveis (principal + adicionais)
+  const allImages = useMemo(() => {
+    const images = [];
+    
+    // Imagem principal (da variante selecionada ou do produto)
+    const mainImage = selectedVariant?.image || product.image;
+    if (mainImage) {
+      images.push(mainImage);
+    }
+    
+    // Imagens adicionais do produto
+    if (product.additionalImages && Array.isArray(product.additionalImages)) {
+      images.push(...product.additionalImages);
+    }
+    
+    return images;
+  }, [product.image, product.additionalImages, selectedVariant?.image]);
+
+  // Lógica de estoque e limite de quantidade
+  const stockQuantity = useMemo(() => {
+    if (hasVariants && selectedVariant) {
+      // Se tem variante selecionada, usa o estoque da variante
+      return typeof selectedVariant.stockQuantity === 'number' ? selectedVariant.stockQuantity : null;
+    }
+    // Senão, usa o estoque do produto principal
+    return typeof product.stockQuantity === 'number' ? product.stockQuantity : null;
+  }, [hasVariants, selectedVariant, product.stockQuantity]);
+
+  const maxQuantity = stockQuantity || 999; // Se não tem estoque definido, permite até 999
+  const isInStock = product.inStock !== false && (!hasVariants || selectedVariant?.inStock !== false);
+
+  // Funções para controlar quantidade
+  const increaseQuantity = () => {
+    if (quantity < maxQuantity) {
+      setQuantity(prev => prev + 1);
+    }
+  };
+
+  const decreaseQuantity = () => {
+    if (quantity > 1) {
+      setQuantity(prev => prev - 1);
+    }
+  };
+
+  const handleQuantityChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const value = parseInt(e.target.value) || 1;
+    if (value >= 1 && value <= maxQuantity) {
+      setQuantity(value);
+    }
+  };
+
+  // Reset quantidade quando mudar variante
+  useMemo(() => {
+    setQuantity(1);
+  }, [selectedVariantKey]);
+
+  if (!product) return <div className="text-center py-16">Produto não encontrado.</div>;
+
+  const descriptionText = getDescriptionText(product.description);
+  const description = getTruncatedDescription(product.description, 160);
+  const url = `https://powerhousebrasil.com.br/shop/${(product.slug as any).current}`;
+
+  const basePrice = Number(product.price) || 0;
+  const priceModifier = selectedVariant?.priceModifier ? Number(selectedVariant.priceModifier) : 0;
+  const finalPrice = basePrice + priceModifier;
+  const shippingCost = getShippingCost(product);
+
+  // Lógica de promoção
+  const isOnSale = product?.isOnSale && isPromotionValid(product?.saleEndDate);
+  const displayPrice = isOnSale ? (product?.salePrice || 0) + priceModifier : finalPrice;
+  const originalPrice = isOnSale ? finalPrice : null;
+
+  const placeholderImage = '/img/static/placeholder.svg';
+  const currentImage = allImages[selectedImageIndex] || selectedVariant?.image || product.image;
+  const displayImageUrl = getImageUrl(currentImage) || placeholderImage;
+
+  // Informações de parcelamento do Mercado Pago
+  const currency = useMemo(
+    () => new Intl.NumberFormat('pt-BR', { style: 'currency', currency: 'BRL' }),
+    []
+  );
+
+  const resetImageIndex = () => setSelectedImageIndex(0);
+
+  // Efeito para resetar índice quando mudar variante
+  useMemo(() => {
+    resetImageIndex();
+  }, [selectedVariantKey, allImages.length]);
+
+  const handleAddToCart = () => {
+    // Monta um produto com identificação única por variante para o carrinho
+    const variantSuffix = selectedVariant?._key ? `::${selectedVariant._key}` : '';
+    const productWithVariant = {
+      ...product,
+      id: `${(product.id || product._id) ?? 'prod'}${variantSuffix}`,
+      title: selectedVariant?.name ? `${product.title} - ${selectedVariant.name}` : product.title,
+      price: displayPrice, // Usa o preço promocional se aplicável
+      image: selectedVariant?.image || product.image,
+      // Anexa metadados úteis, incluindo estoque da variação
+      selectedVariant: selectedVariant 
+        ? { 
+            _key: selectedVariant._key, 
+            name: selectedVariant.name, 
+            priceModifier: selectedVariant.priceModifier,
+            stockQuantity: selectedVariant.stockQuantity
+          } 
+        : undefined,
+    } as any as Product;
+
+    // Adiciona a quantidade especificada ao carrinho
+    for (let i = 0; i < quantity; i++) {
+      addToCart(productWithVariant);
+    }
+    
+    setAdded(true);
+    setTimeout(() => setAdded(false), 2000);
+  };
+
+  return (
+    <>
+      <Seo title={product.title} description={description} image={displayImageUrl} url={url} />
+      <div className="max-w-5xl mx-auto px-4 py-10 grid grid-cols-1 md:grid-cols-2 gap-12 items-start">
+        {/* Galeria de imagens do produto */}
+        <div className="w-full flex flex-col gap-4">
+          {/* Imagem principal */}
+          <div className="w-full flex justify-center">
+            <div className="relative w-full aspect-square max-w-md rounded-xl overflow-hidden">
+              {/* Badge de promoção */}
+              {isOnSale && (
+                <div className="absolute top-2 left-2 z-10">
+                  <span className="bg-red-500 text-white text-xs font-bold px-2 py-1 rounded">
+                    PROMOÇÃO
+                  </span>
+                </div>
+              )}
+              {displayImageUrl && displayImageUrl !== placeholderImage ? (
+                 <>
+                  {/* Teste com img tag normal */}
+                  <img
+                    src={displayImageUrl}
+                    alt={selectedVariant?.name ? `${product.title} - ${selectedVariant.name}` : product.title}
+                    className="w-full h-full object-cover object-center"
+                    onLoad={() => {
+                      console.log('✅ Imagem carregada com sucesso (img tag):', displayImageUrl);
+                    }}
+                    onError={(e) => {
+                      console.error('❌ Erro ao carregar imagem (img tag):', displayImageUrl);
+                      // Fallback para Image do Next.js se img falhar
+                      const imgElement = e.target as HTMLImageElement;
+                      imgElement.style.display = 'none';
+                      const nextImageContainer = imgElement.parentElement?.querySelector('.next-image-fallback');
+                      if (nextImageContainer) {
+                        (nextImageContainer as HTMLElement).style.display = 'block';
+                      }
+                    }}
+                  />
+                  
+                  {/* Fallback com Next.js Image (inicialmente escondido) */}
+                  <div className="next-image-fallback absolute inset-0" style={{ display: 'none' }}>
+                    <Image
+                      src={displayImageUrl}
+                      alt={selectedVariant?.name ? `${product.title} - ${selectedVariant.name}` : product.title}
+                      fill
+                      className="object-cover object-center"
+                      sizes="(max-width: 768px) 100vw, 50vw"
+                      unoptimized
+                    onLoad={() => {
+                      console.log('✅ Imagem carregada com sucesso (Next.js Image):', displayImageUrl);
+                    }}
+                    onError={(e) => {
+                      console.error('❌ Erro ao carregar imagem (Next.js Image):', displayImageUrl);
+                      (e.target as HTMLImageElement).src = placeholderImage;
+                    }}
+                  />
+                </div>
+              </>
+            ) : (
+              <div className="w-full h-full flex items-center justify-center bg-gray-200">
+                <div className="text-center text-gray-500">
+                  <div className="text-4xl mb-2">📦</div>
+                  <div>Imagem não disponível</div>
+                  <div className="text-xs mt-2">URL: {displayImageUrl}</div>
+                </div>
+              </div>
+            )}
+          </div>
+        </div>
+        
+        {/* Miniaturas das imagens (se houver mais de uma imagem) */}
+        {allImages.length > 1 && (
+          <div className="flex justify-center">
+            <div className="flex gap-2 overflow-x-auto max-w-md">
+              {allImages.map((image, index) => {
+                const thumbnailUrl = getImageUrl(image) || placeholderImage;
+                const isSelected = index === selectedImageIndex;
+                
+                return (
+                  <button
+                    key={index}
+                    onClick={() => setSelectedImageIndex(index)}
+                    className={`flex-shrink-0 w-16 h-16 rounded-lg overflow-hidden border-2 transition-all ${
+                      isSelected ? 'border-black' : 'border-gray-300 hover:border-gray-400'
+                    }`}
+                  >
+                    <img
+                      src={thumbnailUrl}
+                      alt={`${product.title} - Imagem ${index + 1}`}
+                      className="w-full h-full object-cover object-center"
+                      onError={(e) => {
+                        (e.target as HTMLImageElement).src = placeholderImage;
+                      }}
+                    />
+                  </button>
+                );
+              })}
+            </div>
+          </div>
+        )}
+      </div>
+
+        {/* Detalhes do produto */}
+        <div className="flex flex-col gap-6">
+          <h1 className="text-3xl font-bold text-primary mb-2">{product.title}</h1>
+
+          {/* Seletor de variantes */}
+          {hasVariants && (
+            <div className="flex flex-col gap-3">
+              <span className="font-medium text-neutral-700">Selecione uma opção:</span>
+              <div className="flex flex-wrap gap-2">
+                {product.variants!.map((variant) => {
+                  const selected = selectedVariantKey === variant._key;
+                  const disabled = variant.inStock === false;
+                  return (
+                    <button
+                      key={variant._key}
+                      type="button"
+                      onClick={() => !disabled && setSelectedVariantKey(variant._key || null)}
+                      className={[
+                        'px-4 py-2 rounded-lg border text-sm font-semibold transition-all',
+                        selected ? 'bg-black text-white border-black' : 'bg-white text-black border-neutral-300 hover:border-black',
+                        disabled ? 'opacity-50 cursor-not-allowed' : 'cursor-pointer',
+                      ].join(' ')}
+                      aria-pressed={selected}
+                      aria-label={`Selecionar variante ${variant.name}`}
+                      disabled={disabled}
+                    >
+                      {variant.name}
+                    </button>
+                  );
+                })}
+              </div>
+            </div>
+          )}
+
+          {/* Preços */}
+          <div className="space-y-1">
+            {isOnSale ? (
+              <div className="space-y-1">
+                {/* Preço original riscado */}
+                <span className="text-lg text-gray-400 line-through block">
+                  De: R$ {originalPrice?.toFixed(2)}
+                </span>
+                {/* Preço promocional */}
+                <span className="text-2xl font-bold text-red-500 block">
+                  Por: R$ {displayPrice?.toFixed(2)}
+                </span>
+                {/* Economia */}
+                {originalPrice && displayPrice && (
+                  <span className="text-sm text-green-600 font-semibold block">
+                    Economize R$ {(originalPrice - displayPrice).toFixed(2)}
+                  </span>
+                )}
+              </div>
+            ) : (
+              <span className="text-2xl text-green-600 font-semibold block">R$ {displayPrice.toFixed(2)}</span>
+            )}
+
+          </div>
+
+          {/* Informações de Parcelamento */}
+          <div className="rounded-lg border border-gray-200 bg-gray-50 p-4">
+            <div className="flex items-center justify-between mb-3">
+              <div className="font-semibold text-gray-800">Parcelamento no cartão</div>
+              <div className="text-sm text-gray-500">até 12x</div>
+            </div>
+            <div className="space-y-2">
+              <div className="flex items-center gap-2">
+                <div className="w-2 h-2 bg-yellow-500 rounded-full"></div>
+                <span className="text-sm font-medium text-gray-700">
+                  Parcela mínima de R$ 150,00 sem juros
+                </span>
+              </div>
+              <div className="flex items-center gap-2">
+                <div className="w-2 h-2 bg-yellow-500 rounded-full"></div>
+                <span className="text-sm text-gray-600">
+                  Parcelamento em até 12x no cartão de crédito
+                </span>
+              </div>
+            </div>
+          </div>
+
+          {/* Quantidade em estoque */}
+          {(typeof stockQuantity === 'number') && (
+            <div className="text-sm text-gray-600">
+              <span className="font-medium">Quantidade em estoque: </span>
+              <span className={stockQuantity > 0 ? 'text-green-600' : 'text-red-600'}>
+                {stockQuantity}
+              </span>
+            </div>
+          )}
+
+          {/* Controles de Quantidade */}
+          {(product.inStock !== false && (!hasVariants || selectedVariant?.inStock !== false)) && (
+            <div className="flex flex-col gap-3">
+              <label className="text-lg font-semibold text-neutral-900">Quantidade:</label>
+              <div className="flex items-center gap-3">
+                <button
+                  onClick={decreaseQuantity}
+                  disabled={quantity <= 1}
+                  className="flex items-center justify-center w-10 h-10 rounded-lg border border-gray-300 hover:border-yellow-400 hover:bg-yellow-50 disabled:opacity-50 disabled:cursor-not-allowed transition-all"
+                  aria-label="Diminuir quantidade"
+                >
+                  <Minus className="w-4 h-4" />
+                </button>
+                
+                <input
+                  type="number"
+                  min="1"
+                  max={maxQuantity}
+                  value={quantity}
+                  onChange={handleQuantityChange}
+                  className="w-20 h-10 text-center border border-gray-300 rounded-lg focus:border-yellow-400 focus:ring-2 focus:ring-yellow-400 focus:ring-opacity-20 outline-none"
+                  aria-label="Quantidade do produto"
+                />
+                
+                <button
+                  onClick={increaseQuantity}
+                  disabled={quantity >= maxQuantity}
+                  className="flex items-center justify-center w-10 h-10 rounded-lg border border-gray-300 hover:border-yellow-400 hover:bg-yellow-50 disabled:opacity-50 disabled:cursor-not-allowed transition-all"
+                  aria-label="Aumentar quantidade"
+                >
+                  <Plus className="w-4 h-4" />
+                </button>
+              </div>
+              
+              {stockQuantity && quantity >= stockQuantity && (
+                <p className="text-sm text-amber-600">
+                  ⚠️ Quantidade máxima disponível: {stockQuantity}
+                </p>
+              )}
+              
+              {!stockQuantity && (
+                <p className="text-sm text-gray-500">
+                  ✅ Sem limite de estoque
+                </p>
+              )}
+            </div>
+          )}
+
+          {descriptionText && <p className="text-neutral-700 text-lg leading-relaxed">{descriptionText}</p>}
+
+          <ButtonPrimary
+            className="mt-2 w-full md:w-auto"
+            onClick={handleAddToCart}
+            aria-label={`Adicionar ${quantity} ${quantity === 1 ? 'unidade' : 'unidades'} ao carrinho`}
+            disabled={product.inStock === false || (hasVariants && selectedVariant?.inStock === false)}
+          >
+            {product.inStock === false || (hasVariants && selectedVariant?.inStock === false)
+              ? 'Produto indisponível'
+              : `Adicionar ${quantity} ${quantity === 1 ? 'unidade' : 'unidades'} ao Carrinho`}
+          </ButtonPrimary>
+          
+          {added && (
+            <div className="mt-2 text-green-600 font-semibold transition-all">
+              {quantity === 1 ? 'Produto adicionado' : `${quantity} produtos adicionados`} ao carrinho!
+            </div>
+          )}
+        </div>
+      </div>
+
+      {/* Produtos relacionados */}
+      {related.length > 0 && (
+        <section className="max-w-5xl mx-auto px-4 py-16">
+          <h2 className="text-2xl font-bold text-primary mb-8">Você também pode gostar</h2>
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8">
+            {related.map((item) => (
+              <ProductCard
+                key={item._id}
+                title={item.title}
+                image={item.image ? urlFor(item.image as any).width(400).height(300).url() : '/img/placeholder.jpg'}
+                price={item.price}
+                slug={(item.slug as any).current}
+                description={item.description}
+                product={item}
+              />
+            ))}
+          </div>
+        </section>
+      )}
+      <div className="flex justify-center mb-12">
+        <Link href="/shop" aria-label="Voltar para a loja">
+          <ButtonPrimary className="mt-12">← Voltar para a Loja</ButtonPrimary>
+        </Link>
+      </div>
+    </>
+  );
+};
+
+export const getStaticPaths: GetStaticPaths = async () => {
+  const products = await getAllProducts();
+  const paths = products.map((product: Product) => ({
+    params: { slug: (product.slug as any).current },
+  }));
+  return { paths, fallback: 'blocking' };
+};
+
+export const getStaticProps: GetStaticProps = async ({ params }) => {
+  const { slug } = params as { slug: string };
+  const product = await getProductBySlug(slug);
+  if (!product) return { notFound: true };
+  // Selecionar até 3 produtos relacionados (excluindo o atual)
+  const allProducts = await getAllProducts();
+  const related = allProducts.filter((p: Product) => (p.slug as any).current !== slug).slice(0, 3);
+  return {
+    props: { product, related },
+    revalidate: 60,
+  };
+};
+
+export default ProductPage;
