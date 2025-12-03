@@ -82,12 +82,12 @@ const nextConfig = {
             key: 'Content-Security-Policy',
             value: [
               "default-src 'self'",
-              "script-src 'self' 'unsafe-inline' 'unsafe-eval' https://www.google.com https://www.gstatic.com https://sdk.mercadopago.com https://www.mercadopago.com",
+              "script-src 'self' 'unsafe-inline' 'unsafe-eval' https://www.google.com https://www.gstatic.com https://sdk.mercadopago.com https://www.mercadopago.com https://www.clarity.ms",
               "child-src 'self'",
               "style-src 'self' 'unsafe-inline' https://fonts.googleapis.com",
               "font-src 'self' https://fonts.gstatic.com",
               "img-src 'self' blob: data: https://cdn.sanity.io https://images.unsplash.com https://powerhousebrasil.com.br",
-              "connect-src 'self' https://api.mercadopago.com https://www.google.com https://1sbzjovr.api.sanity.io https://api.sanity.io https://cdn.sanity.io",
+              "connect-src 'self' https://api.mercadopago.com https://www.google.com https://1sbzjovr.api.sanity.io https://api.sanity.io https://cdn.sanity.io https://www.clarity.ms",
               "frame-src 'self' https://www.google.com https://www.mercadopago.com"
             ].join('; ')
           }
