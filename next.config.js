@@ -61,11 +61,11 @@ const nextConfig = {
             key: 'Content-Security-Policy',
             value: [
               "default-src 'self'",
-              "script-src 'self' 'unsafe-inline' 'unsafe-eval' https://www.google.com https://www.recaptcha.net https://www.gstatic.com https://sdk.mercadopago.com https://www.mercadopago.com https://www.clarity.ms",
+              "script-src 'self' 'unsafe-inline' 'unsafe-eval' https://www.google.com https://www.recaptcha.net https://www.gstatic.com https://sdk.mercadopago.com https://www.mercadopago.com https://www.clarity.ms https://scripts.clarity.ms https://*.clarity.ms",
               "style-src 'self' 'unsafe-inline' https://fonts.googleapis.com",
               "font-src 'self' https://fonts.gstatic.com",
               "img-src 'self' data: https: blob: https://www.clarity.ms",
-              "connect-src 'self' https://api.mercadopago.com https://www.google.com https://www.recaptcha.net https://1sbzjovr.api.sanity.io https://api.sanity.io https://cdn.sanity.io https://www.clarity.ms",
+              "connect-src 'self' https://api.mercadopago.com https://www.google.com https://www.recaptcha.net https://1sbzjovr.api.sanity.io https://api.sanity.io https://cdn.sanity.io https://www.clarity.ms https://scripts.clarity.ms https://*.clarity.ms",
               "frame-src 'self' https://www.google.com https://www.recaptcha.net https://recaptcha.google.com https://www.mercadopago.com",
               "worker-src 'self' blob:",
               "object-src 'none'",
@@ -83,12 +83,12 @@ const nextConfig = {
             key: 'Content-Security-Policy',
             value: [
               "default-src 'self'",
-              "script-src 'self' 'unsafe-inline' 'unsafe-eval' https://www.google.com https://www.gstatic.com https://sdk.mercadopago.com https://www.mercadopago.com https://www.clarity.ms",
+              "script-src 'self' 'unsafe-inline' 'unsafe-eval' https://www.google.com https://www.gstatic.com https://sdk.mercadopago.com https://www.mercadopago.com https://www.clarity.ms https://scripts.clarity.ms https://*.clarity.ms",
               "child-src 'self'",
               "style-src 'self' 'unsafe-inline' https://fonts.googleapis.com",
               "font-src 'self' https://fonts.gstatic.com",
               "img-src 'self' blob: data: https://cdn.sanity.io https://images.unsplash.com https://powerhousebrasil.com.br",
-              "connect-src 'self' https://api.mercadopago.com https://www.google.com https://1sbzjovr.api.sanity.io https://api.sanity.io https://cdn.sanity.io https://www.clarity.ms",
+              "connect-src 'self' https://api.mercadopago.com https://www.google.com https://1sbzjovr.api.sanity.io https://api.sanity.io https://cdn.sanity.io https://www.clarity.ms https://scripts.clarity.ms https://*.clarity.ms",
               "worker-src 'self' blob:",
               "frame-src 'self' https://www.google.com https://www.mercadopago.com"
             ].join('; ')
