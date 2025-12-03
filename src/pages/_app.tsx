@@ -3,11 +3,18 @@ import { Inter } from 'next/font/google';
 import '../styles/globals.css';
 import { useRouter } from 'next/router';
 import PageLayout from '../components/PageLayout';
+import { useEffect } from 'react';
+import Clarity from '@microsoft/clarity';
 
 const inter = Inter({ subsets: ['latin'] });
 
 function MyApp({ Component, pageProps }: AppProps) {
   const router = useRouter();
+  useEffect(() => {
+    try {
+      Clarity.init('ufg3vya8z2');
+    } catch {}
+  }, []);
   
   // Páginas que já têm seu próprio layout (incluem PageLayout internamente)
   const pagesWithOwnLayout = [

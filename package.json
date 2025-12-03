@@ -23,6 +23,7 @@
   },
   "dependencies": {
     "@headlessui/react": "^2.2.4",
+    "@microsoft/clarity": "^1.0.2",
     "@portabletext/react": "^4.0.3",
     "@sanity/client": "^7.11.0",
     "@sanity/icons": "^3.7.4",
